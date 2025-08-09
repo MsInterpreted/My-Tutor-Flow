@@ -1,0 +1,139 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Helper functions for authentication and authorization
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    function isOwner(userId) {
+      return request.auth.uid == userId;
+    }
+    
+    function isTutor() {
+      return isAuthenticated() && 
+             exists(/databases/$(database)/documents/tutors/$(request.auth.uid));
+    }
+    
+    function isAdmin() {
+      return isAuthenticated() && 
+             get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin';
+    }
+    
+    // User profiles - users can only access their own profile
+    match /users/{userId} {
+      allow read, write: if isAuthenticated() && isOwner(userId);
+      allow create: if isAuthenticated() && isOwner(userId);
+    }
+    
+    // Tutor profiles - only the tutor can access their profile
+    match /tutors/{tutorId} {
+      allow read, write: if isAuthenticated() && isOwner(tutorId);
+      allow create: if isAuthenticated() && isOwner(tutorId);
+    }
+    
+    // Students - only authenticated tutors can access
+    match /students/{studentId} {
+      allow read, write: if isTutor();
+      allow create: if isTutor();
+      allow delete: if isTutor() || isAdmin();
+    }
+    
+    // Attendance records - only authenticated tutors can access
+    match /attendance/{attendanceId} {
+      allow read, write: if isTutor();
+      allow create: if isTutor();
+      allow delete: if isTutor() || isAdmin();
+    }
+    
+    // Marks and grades - only authenticated tutors can access
+    match /marks/{markId} {
+      allow read, write: if isTutor();
+      allow create: if isTutor();
+      allow delete: if isTutor() || isAdmin();
+    }
+    
+    // Billing data - only authenticated tutors can access
+    match /billing/{billingId} {
+      allow read, write: if isTutor();
+      allow create: if isTutor();
+      allow delete: if isTutor() || isAdmin();
+    }
+    
+    // Invoices - only authenticated tutors can access
+    match /invoices/{invoiceId} {
+      allow read, write: if isTutor();
+      allow create: if isTutor();
+      allow delete: if isTutor() || isAdmin();
+    }
+    
+    // Reports - only authenticated tutors can access
+    match /reports/{reportId} {
+      allow read, write: if isTutor();
+      allow create: if isTutor();
+      allow delete: if isTutor() || isAdmin();
+    }
+    
+    // Parent communications - only authenticated tutors can access
+    match /parentLogs/{logId} {
+      allow read, write: if isTutor();
+      allow create: if isTutor();
+      allow delete: if isTutor() || isAdmin();
+    }
+    
+    // Business analytics - only authenticated tutors can access
+    match /analytics/{analyticsId} {
+      allow read, write: if isTutor();
+      allow create: if isTutor();
+    }
+    
+    // System settings - only admins can modify
+    match /settings/{settingId} {
+      allow read: if isTutor();
+      allow write: if isAdmin();
+    }
+    
+    // Audit logs - read-only for tutors, write for system
+    match /auditLogs/{logId} {
+      allow read: if isTutor() || isAdmin();
+      allow write: if false; // Only system can write audit logs
+    }
+    
+    // Backup metadata - only admins can access
+    match /backups/{backupId} {
+      allow read, write: if isAdmin();
+    }
+    
+    // Multi-tenant support (for future SaaS implementation)
+    match /tenants/{tenantId} {
+      allow read: if isAuthenticated() && 
+                     (isOwner(tenantId) || 
+                      exists(/databases/$(database)/documents/tenants/$(tenantId)/members/$(request.auth.uid)));
+      allow write: if isAuthenticated() && isOwner(tenantId);
+    }
+    
+    match /tenants/{tenantId}/members/{memberId} {
+      allow read: if isAuthenticated() && 
+                     exists(/databases/$(database)/documents/tenants/$(tenantId)/members/$(request.auth.uid));
+      allow write: if isAuthenticated() && 
+                      (isOwner(tenantId) || 
+                       get(/databases/$(database)/documents/tenants/$(tenantId)/members/$(request.auth.uid)).data.role == 'admin');
+    }
+    
+    // Subscription data (for future SaaS implementation)
+    match /subscriptions/{subscriptionId} {
+      allow read: if isAuthenticated() && 
+                     resource.data.userId == request.auth.uid;
+      allow write: if false; // Only system can modify subscriptions
+    }
+    
+    // Payment records (for future SaaS implementation)
+    match /payments/{paymentId} {
+      allow read: if isAuthenticated() && 
+                     resource.data.userId == request.auth.uid;
+      allow write: if false; // Only system can modify payments
+    }
+  }
+}

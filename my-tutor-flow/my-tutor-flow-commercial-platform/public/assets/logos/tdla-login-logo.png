@@ -1,0 +1,30 @@
+<svg width="200" height="67" viewBox="0 0 200 67" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- TD Learning Academy Placeholder Logo -->
+  
+  <!-- Graduation Cap -->
+  <g transform="translate(10, 10)">
+    <!-- Cap Base -->
+    <path d="M20 25 L35 20 L50 25 L50 30 L35 35 L20 30 Z" fill="#00D4AA" stroke="#1a1a1a" stroke-width="1"/>
+    
+    <!-- Cap Top -->
+    <ellipse cx="35" cy="22" rx="15" ry="3" fill="#00D4AA" stroke="#1a1a1a" stroke-width="1"/>
+    
+    <!-- Tassel -->
+    <line x1="45" y1="22" x2="48" y2="18" stroke="#FFD93D" stroke-width="2"/>
+    <circle cx="48" cy="18" r="2" fill="#FFD93D"/>
+    
+    <!-- Tassel Strings -->
+    <line x1="48" y1="20" x2="50" y2="25" stroke="#FFD93D" stroke-width="1"/>
+    <line x1="48" y1="20" x2="46" y2="25" stroke="#FFD93D" stroke-width="1"/>
+    <line x1="48" y1="20" x2="49" y2="26" stroke="#FFD93D" stroke-width="1"/>
+  </g>
+  
+  <!-- TDLA Text -->
+  <g transform="translate(75, 15)">
+    <text x="0" y="20" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#1a1a1a">TDLA</text>
+    <text x="0" y="35" font-family="Arial, sans-serif" font-size="10" fill="#666">Excellence in Education</text>
+  </g>
+  
+  <!-- Background Circle (subtle) -->
+  <circle cx="35" cy="33" r="25" fill="none" stroke="#00D4AA" stroke-width="0.5" opacity="0.3"/>
+</svg>

@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>My Tutor Flow - Solana Mobile Hackathon</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+        .slide {
+            width: 100vw;
+            height: 100vh;
+            padding: 4rem 6rem;
+            box-sizing: border-box;
+            page-break-after: always;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+        }
+        .slide-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            max-height: calc(100vh - 8rem);
+            overflow: visible;
+            padding: 1rem 0;
+        }
+        .slide1 { background: linear-gradient(135deg, #10B981, #047857); color: white; text-align: center; }
+        .slide2 { background: linear-gradient(135deg, #DC2626, #991B1B); color: white; }
+        .slide3 { background: linear-gradient(135deg, #2563EB, #1E40AF); color: white; }
+        .slide4 { background: linear-gradient(135deg, #FF6B35, #F7931E); color: white; }
+        .slide5 { background: linear-gradient(135deg, #8B5CF6, #7C3AED); color: white; }
+        .slide6 { background: linear-gradient(135deg, #059669, #047857); color: white; text-align: center; }
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        h2 {
+            font-size: 2.2rem;
+            margin-bottom: 1.2rem;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+        h3 {
+            font-size: 1.8rem;
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+        .subtitle {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+            line-height: 1.4;
+        }
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        .feature-box {
+            background: rgba(255,255,255,0.15);
+            padding: 1.5rem;
+            border-radius: 1rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .feature-box h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.8rem;
+        }
+        .feature-box p {
+            font-size: 1rem;
+            line-height: 1.4;
+            margin: 0;
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        .stat {
+            background: rgba(255,255,255,0.2);
+            padding: 1.2rem;
+            border-radius: 1rem;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+        .stat-number {
+            font-size: 2.2rem;
+            font-weight: 800;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        .logo {
+            font-size: 6rem;
+            margin: 1.5rem 0;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+        }
+        .bonk-logo {
+            font-size: 4rem;
+            margin: 1rem;
+        }
+        ul {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin: 1rem 0;
+            padding-left: 1.5rem;
+        }
+        li {
+            margin-bottom: 0.8rem;
+        }
+        .demo-box {
+            background: rgba(255,255,255,0.2);
+            padding: 2rem;
+            border-radius: 1.5rem;
+            margin: 1.5rem 0;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+        .cta {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-top: 2rem;
+        }
+        .slide-footer {
+            text-align: center;
+            font-size: 0.9rem;
+            opacity: 0.7;
+            margin-top: 1rem;
+        }
+        .demo-iframe {
+            width: 100%;
+            height: 500px;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-radius: 1rem;
+            background: white;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+        }
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: center;
+        }
+        .three-column {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Slide 1: Title -->
+<div class="slide slide1">
+    <div class="slide-content">
+        <div style="margin-bottom: 2rem;">
+            <div style="width: 200px; height: 80px; background: linear-gradient(135deg, #10B981, #047857); border-radius: 20px; display: flex; align-items: center; justify-content: center; margin: 0 auto; box-shadow: 0 8px 24px rgba(16, 185, 129, 0.3);">
+                <span style="color: white; font-size: 1.8rem; font-weight: 800; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);">🎓 My Tutor Flow</span>
+            </div>
+        </div>
+        <h1>My Tutor Flow</h1>
+        <div class="subtitle">Solana Mobile Hackathon Presentation</div>
+        <h3>Mobile-First Education Platform</h3>
+        <div style="margin-top: 2rem;">
+            <span style="background: rgba(255,255,255,0.25); padding: 1rem 2rem; border-radius: 2rem; font-size: 1.2rem; backdrop-filter: blur(10px);">4-Minute Pitch</span>
+        </div>
+    </div>
+    <div class="slide-footer">Slide 1 of 7 • 30 seconds</div>
+</div>
+
+<!-- Slide 2: The Problem -->
+<div class="slide slide2">
+    <div class="slide-content">
+        <h1>🔍 The Problem</h1>
+        <div class="subtitle">Education Technology is Broken for Mobile Users</div>
+
+        <div class="feature-grid">
+            <div class="feature-box">
+                <h3>📱 Mobile Education Crisis</h3>
+                <ul>
+                    <li>Desktop-only education platforms</li>
+                    <li>Complex payment systems</li>
+                    <li>No real-time mobile analytics</li>
+                    <li>Scattered administrative tools</li>
+                </ul>
+            </div>
+            <div class="feature-box">
+                <h3>📊 Market Opportunity</h3>
+                <div class="stats">
+                    <div class="stat">
+                        <span class="stat-number">170K+</span>
+                        <span class="stat-label">Solana Mobile Users</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">$7.8B</span>
+                        <span class="stat-label">EdTech Market</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">85%</span>
+                        <span class="stat-label">Mobile Usage</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">0</span>
+                        <span class="stat-label">Mobile-First Solutions</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="slide-footer">Slide 2 of 7 • 45 seconds</div>
+</div>
+
+<!-- Slide 3: Our Solution -->
+<div class="slide slide3">
+    <div class="slide-content" style="padding: 1rem 0;">
+        <h1 style="font-size: 3rem; margin-bottom: 1rem;">💡 Our Solution</h1>
+        <div class="subtitle" style="font-size: 1.1rem; margin-bottom: 1.5rem;">Mobile-First Education Platform Built for Solana Ecosystem</div>
+
+        <div class="demo-box" style="padding: 1.5rem; margin: 1rem 0;">
+            <h2 style="font-size: 1.8rem; margin-bottom: 0.8rem;">"From Scattered Spreadsheets to Streamlined Success"</h2>
+            <p style="font-size: 1rem; margin: 0;">The first mobile-native education management platform designed for the Solana ecosystem</p>
+        </div>
+
+        <div class="feature-grid" style="gap: 1rem; margin: 1rem 0;">
+            <div class="feature-box" style="padding: 1rem;">
+                <h3 style="font-size: 1.2rem; margin-bottom: 0.5rem;">🎯 Touch-First UI</h3>
+                <p style="font-size: 0.9rem; margin: 0;">Optimized for mobile interactions with 48px touch targets</p>
+            </div>
+            <div class="feature-box" style="padding: 1rem;">
+                <h3 style="font-size: 1.2rem; margin-bottom: 0.5rem;">⚡ Lightning Fast</h3>
+                <p style="font-size: 0.9rem; margin: 0;">Sub-second load times with offline-first architecture</p>
+            </div>
+            <div class="feature-box" style="padding: 1rem;">
+                <h3 style="font-size: 1.2rem; margin-bottom: 0.5rem;">🔗 Crypto-Ready</h3>
+                <p style="font-size: 0.9rem; margin: 0;">Built for Solana wallet integration and BONK payments</p>
+            </div>
+            <div class="feature-box" style="padding: 1rem;">
+                <h3 style="font-size: 1.2rem; margin-bottom: 0.5rem;">📈 Scalable</h3>
+                <p style="font-size: 0.9rem; margin: 0;">From individual tutors to education enterprises</p>
+            </div>
+        </div>
+    </div>
+    <div class="slide-footer">Slide 3 of 7 • 60 seconds</div>
+</div>
+
+<!-- Slide 4: BONK Integration -->
+<div class="slide slide4">
+    <div class="slide-content">
+        <h1>🐕 BONK Integration</h1>
+        <div class="subtitle">First Education Platform with BONK Payments</div>
+
+        <div class="two-column">
+            <div>
+                <div style="text-align: center; margin-bottom: 1.5rem;">
+                    <div style="width: 120px; height: 120px; background: linear-gradient(135deg, #FF6B35, #F7931E); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto; box-shadow: 0 8px 24px rgba(255, 107, 53, 0.4);">
+                        <span style="color: white; font-size: 3rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);">🐕</span>
+                    </div>
+                </div>
+                <h2>Community-Driven Payments</h2>
+                <ul>
+                    <li>Real BONK token integration</li>
+                    <li>Mobile Wallet Adapter ready</li>
+                    <li>Sub-second transactions</li>
+                    <li>Accessible to all Solana users</li>
+                </ul>
+            </div>
+            <div class="demo-box">
+                <h3>Payment Example</h3>
+                <div style="margin: 1.5rem 0;">
+                    <div style="font-size: 1.3rem; margin-bottom: 1rem;">Tuition Fee: R350 ZAR</div>
+                    <div style="font-size: 1.8rem; font-weight: 800; color: #FFD700; display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
+                        <span style="font-size: 1.5rem;">🐕</span>
+                        14,000,000 BONK
+                    </div>
+                </div>
+                <div style="font-size: 1rem; opacity: 0.8;">Transaction Fee: ~$0.001 SOL</div>
+                <div style="font-size: 0.9rem; opacity: 0.7; margin-top: 1rem;">Settlement: &lt;1 second</div>
+            </div>
+        </div>
+    </div>
+    <div class="slide-footer">Slide 4 of 7 • 45 seconds</div>
+</div>
+
+<!-- Slide 5: Live Demo - Platform View -->
+<div class="slide slide5">
+    <div class="slide-content">
+        <div style="text-align: center; margin-bottom: 1.5rem;">
+            <div style="width: 120px; height: 48px; background: linear-gradient(135deg, #10B981, #047857); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 0 auto; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);">
+                <span style="color: white; font-size: 0.9rem; font-weight: 700; text-shadow: 1px 1px 2px rgba(0,0,0,0.3);">🎓 My Tutor Flow</span>
+            </div>
+        </div>
+        <h1 style="font-size: 3rem; margin-bottom: 1rem;">🎬 Live Platform Demo</h1>
+        <div class="subtitle" style="font-size: 1.2rem; margin-bottom: 2rem;">Experience My Tutor Flow in Action</div>
+
+        <div style="text-align: center;">
+            <iframe
+                src="http://localhost:3000/hackathon-pitch"
+                style="width: 90%; height: 600px; border: 4px solid rgba(255,255,255,0.4); border-radius: 1.5rem; background: white; box-shadow: 0 12px 32px rgba(0,0,0,0.3);"
+                title="My Tutor Flow Live Demo">
+            </iframe>
+        </div>
+
+        <div style="text-align: center; margin-top: 1.5rem;">
+            <div style="background: rgba(255,255,255,0.2); padding: 1rem 2rem; border-radius: 1rem; display: inline-block; backdrop-filter: blur(10px);">
+                <strong style="font-size: 1.1rem;">🚀 Live Platform Running</strong>
+                <p style="margin: 0.5rem 0 0 0; font-size: 0.9rem; opacity: 0.9;">Real-time education management with BONK integration</p>
+            </div>
+        </div>
+    </div>
+    <div class="slide-footer">Slide 5 of 7 • 30 seconds</div>
+</div>
+
+<!-- Slide 6: Interactive Features -->
+<div class="slide slide6">
+    <div class="slide-content">
+        <div style="text-align: center; margin-bottom: 1rem;">
+            <div style="width: 100px; height: 40px; background: linear-gradient(135deg, #10B981, #047857); border-radius: 10px; display: flex; align-items: center; justify-content: center; margin: 0 auto; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);">
+                <span style="color: white; font-size: 0.8rem; font-weight: 700; text-shadow: 1px 1px 2px rgba(0,0,0,0.3);">🎓 MTF</span>
+            </div>
+        </div>
+        <h1 style="font-size: 2.8rem; margin-bottom: 1rem;">📱 Interactive Features</h1>
+        <div class="subtitle" style="font-size: 1.1rem; margin-bottom: 1.5rem;">Mobile Dashboard & BONK Integration</div>
+
+        <div class="two-column" style="gap: 2rem;">
+            <div>
+                <div class="demo-box" style="padding: 1.5rem;">
+                    <h3 style="font-size: 1.3rem; margin-bottom: 1rem;">🔗 Interactive Demo Links</h3>
+                    <div style="background: rgba(255,255,255,0.3); padding: 1rem; border-radius: 0.8rem; margin-bottom: 1rem;">
+                        <strong style="font-size: 1rem;">Main Dashboard:</strong><br>
+                        <a href="http://localhost:3000" target="_blank" style="color: #FFD700; text-decoration: none; font-family: monospace; font-size: 0.9rem;">localhost:3000</a>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.3); padding: 1rem; border-radius: 0.8rem; margin-bottom: 1rem;">
+                        <strong style="font-size: 1rem;">BONK Showcase:</strong><br>
+                        <a href="http://localhost:3000/bonk-showcase" target="_blank" style="color: #FFD700; text-decoration: none; font-family: monospace; font-size: 0.9rem;">bonk-showcase</a>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.3); padding: 1rem; border-radius: 0.8rem;">
+                        <strong style="font-size: 1rem;">Business Dashboard:</strong><br>
+                        <a href="http://localhost:3000/business" target="_blank" style="color: #FFD700; text-decoration: none; font-family: monospace; font-size: 0.9rem;">business-analytics</a>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="feature-grid" style="gap: 1rem;">
+                    <div class="feature-box" style="padding: 1.2rem;">
+                        <h3 style="font-size: 1.2rem; margin-bottom: 0.8rem;">📱 Mobile Dashboard</h3>
+                        <p style="font-size: 0.9rem; margin: 0;">Real-time analytics optimized for touch interactions</p>
+                    </div>
+                    <div class="feature-box" style="padding: 1.2rem;">
+                        <h3 style="font-size: 1.2rem; margin-bottom: 0.8rem;">🐕 BONK Payments</h3>
+                        <p style="font-size: 0.9rem; margin: 0;">First education platform with meme coin integration</p>
+                    </div>
+                    <div class="feature-box" style="padding: 1.2rem;">
+                        <h3 style="font-size: 1.2rem; margin-bottom: 0.8rem;">📊 Touch Analytics</h3>
+                        <p style="font-size: 0.9rem; margin: 0;">Swipe through student progress and insights</p>
+                    </div>
+                    <div class="feature-box" style="padding: 1.2rem;">
+                        <h3 style="font-size: 1.2rem; margin-bottom: 0.8rem;">🔗 Crypto Ready</h3>
+                        <p style="font-size: 0.9rem; margin: 0;">Solana Mobile Wallet Adapter integration</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="slide-footer">Slide 6 of 7 • 30 seconds</div>
+</div>
+
+<!-- Slide 7: The Ask -->
+<div class="slide slide6">
+    <div class="slide-content">
+        <div style="text-align: center; margin-bottom: 1.5rem;">
+            <div style="width: 150px; height: 60px; background: linear-gradient(135deg, #10B981, #047857); border-radius: 15px; display: flex; align-items: center; justify-content: center; margin: 0 auto; box-shadow: 0 6px 18px rgba(16, 185, 129, 0.4);">
+                <span style="color: white; font-size: 1.1rem; font-weight: 800; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);">🎓 My Tutor Flow</span>
+            </div>
+        </div>
+        <h1>🏆 Ready to Win</h1>
+        <div class="subtitle">My Tutor Flow is the mobile-first education platform the Solana ecosystem needs</div>
+
+        <div class="three-column">
+            <div class="feature-box">
+                <h2 style="font-size: 3rem; margin-bottom: 1rem;">✅</h2>
+                <h3>Mobile-Native</h3>
+                <p>Built for Solana Mobile from day one</p>
+            </div>
+            <div class="feature-box">
+                <h2 style="font-size: 3rem; margin-bottom: 1rem;">✅</h2>
+                <h3>Market Ready</h3>
+                <p>Addressing real pain points today</p>
+            </div>
+            <div class="feature-box">
+                <h2 style="font-size: 3rem; margin-bottom: 1rem;">✅</h2>
+                <h3>BONK Future</h3>
+                <p>First education + meme coin integration</p>
+            </div>
+        </div>
+
+        <div class="cta">Let's Transform Education Together</div>
+        <div style="font-size: 1.2rem; margin-top: 1.5rem; opacity: 0.9;">
+            <strong>Contact:</strong> hello@mytutorflow.com<br>
+            <strong>Demo:</strong> mytutorflow.com
+        </div>
+    </div>
+    <div class="slide-footer">Slide 7 of 7 • 15 seconds</div>
+</div>
+
+<script>
+// Enhanced presentation controls
+let currentSlide = 0;
+const slides = document.querySelectorAll('.slide');
+const totalSlides = slides.length;
+
+// Navigation functions
+function goToSlide(n) {
+    currentSlide = Math.max(0, Math.min(n, totalSlides - 1));
+    slides[currentSlide].scrollIntoView({ behavior: 'smooth' });
+    updateSlideIndicator();
+}
+
+function nextSlide() {
+    if (currentSlide < totalSlides - 1) {
+        goToSlide(currentSlide + 1);
+    }
+}
+
+function prevSlide() {
+    if (currentSlide > 0) {
+        goToSlide(currentSlide - 1);
+    }
+}
+
+// Update current slide based on scroll position
+function updateCurrentSlide() {
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    const slideHeight = window.innerHeight;
+    const newSlide = Math.round(scrollTop / slideHeight);
+    if (newSlide !== currentSlide && newSlide >= 0 && newSlide < totalSlides) {
+        currentSlide = newSlide;
+        updateSlideIndicator();
+    }
+}
+
+// Keyboard navigation
+document.addEventListener('keydown', function(e) {
+    switch(e.key) {
+        case 'ArrowRight':
+        case ' ':
+        case 'PageDown':
+            e.preventDefault();
+            nextSlide();
+            break;
+        case 'ArrowLeft':
+        case 'PageUp':
+            e.preventDefault();
+            prevSlide();
+            break;
+        case 'Home':
+            e.preventDefault();
+            goToSlide(0);
+            break;
+        case 'End':
+            e.preventDefault();
+            goToSlide(totalSlides - 1);
+            break;
+        case 'F5':
+            e.preventDefault();
+            location.reload();
+            break;
+        case 'Escape':
+            if (document.fullscreenElement) {
+                document.exitFullscreen();
+            } else {
+                document.documentElement.requestFullscreen();
+            }
+            break;
+    }
+});
+
+// Mouse/touch navigation
+document.addEventListener('click', function(e) {
+    const clickX = e.clientX;
+    const screenWidth = window.innerWidth;
+
+    if (clickX > screenWidth * 0.7) {
+        nextSlide();
+    } else if (clickX < screenWidth * 0.3) {
+        prevSlide();
+    }
+});
+
+// Scroll listener to update counter
+window.addEventListener('scroll', function() {
+    updateCurrentSlide();
+});
+
+// Slide indicator
+function updateSlideIndicator() {
+    const indicator = document.getElementById('slide-indicator');
+    if (indicator) {
+        indicator.textContent = `${currentSlide + 1} / ${totalSlides}`;
+    }
+}
+
+// Initialize
+document.addEventListener('DOMContentLoaded', function() {
+    // Add slide indicator
+    const indicator = document.createElement('div');
+    indicator.id = 'slide-indicator';
+    indicator.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: rgba(0,0,0,0.7);
+        color: white;
+        padding: 10px 15px;
+        border-radius: 20px;
+        font-size: 14px;
+        font-weight: bold;
+        z-index: 1000;
+        backdrop-filter: blur(10px);
+    `;
+    document.body.appendChild(indicator);
+
+    // Add navigation hint
+    const hint = document.createElement('div');
+    hint.style.cssText = `
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(0,0,0,0.7);
+        color: white;
+        padding: 10px 20px;
+        border-radius: 20px;
+        font-size: 12px;
+        z-index: 1000;
+        backdrop-filter: blur(10px);
+        opacity: 0.8;
+    `;
+    hint.textContent = 'Use arrow keys, spacebar, or click to navigate • ESC for fullscreen • F5 to reload';
+    document.body.appendChild(hint);
+
+    updateSlideIndicator();
+
+    // Auto-hide hint after 5 seconds
+    setTimeout(() => {
+        hint.style.opacity = '0';
+        hint.style.transition = 'opacity 1s ease';
+    }, 5000);
+});
+
+// Timer for presentation
+let startTime = Date.now();
+function showTimer() {
+    const elapsed = Math.floor((Date.now() - startTime) / 1000);
+    const minutes = Math.floor(elapsed / 60);
+    const seconds = elapsed % 60;
+    console.log(`Presentation time: ${minutes}:${seconds.toString().padStart(2, '0')}`);
+}
+
+// Show timer every 30 seconds
+setInterval(showTimer, 30000);
+</script>
+
+</body>
+</html>

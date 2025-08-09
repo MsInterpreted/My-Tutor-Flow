@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Student Profile Test</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        background-color: #f5f5f5;
+      }
+      .test-container {
+        max-width: 800px;
+        margin: 0 auto;
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      .test-item {
+        margin: 10px 0;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+      }
+      .test-link {
+        display: inline-block;
+        padding: 8px 16px;
+        background-color: #007bff;
+        color: white;
+        text-decoration: none;
+        border-radius: 4px;
+        margin: 5px;
+      }
+      .test-link:hover {
+        background-color: #0056b3;
+      }
+      .status {
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 12px;
+        font-weight: bold;
+      }
+      .status.pass {
+        background-color: #d4edda;
+        color: #155724;
+      }
+      .status.fail {
+        background-color: #f8d7da;
+        color: #721c24;
+      }
+      .instructions {
+        background-color: #e7f3ff;
+        padding: 15px;
+        border-radius: 4px;
+        margin-bottom: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="test-container">
+      <h1>🧪 Student Profile Testing Suite</h1>
+
+      <div class="instructions">
+        <h3>📋 Test Instructions:</h3>
+        <ol>
+          <li>Click on each student profile link below</li>
+          <li>Verify that the page loads without errors</li>
+          <li>Check the browser console (F12) for any JavaScript errors</li>
+          <li>Confirm that student data, attendance, marks, and invoices display correctly</li>
+          <li>Test page refresh to ensure no login redirects occur</li>
+          <li>Verify that the mock data indicator appears at the top</li>
+        </ol>
+      </div>
+
+      <h2>🎓 Test Student Profiles</h2>
+
+      <div class="test-item">
+        <h3>Student 1: John Doe (Mathematics, Grade 10)</h3>
+        <p><strong>Expected Data:</strong> Attendance records, marks, invoices, parent logs</p>
+        <a href="http://localhost:3001/students/student1" class="test-link" target="_blank">
+          📊 Test John Doe Profile
+        </a>
+        <span class="status" id="student1-status">⏳ Not Tested</span>
+      </div>
+
+      <div class="test-item">
+        <h3>Student 2: Alice Smith (Physics, Grade 11)</h3>
+        <p><strong>Expected Data:</strong> Attendance records, sibling relationship with Emma</p>
+        <a href="http://localhost:3001/students/student2" class="test-link" target="_blank">
+          📊 Test Alice Smith Profile
+        </a>
+        <span class="status" id="student2-status">⏳ Not Tested</span>
+      </div>
+
+      <div class="test-item">
+        <h3>Student 3: Mike Johnson (Chemistry, Grade 12)</h3>
+        <p><strong>Expected Data:</strong> Attendance records</p>
+        <a href="http://localhost:3001/students/student3" class="test-link" target="_blank">
+          📊 Test Mike Johnson Profile
+        </a>
+        <span class="status" id="student3-status">⏳ Not Tested</span>
+      </div>
+
+      <div class="test-item">
+        <h3>Student 4: Emma Smith (Mathematics, Grade 8)</h3>
+        <p><strong>Expected Data:</strong> Attendance records, sibling relationship with Alice</p>
+        <a href="http://localhost:3001/students/student4" class="test-link" target="_blank">
+          📊 Test Emma Smith Profile
+        </a>
+        <span class="status" id="student4-status">⏳ Not Tested</span>
+      </div>
+
+      <h2>🔧 Additional Tests</h2>
+
+      <div class="test-item">
+        <h3>Navigation Tests</h3>
+        <a href="http://localhost:3001/students" class="test-link" target="_blank">
+          📋 Students List Page
+        </a>
+        <a href="http://localhost:3001/dashboard" class="test-link" target="_blank">
+          🏠 Dashboard
+        </a>
+        <a href="http://localhost:3001/attendance" class="test-link" target="_blank">
+          📅 Attendance Page
+        </a>
+      </div>
+
+      <div class="test-item">
+        <h3>Error Handling Tests</h3>
+        <a href="http://localhost:3001/students/nonexistent" class="test-link" target="_blank">
+          ❌ Test Non-existent Student
+        </a>
+        <p><em>Should show "Student not found" error</em></p>
+      </div>
+
+      <h2>✅ Test Checklist</h2>
+      <div class="test-item">
+        <h3>Expected Results:</h3>
+        <ul>
+          <li>✅ No Firebase collection reference errors in console</li>
+          <li>✅ No authentication redirects to login page</li>
+          <li>✅ Student profile data loads correctly</li>
+          <li>✅ Mock data indicator shows at top of pages</li>
+          <li>✅ Attendance, marks, and invoices display properly</li>
+          <li>✅ Page refresh works without errors</li>
+          <li>✅ Navigation between pages works smoothly</li>
+          <li>✅ Error handling for non-existent students works</li>
+        </ul>
+      </div>
+
+      <div class="test-item">
+        <h3>🚨 Known Issues Fixed:</h3>
+        <ul>
+          <li>✅ Firebase collection reference errors (db is null)</li>
+          <li>✅ Authentication redirects in mock mode</li>
+          <li>✅ StudentBillingSummary component errors</li>
+          <li>✅ InvoicesTableNew component Firebase usage</li>
+        </ul>
+      </div>
+    </div>
+
+    <script>
+      // Simple test status tracking
+      function updateStatus(studentId, status) {
+        const statusElement = document.getElementById(studentId + '-status');
+        if (statusElement) {
+          statusElement.textContent = status;
+          statusElement.className = 'status ' + (status.includes('✅') ? 'pass' : 'fail');
+        }
+      }
+
+      // Auto-refresh status every 5 seconds
+      setInterval(() => {
+        const now = new Date().toLocaleTimeString();
+        document.title = `Student Profile Test - ${now}`;
+      }, 5000);
+    </script>
+  </body>
+</html>

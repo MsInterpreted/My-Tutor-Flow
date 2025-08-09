@@ -1,0 +1,36 @@
+# TD Learning Academy - Simple HostAfrica Compatible Configuration
+# Use this version if the main .htaccess doesn't work
+
+# CRITICAL: Fix MIME Types for HostAfrica
+AddType text/css .css
+AddType application/javascript .js
+AddType application/json .json
+AddType image/png .png
+AddType image/jpeg .jpg
+AddType image/gif .gif
+AddType image/svg+xml .svg
+AddType font/woff .woff
+AddType font/woff2 .woff2
+
+# Enable Rewrite Engine
+RewriteEngine On
+
+# Simple SPA routing - only redirect HTML requests
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} !^/assets/
+RewriteCond %{REQUEST_URI} !\.css$
+RewriteCond %{REQUEST_URI} !\.js$
+RewriteCond %{REQUEST_URI} !\.png$
+RewriteCond %{REQUEST_URI} !\.jpg$
+RewriteCond %{REQUEST_URI} !\.gif$
+RewriteCond %{REQUEST_URI} !\.svg$
+RewriteCond %{REQUEST_URI} !\.woff$
+RewriteCond %{REQUEST_URI} !\.woff2$
+RewriteRule ^(.*)$ index.html [L]
+
+# Basic Security
+<Files ".env*">
+    Order allow,deny
+    Deny from all
+</Files>

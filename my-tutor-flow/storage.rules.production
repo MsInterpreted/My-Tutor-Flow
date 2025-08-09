@@ -1,0 +1,145 @@
+rules_version = '2';
+
+service firebase.storage {
+  match /b/{bucket}/o {
+    
+    // Helper functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    function isOwner(userId) {
+      return request.auth.uid == userId;
+    }
+    
+    function isValidImageType() {
+      return resource.contentType.matches('image/.*');
+    }
+    
+    function isValidPDFType() {
+      return resource.contentType == 'application/pdf';
+    }
+    
+    function isValidCSVType() {
+      return resource.contentType == 'text/csv' || 
+             resource.contentType == 'application/csv';
+    }
+    
+    function isUnder5MB() {
+      return resource.size < 5 * 1024 * 1024; // 5MB limit
+    }
+    
+    function isUnder10MB() {
+      return resource.size < 10 * 1024 * 1024; // 10MB limit
+    }
+    
+    // Student profile photos
+    match /student-photos/{studentId}/{fileName} {
+      allow read: if isAuthenticated();
+      allow write: if isAuthenticated() && 
+                      isValidImageType() && 
+                      isUnder5MB();
+      allow delete: if isAuthenticated();
+    }
+    
+    // Tutor profile photos
+    match /tutor-photos/{tutorId}/{fileName} {
+      allow read: if isAuthenticated();
+      allow write: if isAuthenticated() && 
+                      isOwner(tutorId) && 
+                      isValidImageType() && 
+                      isUnder5MB();
+      allow delete: if isAuthenticated() && isOwner(tutorId);
+    }
+    
+    // Generated PDF reports
+    match /reports/{tutorId}/{reportId}/{fileName} {
+      allow read: if isAuthenticated() && isOwner(tutorId);
+      allow write: if isAuthenticated() && 
+                      isOwner(tutorId) && 
+                      isValidPDFType() && 
+                      isUnder10MB();
+      allow delete: if isAuthenticated() && isOwner(tutorId);
+    }
+    
+    // Invoice PDFs
+    match /invoices/{tutorId}/{invoiceId}/{fileName} {
+      allow read: if isAuthenticated() && isOwner(tutorId);
+      allow write: if isAuthenticated() && 
+                      isOwner(tutorId) && 
+                      isValidPDFType() && 
+                      isUnder10MB();
+      allow delete: if isAuthenticated() && isOwner(tutorId);
+    }
+    
+    // CSV exports
+    match /exports/{tutorId}/{exportId}/{fileName} {
+      allow read: if isAuthenticated() && isOwner(tutorId);
+      allow write: if isAuthenticated() && 
+                      isOwner(tutorId) && 
+                      isValidCSVType() && 
+                      isUnder5MB();
+      allow delete: if isAuthenticated() && isOwner(tutorId);
+    }
+    
+    // Backup files (admin only)
+    match /backups/{backupId}/{fileName} {
+      allow read: if isAuthenticated() && 
+                     exists(/databases/(default)/documents/users/$(request.auth.uid)) &&
+                     get(/databases/(default)/documents/users/$(request.auth.uid)).data.role == 'admin';
+      allow write: if false; // Only system can create backups
+    }
+    
+    // Temporary uploads (24-hour auto-delete)
+    match /temp/{userId}/{fileName} {
+      allow read, write: if isAuthenticated() && 
+                            isOwner(userId) && 
+                            isUnder10MB();
+      allow delete: if isAuthenticated() && isOwner(userId);
+    }
+    
+    // Business logos and branding
+    match /branding/{tutorId}/{fileName} {
+      allow read: if isAuthenticated();
+      allow write: if isAuthenticated() && 
+                      isOwner(tutorId) && 
+                      isValidImageType() && 
+                      isUnder5MB();
+      allow delete: if isAuthenticated() && isOwner(tutorId);
+    }
+    
+    // Document attachments (for future features)
+    match /documents/{tutorId}/{documentId}/{fileName} {
+      allow read: if isAuthenticated() && isOwner(tutorId);
+      allow write: if isAuthenticated() && 
+                      isOwner(tutorId) && 
+                      (isValidPDFType() || isValidImageType()) && 
+                      isUnder10MB();
+      allow delete: if isAuthenticated() && isOwner(tutorId);
+    }
+    
+    // Multi-tenant file storage (for future SaaS implementation)
+    match /tenants/{tenantId}/{path=**} {
+      allow read: if isAuthenticated() && 
+                     exists(/databases/(default)/documents/tenants/$(tenantId)/members/$(request.auth.uid));
+      allow write: if isAuthenticated() && 
+                      exists(/databases/(default)/documents/tenants/$(tenantId)/members/$(request.auth.uid)) &&
+                      isUnder10MB();
+      allow delete: if isAuthenticated() && 
+                       exists(/databases/(default)/documents/tenants/$(tenantId)/members/$(request.auth.uid));
+    }
+    
+    // Public assets (logos, marketing materials)
+    match /public/{fileName} {
+      allow read: if true; // Public read access
+      allow write: if isAuthenticated() && 
+                      exists(/databases/(default)/documents/users/$(request.auth.uid)) &&
+                      get(/databases/(default)/documents/users/$(request.auth.uid)).data.role == 'admin';
+    }
+    
+    // Default deny rule for any other paths
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+}
