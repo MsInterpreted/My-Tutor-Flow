@@ -1,248 +1,204 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Box, Typography, Button, Container, Fade, Slide } from '@mui/material';
-import { ArrowForward, School, TrendingUp, People } from '@mui/icons-material';
+import React, { useState } from 'react';
+import { Box, Typography, Button, Container, Grid, Card, CardContent, CardActions } from '@mui/material';
 import { MyTutorFlowLogo } from '../components/branding/MyTutorFlowLogo';
 import { useTheme } from '../theme/ThemeContext';
 
-// Background options - you can choose from these 10 options
-const backgroundOptions = {
-  // Option 1: Floating Geometric Shapes
-  geometricShapes: {
-    name: "Floating Geometric Shapes",
+// Import all background components from WelcomePage
+const backgroundOptions = [
+  {
+    id: 'geometricShapes',
+    name: 'Geometric Shapes',
+    description: 'Floating geometric elements with gentle movement',
     component: GeometricShapesBackground
   },
-  
-  // Option 2: Gradient Wave Animation
-  gradientWaves: {
-    name: "Gradient Wave Animation", 
+  {
+    id: 'gradientWaves',
+    name: 'Gradient Waves',
+    description: 'Diagonal gradient waves that shift and move',
     component: GradientWavesBackground
   },
-  
-  // Option 3: Particle Network
-  particleNetwork: {
-    name: "Particle Network",
+  {
+    id: 'particleNetwork',
+    name: 'Particle Network',
+    description: 'Connected particle system simulation',
     component: ParticleNetworkBackground
   },
-  
-  // Option 4: Morphing Blobs
-  morphingBlobs: {
-    name: "Morphing Blobs",
+  {
+    id: 'morphingBlobs',
+    name: 'Morphing Blobs',
+    description: 'Organic blob shapes that morph and rotate',
     component: MorphingBlobsBackground
   },
-  
-  // Option 5: Digital Grid
-  digitalGrid: {
-    name: "Digital Grid",
+  {
+    id: 'digitalGrid',
+    name: 'Digital Grid',
+    description: 'Animated grid lines with tech aesthetic',
     component: DigitalGridBackground
   },
-  
-  // Option 6: Floating Orbs
-  floatingOrbs: {
-    name: "Floating Orbs",
+  {
+    id: 'floatingOrbs',
+    name: 'Floating Orbs',
+    description: 'Multiple floating orb elements',
     component: FloatingOrbsBackground
   },
-  
-  // Option 7: Animated Gradient Mesh
-  gradientMesh: {
-    name: "Animated Gradient Mesh",
+  {
+    id: 'gradientMesh',
+    name: 'Gradient Mesh',
+    description: 'Complex gradient mesh that shifts',
     component: GradientMeshBackground
   },
-  
-  // Option 8: Ripple Effect
-  rippleEffect: {
-    name: "Ripple Effect",
+  {
+    id: 'rippleEffect',
+    name: 'Ripple Effect',
+    description: 'Expanding ripple circles',
     component: RippleEffectBackground
   },
-  
-  // Option 9: Constellation
-  constellation: {
-    name: "Constellation",
+  {
+    id: 'constellation',
+    name: 'Constellation',
+    description: 'Star field with moving constellation',
     component: ConstellationBackground
   },
-  
-  // Option 10: Liquid Motion
-  liquidMotion: {
-    name: "Liquid Motion",
+  {
+    id: 'liquidMotion',
+    name: 'Liquid Motion',
+    description: 'Fluid liquid-like gradient movement',
     component: LiquidMotionBackground
   }
-};
+];
 
-// Set the active background here - change this to test different options
-const ACTIVE_BACKGROUND = 'liquidMotion'; // Change this to any key from backgroundOptions
-
-function WelcomePage() {
-  const navigate = useNavigate();
+function BackgroundShowcasePage() {
   const theme = useTheme();
-  const [showContent, setShowContent] = useState(false);
-  const [showButtons, setShowButtons] = useState(false);
+  const [selectedBackground, setSelectedBackground] = useState(null);
 
-  useEffect(() => {
-    // Staggered animations
-    const timer1 = setTimeout(() => setShowContent(true), 500);
-    const timer2 = setTimeout(() => setShowButtons(true), 1200);
-    
-    return () => {
-      clearTimeout(timer1);
-      clearTimeout(timer2);
-    };
-  }, []);
-
-  const handleEnterDemo = () => {
-    navigate('/dashboard');
+  const handleSelectBackground = (backgroundId) => {
+    setSelectedBackground(backgroundId);
+    // You can add logic here to update the WelcomePage background
+    alert(`Selected: ${backgroundOptions.find(bg => bg.id === backgroundId)?.name}\n\nTo activate this background, update the ACTIVE_BACKGROUND constant in WelcomePage.jsx to '${backgroundId}'`);
   };
-
-  const handleViewShowcase = () => {
-    navigate('/bonk-showcase');
-  };
-
-  const ActiveBackground = backgroundOptions[ACTIVE_BACKGROUND].component;
 
   return (
-    <Box
-      sx={{
-        minHeight: '100vh',
-        position: 'relative',
-        overflow: 'hidden',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        background: `linear-gradient(135deg, ${theme.colors.primary} 0%, ${theme.colors.secondary} 100%)`,
-      }}
-    >
-      {/* Animated Background */}
-      <ActiveBackground />
-      
-      {/* Content Overlay */}
-      <Container maxWidth="md" sx={{ position: 'relative', zIndex: 2, textAlign: 'center' }}>
-        <Fade in={showContent} timeout={1000}>
-          <Box>
-            {/* Logo */}
-            <Box sx={{ mb: 4 }}>
-              <MyTutorFlowLogo size={200} showText={true} />
-            </Box>
-            
-            {/* Welcome Text */}
-            <Typography
-              variant="h2"
-              sx={{
-                fontSize: { xs: '2.5rem', md: '3.5rem' },
-                fontWeight: 800,
-                background: 'linear-gradient(135deg, #ffffff 0%, #f0f9ff 100%)',
-                backgroundClip: 'text',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                mb: 2,
-                textShadow: '0 4px 20px rgba(0,0,0,0.3)',
-              }}
-            >
-              Welcome to the Future
-            </Typography>
-            
-            <Typography
-              variant="h5"
-              sx={{
-                fontSize: { xs: '1.2rem', md: '1.5rem' },
-                fontWeight: 400,
-                color: 'rgba(255,255,255,0.9)',
-                mb: 1,
-                textShadow: '0 2px 10px rgba(0,0,0,0.3)',
-              }}
-            >
-              of Education Management
-            </Typography>
-            
-            <Typography
-              variant="body1"
-              sx={{
-                fontSize: { xs: '1rem', md: '1.1rem' },
-                color: 'rgba(255,255,255,0.8)',
-                mb: 4,
-                maxWidth: '600px',
-                mx: 'auto',
-                lineHeight: 1.6,
-              }}
-            >
-              Experience the power of AI-driven tutoring management with BONK cryptocurrency integration, 
-              built for the Solana Mobile ecosystem.
-            </Typography>
-          </Box>
-        </Fade>
+    <Box sx={{ minHeight: '100vh', backgroundColor: theme.colors.background.primary, py: 4 }}>
+      <Container maxWidth="xl">
+        {/* Header */}
+        <Box sx={{ textAlign: 'center', mb: 6 }}>
+          <MyTutorFlowLogo size={120} showText={true} />
+          <Typography variant="h3" sx={{ mt: 3, mb: 2, color: theme.colors.text.primary }}>
+            Choose Your Welcome Page Background
+          </Typography>
+          <Typography variant="h6" sx={{ color: theme.colors.text.secondary, maxWidth: '600px', mx: 'auto' }}>
+            Select from 10 stunning animated backgrounds for your hackathon demo
+          </Typography>
+        </Box>
 
-        {/* Action Buttons */}
-        <Slide in={showButtons} direction="up" timeout={800}>
-          <Box sx={{ display: 'flex', gap: 3, justifyContent: 'center', flexWrap: 'wrap' }}>
-            <Button
-              variant="contained"
-              size="large"
-              onClick={handleEnterDemo}
-              endIcon={<ArrowForward />}
-              sx={{
-                px: 4,
-                py: 2,
-                fontSize: '1.1rem',
-                fontWeight: 600,
-                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-                boxShadow: '0 8px 32px rgba(102, 126, 234, 0.4)',
-                '&:hover': {
-                  background: 'linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%)',
-                  transform: 'translateY(-2px)',
-                  boxShadow: '0 12px 40px rgba(102, 126, 234, 0.6)',
-                },
-                transition: 'all 0.3s ease',
-              }}
-            >
-              Enter Demo
-            </Button>
-            
-            <Button
-              variant="outlined"
-              size="large"
-              onClick={handleViewShowcase}
-              endIcon={<School />}
-              sx={{
-                px: 4,
-                py: 2,
-                fontSize: '1.1rem',
-                fontWeight: 600,
-                borderColor: 'rgba(255,255,255,0.5)',
-                color: 'white',
-                '&:hover': {
-                  borderColor: 'white',
-                  backgroundColor: 'rgba(255,255,255,0.1)',
-                  transform: 'translateY(-2px)',
-                },
-                transition: 'all 0.3s ease',
-              }}
-            >
-              BONK Showcase
-            </Button>
-          </Box>
-        </Slide>
+        {/* Background Options Grid */}
+        <Grid container spacing={3}>
+          {backgroundOptions.map((option) => (
+            <Grid item xs={12} sm={6} md={4} key={option.id}>
+              <Card 
+                sx={{ 
+                  height: '400px',
+                  position: 'relative',
+                  overflow: 'hidden',
+                  cursor: 'pointer',
+                  transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+                  '&:hover': {
+                    transform: 'translateY(-8px)',
+                    boxShadow: '0 12px 40px rgba(0,0,0,0.2)',
+                  },
+                  border: selectedBackground === option.id ? `3px solid ${theme.colors.primary}` : 'none',
+                }}
+                onClick={() => handleSelectBackground(option.id)}
+              >
+                {/* Background Preview */}
+                <Box
+                  sx={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    height: '280px',
+                    background: `linear-gradient(135deg, ${theme.colors.primary} 0%, ${theme.colors.secondary} 100%)`,
+                    overflow: 'hidden',
+                  }}
+                >
+                  <option.component />
+                  
+                  {/* Mini Logo Overlay */}
+                  <Box
+                    sx={{
+                      position: 'absolute',
+                      top: '50%',
+                      left: '50%',
+                      transform: 'translate(-50%, -50%)',
+                      zIndex: 2,
+                    }}
+                  >
+                    <MyTutorFlowLogo size={60} showText={false} />
+                  </Box>
+                </Box>
 
-        {/* Feature Highlights */}
-        <Fade in={showButtons} timeout={1200}>
-          <Box sx={{ mt: 6, display: 'flex', justifyContent: 'center', gap: 4, flexWrap: 'wrap' }}>
-            <Box sx={{ textAlign: 'center', color: 'rgba(255,255,255,0.8)' }}>
-              <People sx={{ fontSize: 40, mb: 1 }} />
-              <Typography variant="body2">7+ Students</Typography>
-            </Box>
-            <Box sx={{ textAlign: 'center', color: 'rgba(255,255,255,0.8)' }}>
-              <TrendingUp sx={{ fontSize: 40, mb: 1 }} />
-              <Typography variant="body2">R20K+ Revenue</Typography>
-            </Box>
-            <Box sx={{ textAlign: 'center', color: 'rgba(255,255,255,0.8)' }}>
-              <School sx={{ fontSize: 40, mb: 1 }} />
-              <Typography variant="body2">BONK Integration</Typography>
-            </Box>
+                {/* Card Content */}
+                <CardContent sx={{ position: 'absolute', bottom: 0, left: 0, right: 0, backgroundColor: 'white' }}>
+                  <Typography variant="h6" sx={{ fontWeight: 600, mb: 1 }}>
+                    {option.name}
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary" sx={{ fontSize: '0.85rem' }}>
+                    {option.description}
+                  </Typography>
+                </CardContent>
+
+                {/* Selection Indicator */}
+                {selectedBackground === option.id && (
+                  <Box
+                    sx={{
+                      position: 'absolute',
+                      top: 10,
+                      right: 10,
+                      backgroundColor: theme.colors.primary,
+                      color: 'white',
+                      borderRadius: '50%',
+                      width: 30,
+                      height: 30,
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      fontSize: '1.2rem',
+                      zIndex: 3,
+                    }}
+                  >
+                    ✓
+                  </Box>
+                )}
+              </Card>
+            </Grid>
+          ))}
+        </Grid>
+
+        {/* Instructions */}
+        <Box sx={{ mt: 6, textAlign: 'center', p: 4, backgroundColor: theme.colors.background.secondary, borderRadius: 2 }}>
+          <Typography variant="h5" sx={{ mb: 2, color: theme.colors.text.primary }}>
+            How to Apply Your Choice
+          </Typography>
+          <Typography variant="body1" sx={{ color: theme.colors.text.secondary, mb: 3 }}>
+            Click on any background above to see the selection. To activate it on your welcome page:
+          </Typography>
+          <Box sx={{ textAlign: 'left', maxWidth: '600px', mx: 'auto' }}>
+            <Typography variant="body2" sx={{ fontFamily: 'monospace', backgroundColor: '#f5f5f5', p: 2, borderRadius: 1, mb: 2 }}>
+              1. Open: my-tutor-flow/src/pages/WelcomePage.jsx<br/>
+              2. Find line 44: const ACTIVE_BACKGROUND = 'gradientWaves';<br/>
+              3. Replace 'gradientWaves' with your chosen background ID<br/>
+              4. Save and rebuild: npm run build<br/>
+              5. Redeploy: npx surge dist my-tutor-flow-hackathon.surge.sh
+            </Typography>
           </Box>
-        </Fade>
+        </Box>
       </Container>
     </Box>
   );
 }
 
-// Background Component Placeholders - These will be implemented based on your choice
+// Background Components (copied from WelcomePage)
 function GeometricShapesBackground() {
   return (
     <Box
@@ -288,11 +244,11 @@ function GradientWavesBackground() {
         `,
         animation: 'wave 8s ease-in-out infinite',
         '@keyframes wave': {
-          '0%, 100%': { 
+          '0%, 100%': {
             backgroundPosition: '0% 0%, 100% 100%',
             backgroundSize: '200% 200%, 200% 200%'
           },
-          '50%': { 
+          '50%': {
             backgroundPosition: '100% 100%, 0% 0%',
             backgroundSize: '300% 300%, 300% 300%'
           },
@@ -346,10 +302,10 @@ function MorphingBlobsBackground() {
         '&::before, &::after': {
           content: '""',
           position: 'absolute',
-          width: '300px',
-          height: '300px',
+          width: '150px',
+          height: '150px',
           borderRadius: '50%',
-          filter: 'blur(40px)',
+          filter: 'blur(20px)',
           animation: 'morph 10s ease-in-out infinite',
         },
         '&::before': {
@@ -398,7 +354,7 @@ function DigitalGridBackground() {
           linear-gradient(rgba(102, 126, 234, 0.1) 1px, transparent 1px),
           linear-gradient(90deg, rgba(102, 126, 234, 0.1) 1px, transparent 1px)
         `,
-        backgroundSize: '50px 50px',
+        backgroundSize: '25px 25px',
         animation: 'grid 15s linear infinite',
         '&::before': {
           content: '""',
@@ -411,7 +367,7 @@ function DigitalGridBackground() {
         },
         '@keyframes grid': {
           '0%': { backgroundPosition: '0 0, 0 0' },
-          '100%': { backgroundPosition: '50px 50px, 50px 50px' },
+          '100%': { backgroundPosition: '25px 25px, 25px 25px' },
         },
       }}
     />
@@ -436,24 +392,24 @@ function FloatingOrbsBackground() {
           animation: 'float 8s ease-in-out infinite',
         },
         '& .orb:nth-of-type(1)': {
-          width: '80px',
-          height: '80px',
+          width: '40px',
+          height: '40px',
           background: 'radial-gradient(circle, rgba(102, 126, 234, 0.3), transparent)',
           top: '20%',
           left: '10%',
           animationDelay: '0s',
         },
         '& .orb:nth-of-type(2)': {
-          width: '120px',
-          height: '120px',
+          width: '60px',
+          height: '60px',
           background: 'radial-gradient(circle, rgba(118, 75, 162, 0.2), transparent)',
           top: '60%',
           right: '15%',
           animationDelay: '2s',
         },
         '& .orb:nth-of-type(3)': {
-          width: '60px',
-          height: '60px',
+          width: '30px',
+          height: '30px',
           background: 'radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)',
           bottom: '30%',
           left: '20%',
@@ -461,8 +417,8 @@ function FloatingOrbsBackground() {
         },
         '@keyframes float': {
           '0%, 100%': { transform: 'translateY(0px) translateX(0px)' },
-          '33%': { transform: 'translateY(-30px) translateX(20px)' },
-          '66%': { transform: 'translateY(20px) translateX(-15px)' },
+          '33%': { transform: 'translateY(-15px) translateX(10px)' },
+          '66%': { transform: 'translateY(10px) translateX(-8px)' },
         },
       }}
     >
@@ -473,7 +429,7 @@ function FloatingOrbsBackground() {
   );
 }
 
-// Option 7: Animated Gradient Mesh Background
+// Option 7: Gradient Mesh Background
 function GradientMeshBackground() {
   return (
     <Box
@@ -549,8 +505,8 @@ function RippleEffectBackground() {
             opacity: 1,
           },
           '100%': {
-            width: '300px',
-            height: '300px',
+            width: '150px',
+            height: '150px',
             opacity: 0,
             transform: 'translate(-50%, -50%)',
           },
@@ -655,4 +611,4 @@ function LiquidMotionBackground() {
   );
 }
 
-export default WelcomePage;
+export default BackgroundShowcasePage;

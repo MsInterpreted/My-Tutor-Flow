@@ -49,6 +49,7 @@ import DiagnosticPanel from './components/DiagnosticPanel';
 // Lazy load pages for better performance
 const LoginPage = React.lazy(() => import('./pages/LoginPage'));
 const WelcomePage = React.lazy(() => import('./pages/WelcomePage'));
+const BackgroundShowcasePage = React.lazy(() => import('./pages/BackgroundShowcasePage'));
 const SignUpPage = React.lazy(() => import('./pages/SignUpPage'));
 const DashboardPage = React.lazy(() => import('./pages/DashboardPage'));
 const StudentsPage = React.lazy(() => import('./pages/StudentsPage'));
@@ -657,6 +658,12 @@ function AppContent() {
             <Route
               path="/bonk-showcase"
               element={<BonkShowcasePage />}
+            />
+
+            {/* Background Showcase - Public Route */}
+            <Route
+              path="/background-showcase"
+              element={<BackgroundShowcasePage />}
             />
 
             {/* Welcome Page - Public Route */}
