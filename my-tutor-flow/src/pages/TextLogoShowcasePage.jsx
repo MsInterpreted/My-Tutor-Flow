@@ -19,14 +19,7 @@ import {
   Visibility as VisibilityIcon,
 } from '@mui/icons-material';
 import { useTheme } from '../theme/ThemeContext';
-import { 
-  MyTutorFlowTextLogo,
-  CompactTextLogo,
-  StandardTextLogo,
-  HeroTextLogo,
-  HackathonTextLogo,
-  AnimatedTextLogo,
-} from '../components/branding/MyTutorFlowTextLogo';
+import { MyTutorFlowLogo } from '../components/branding/MyTutorFlowLogo';
 
 /**
  * Text Logo Showcase Page
@@ -39,45 +32,13 @@ const TextLogoShowcasePage = () => {
 
   const logoVariants = [
     {
-      id: 'compact',
-      name: 'Compact',
-      component: CompactTextLogo,
-      description: 'Perfect for headers, business cards, and small spaces',
-      useCase: 'Navigation bars, mobile headers, compact layouts',
-      size: 'Small (80px height)',
-    },
-    {
-      id: 'standard',
-      name: 'Standard',
-      component: StandardTextLogo,
-      description: 'Ideal for general branding and medium-sized applications',
-      useCase: 'Website headers, presentations, marketing materials',
-      size: 'Medium (120px height)',
-    },
-    {
-      id: 'hero',
-      name: 'Hero',
-      component: HeroTextLogo,
-      description: 'Large format with tagline for landing pages and hero sections',
-      useCase: 'Landing pages, hero sections, main branding',
-      size: 'Large (160px height)',
-    },
-    {
-      id: 'hackathon',
-      name: 'Hackathon',
-      component: HackathonTextLogo,
-      description: 'Extra large format perfect for presentations and pitches',
-      useCase: 'Hackathon presentations, investor pitches, large displays',
-      size: 'Extra Large (200px height)',
+      id: 'official',
+      name: 'Official Logo',
+      component: MyTutorFlowLogo,
+      description: 'Official My Tutor Flow logo with emerald green and gold theme',
+      useCase: 'All presentations, marketing materials, and branding',
+      size: 'Scalable (80px - 200px)',
       recommended: true,
-    },
-    {
-      id: 'animated',
-      name: 'Animated',
-      component: AnimatedTextLogo,
-      description: 'Interactive version with subtle floating animation',
-      useCase: 'Digital presentations, interactive demos, web applications',
-      size: 'Large with animation effects',
     },
   ];
 
@@ -164,7 +125,7 @@ const TextLogoShowcasePage = () => {
           🏆 Recommended for Hackathon
         </Typography>
         <Box sx={{ mb: 3 }}>
-          <HackathonTextLogo />
+          <MyTutorFlowLogo size={200} />
         </Box>
         <Alert severity="success" sx={{ maxWidth: 600, mx: 'auto' }}>
           <Typography variant="body1" sx={{ fontWeight: 600 }}>

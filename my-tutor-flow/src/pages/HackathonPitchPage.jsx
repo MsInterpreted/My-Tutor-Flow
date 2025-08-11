@@ -30,7 +30,7 @@ import {
 } from '@mui/icons-material';
 import { useTheme } from '../theme/ThemeContext';
 import MobileScreenshots from '../components/MobileScreenshots';
-import { HackathonLogo } from '../components/branding/CustomMyTutorFlowLogo';
+import { HackathonLogo } from '../components/branding/MyTutorFlowLogo';
 import { BonkLogo, AnimatedBonkLogo, FloatingBonkLogo } from '../components/branding/BonkLogo';
 import SolanaWalletButton from '../components/wallet/SolanaWalletButton';
 import PresentationExporter from '../components/presentation/PresentationExporter';

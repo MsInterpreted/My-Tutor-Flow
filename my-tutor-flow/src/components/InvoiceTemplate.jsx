@@ -13,7 +13,7 @@ import {
   Grid,
 } from '@mui/material';
 import { useTheme } from '../theme/ThemeContext';
-import TDLearningAcademyLogo from './TDLearningAcademyLogo';
+import { MyTutorFlowLogo } from './branding/MyTutorFlowLogo';
 import { formatCurrency } from '../utils/helpers';
 import dayjs from 'dayjs';
 
@@ -73,7 +73,7 @@ const InvoiceTemplate = ({
       <Box sx={{ mb: 4 }}>
         <Grid container spacing={3} alignItems="center">
           <Grid item xs={12} md={6}>
-            <TDLearningAcademyLogo size="large" variant="full" />
+            <MyTutorFlowLogo size={120} />
             <Box sx={{ mt: 2 }}>
               <Typography variant="body2" sx={{ color: theme.colors.text.secondary, mb: 0.5 }}>
                 {companyInfo.address}

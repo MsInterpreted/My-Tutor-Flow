@@ -41,7 +41,7 @@ import {
 import { createTheme, ThemeProvider as MuiThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider, useTheme } from './theme/ThemeContext';
-import { NavigationLogo } from './components/branding/CustomMyTutorFlowLogo';
+import { NavigationLogo } from './components/branding/MyTutorFlowLogo';
 import { BrandingProvider } from './contexts/BrandingContext';
 import ErrorBoundary from './components/ErrorBoundary';
 import DiagnosticPanel from './components/DiagnosticPanel';
@@ -49,7 +49,6 @@ import DiagnosticPanel from './components/DiagnosticPanel';
 // Lazy load pages for better performance
 const LoginPage = React.lazy(() => import('./pages/LoginPage'));
 const WelcomePage = React.lazy(() => import('./pages/WelcomePage'));
-const BackgroundShowcasePage = React.lazy(() => import('./pages/BackgroundShowcasePage'));
 const SignUpPage = React.lazy(() => import('./pages/SignUpPage'));
 const DashboardPage = React.lazy(() => import('./pages/DashboardPage'));
 const StudentsPage = React.lazy(() => import('./pages/StudentsPage'));
@@ -660,11 +659,7 @@ function AppContent() {
               element={<BonkShowcasePage />}
             />
 
-            {/* Background Showcase - Public Route */}
-            <Route
-              path="/background-showcase"
-              element={<BackgroundShowcasePage />}
-            />
+
 
             {/* Welcome Page - Public Route */}
             <Route path="/welcome" element={<WelcomePage />} />
