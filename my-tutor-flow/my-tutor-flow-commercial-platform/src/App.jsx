@@ -80,7 +80,7 @@ const theme = createTheme({
 // Auth Context import
 import { AuthContext, AuthProvider } from './contexts/AuthContext';
 
-// Enhanced Loading component with TD Learning Academy branding
+// Enhanced Loading component with My Tutor Flow branding
 const LoadingSpinner = () => (
   <Box
     sx={{
@@ -89,7 +89,7 @@ const LoadingSpinner = () => (
       justifyContent: 'center',
       alignItems: 'center',
       height: '100vh',
-      background: 'linear-gradient(135deg, #00796B, #004D40)',
+      background: 'linear-gradient(135deg, #10b981, #059669)',
       color: 'white',
       fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
     }}
@@ -99,7 +99,7 @@ const LoadingSpinner = () => (
         width: '60px',
         height: '60px',
         border: '4px solid rgba(255,255,255,0.3)',
-        borderTop: '4px solid #FFD700',
+        borderTop: '4px solid #fbbf24',
         borderRadius: '50%',
         animation: 'spin 1s linear infinite',
         mb: 2,
@@ -109,8 +109,8 @@ const LoadingSpinner = () => (
         }
       }}
     />
-    <Box sx={{ fontSize: '24px', fontWeight: 600, mb: 1 }}>TD Learning Academy</Box>
-    <Box sx={{ fontSize: '14px', opacity: 0.8 }}>Loading your tutoring platform...</Box>
+    <Box sx={{ fontSize: '24px', fontWeight: 600, mb: 1 }}>My Tutor Flow</Box>
+    <Box sx={{ fontSize: '14px', opacity: 0.8 }}>Loading your education platform...</Box>
   </Box>
 );
 
