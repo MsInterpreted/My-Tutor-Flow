@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Marks Modal Dropdown Test</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #f5f5f5;
+      }
+      .test-container {
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+      }
+      .test-result {
+        padding: 10px;
+        margin: 10px 0;
+        border-radius: 4px;
+      }
+      .success {
+        background-color: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+      }
+      .error {
+        background-color: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+      }
+      .info {
+        background-color: #d1ecf1;
+        color: #0c5460;
+        border: 1px solid #bee5eb;
+      }
+      button {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 4px;
+        cursor: pointer;
+        margin: 5px;
+      }
+      button:hover {
+        background-color: #0056b3;
+      }
+      .test-url {
+        font-family: monospace;
+        background-color: #f8f9fa;
+        padding: 5px;
+        border-radius: 3px;
+      }
+      .test-step {
+        margin: 10px 0;
+        padding: 10px;
+        border-left: 4px solid #007bff;
+        background-color: #f8f9fa;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="test-container">
+      <h1>🧪 Marks Modal Dropdown Test</h1>
+      <p>
+        This test verifies that the Term and Subject dropdowns in the "Add Quick Marks" modal work
+        correctly.
+      </p>
+
+      <div id="results"></div>
+
+      <button onclick="runTest()">Run Test</button>
+      <button onclick="clearResults()">Clear Results</button>
+    </div>
+
+    <script>
+      const results = document.getElementById('results');
+
+      function addResult(message, type = 'info') {
+        const div = document.createElement('div');
+        div.className = `test-result ${type}`;
+        div.innerHTML = message;
+        results.appendChild(div);
+      }
+
+      function clearResults() {
+        results.innerHTML = '';
+      }
+
+      function runTest() {
+        clearResults();
+        addResult('🚀 Starting Marks Modal Dropdown Test...', 'info');
+
+        // Test instructions
+        addResult('📋 <strong>Manual Test Instructions:</strong>', 'info');
+
+        addResult(`
+                <div class="test-step">
+                    <strong>Step 1:</strong> Open student profile page: 
+                    <a href="http://localhost:3002/students/student1" target="_blank" class="test-url">
+                        http://localhost:3002/students/student1
+                    </a>
+                </div>
+            `);
+
+        addResult(`
+                <div class="test-step">
+                    <strong>Step 2:</strong> Click the "Add Quick Marks" button (+ icon) in the Recent Marks section
+                </div>
+            `);
+
+        addResult(`
+                <div class="test-step">
+                    <strong>Step 3:</strong> Verify the Term dropdown contains:
+                    <ul>
+                        <li>Term 1, Term 2, Term 3, Term 4</li>
+                        <li>Semester 1, Semester 2</li>
+                        <li>Quarter 1, Quarter 2, Quarter 3, Quarter 4</li>
+                        <li>Mid-term, Final, Assessment</li>
+                        <li>Custom Term... option</li>
+                    </ul>
+                </div>
+            `);
+
+        addResult(`
+                <div class="test-step">
+                    <strong>Step 4:</strong> Test Custom Term functionality:
+                    <ul>
+                        <li>Select "Custom Term..." from dropdown</li>
+                        <li>Verify a text input appears</li>
+                        <li>Enter a custom term name (e.g., "Midyear Assessment")</li>
+                    </ul>
+                </div>
+            `);
+
+        addResult(`
+                <div class="test-step">
+                    <strong>Step 5:</strong> Verify the Subject dropdown contains:
+                    <ul>
+                        <li>Mathematics</li>
+                        <li>English</li>
+                        <li>Science</li>
+                        <li>History</li>
+                        <li>(Should show student's subjects from profile)</li>
+                    </ul>
+                </div>
+            `);
+
+        addResult(`
+                <div class="test-step">
+                    <strong>Step 6:</strong> Test mark entry:
+                    <ul>
+                        <li>Select a term (e.g., "Term 1")</li>
+                        <li>Select a subject (e.g., "Mathematics")</li>
+                        <li>Enter a mark (e.g., "85")</li>
+                        <li>Click "Add Mark"</li>
+                    </ul>
+                </div>
+            `);
+
+        addResult(`
+                <div class="test-step">
+                    <strong>Step 7:</strong> Verify the mark appears in the Recent Marks table with correct term and subject
+                </div>
+            `);
+
+        addResult(`
+                <div class="test-step">
+                    <strong>Step 8:</strong> Test with other students:
+                    <ul>
+                        <li><a href="http://localhost:3002/students/student2" target="_blank">Student 2</a> - Should show Physics, Chemistry, Mathematics, English</li>
+                        <li><a href="http://localhost:3002/students/student3" target="_blank">Student 3</a> - Should show Chemistry, Biology, Physics, Mathematics</li>
+                        <li><a href="http://localhost:3002/students/student4" target="_blank">Student 4</a> - Should show Mathematics, English, Science, Geography, Foreign Language</li>
+                    </ul>
+                </div>
+            `);
+
+        // Expected results
+        addResult('✅ <strong>Expected Results:</strong>', 'success');
+        addResult(
+          '• Term dropdown should show all predefined options plus custom option',
+          'success'
+        );
+        addResult('• Custom term input should appear when "Custom Term..." is selected', 'success');
+        addResult(
+          '• Subject dropdown should show student-specific subjects (not "No subjects available")',
+          'success'
+        );
+        addResult('• Marks should save successfully with selected term and subject', 'success');
+        addResult('• Different students should show different subject lists', 'success');
+
+        // Open the first test page
+        window.open('http://localhost:3002/students/student1', '_blank');
+        addResult('🔗 Opened Student 1 profile page for testing', 'info');
+      }
+    </script>
+  </body>
+</html>
