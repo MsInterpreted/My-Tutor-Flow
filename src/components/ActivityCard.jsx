@@ -48,7 +48,7 @@ const ActivityCard = ({
       sx={{
         background: `linear-gradient(135deg, ${colorMap[color]}, ${colorMap[color]}CC)`,
         borderRadius: '20px',
-        padding: '24px',
+        padding: { xs: '16px', sm: '20px', md: '24px' },
         color: 'white',
         cursor: 'pointer',
         position: 'relative',
@@ -59,12 +59,15 @@ const ActivityCard = ({
         justifyContent: 'space-between',
         transition: 'all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55)',
         boxShadow: '0 8px 32px rgba(0, 0, 0, 0.12)',
-        '&:hover': {
-          transform: 'translateY(-8px) scale(1.02)',
-          boxShadow: '0 12px 40px rgba(0, 0, 0, 0.2)',
+        '@media (hover: hover)': {
+          '&:hover': {
+            transform: 'translateY(-8px) scale(1.02)',
+            boxShadow: '0 12px 40px rgba(0, 0, 0, 0.2)',
+          },
         },
         '&:active': {
-          transform: 'translateY(-4px) scale(1.01)',
+          transform: 'scale(0.98)',
+          opacity: 0.9,
         },
         // Add subtle pattern overlay
         '&::before': {
@@ -137,7 +140,7 @@ const ActivityCard = ({
             fontSize: '14px',
             lineHeight: 1.4,
             fontWeight: 500,
-            color: 'rgba(0, 0, 0, 0.8)',
+            color: 'rgba(255, 255, 255, 0.85)',
             minHeight: '20px', // Reserve space even when empty
           }}
         >

@@ -29,6 +29,7 @@ import {
 } from '@mui/icons-material';
 import { useTheme } from '../theme/ThemeContext';
 import paymentService, { PAYMENT_PROVIDERS } from '../services/paymentService';
+import NotificationSettings from '../components/NotificationSettings';
 
 export default function PaymentSettingsPage() {
   const theme = useTheme();
@@ -96,7 +97,7 @@ export default function PaymentSettingsPage() {
   };
 
   return (
-    <Box sx={{ minHeight: '100vh', background: theme.colors.background.primary, p: 3 }}>
+    <Box sx={{ minHeight: '100vh', background: theme.colors.background.primary, p: { xs: 1.5, sm: 2, md: 3 } }}>
       <Box display="flex" alignItems="center" justifyContent="space-between" mb={3} flexWrap="wrap" gap={2}>
         <Typography variant="h4" sx={{ color: theme.colors.text.primary, fontWeight: 700 }}>
           Payment Settings
@@ -186,7 +187,7 @@ export default function PaymentSettingsPage() {
             <CardContent>
               <Box display="flex" alignItems="center" justifyContent="space-between" mb={2}>
                 <Box display="flex" alignItems="center" gap={1}>
-                  <Payment sx={{ color: '#003087' }} />
+                  <Payment sx={{ color: theme.isDarkMode ? '#4A90D9' : '#003087' }} />
                   <Typography variant="h6" sx={{ color: theme.colors.text.primary, fontWeight: 600 }}>
                     PayPal
                   </Typography>
@@ -368,6 +369,11 @@ export default function PaymentSettingsPage() {
           </Card>
         </Grid>
       </Grid>
+
+      {/* Notification Settings */}
+      <Box sx={{ mt: 4 }}>
+        <NotificationSettings />
+      </Box>
     </Box>
   );
 }

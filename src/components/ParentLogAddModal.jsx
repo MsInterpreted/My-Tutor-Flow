@@ -10,6 +10,8 @@ import {
   InputLabel,
   Select,
   MenuItem,
+  useMediaQuery,
+  useTheme as useMuiTheme,
 } from '@mui/material';
 import { useTheme } from '../theme/ThemeContext';
 import firebaseService from '../services/firebaseService';
@@ -18,6 +20,8 @@ import dayjs from 'dayjs';
 
 export default function ParentLogAddModal({ open, studentId, onClose, reload, setSnackbar }) {
   const theme = useTheme();
+  const muiTheme = useMuiTheme();
+  const isMobile = useMediaQuery(muiTheme.breakpoints.down('md'));
   const [log, setLog] = useState({
     date: dayjs().format('YYYY-MM-DD'),
     type: '',
@@ -63,7 +67,7 @@ export default function ParentLogAddModal({ open, studentId, onClose, reload, se
   };
 
   return (
-    <Dialog open={open} onClose={onClose} maxWidth="xs">
+    <Dialog open={open} onClose={onClose} maxWidth="xs" fullScreen={isMobile}>
       <DialogTitle>Add Parent Communication Log</DialogTitle>
       <DialogContent dividers>
         <TextField

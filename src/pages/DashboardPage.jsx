@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback, lazy, Suspense } from 'react';
 import firebaseService from '../services/firebaseService';
 import {
   Box,
@@ -7,18 +7,21 @@ import {
   Container,
   useMediaQuery,
   useTheme as useMuiTheme,
+  CircularProgress,
 } from '@mui/material';
 import { useTheme } from '../theme/ThemeContext';
 import ActivityCard from '../components/ActivityCard';
 import ProgressCircle from '../components/ProgressCircle';
-import ModernChart from '../components/ModernChart';
-import PerformanceMonitor from '../components/PerformanceMonitor';
 import {
   School as SchoolIcon,
   TrendingUp as TrendingUpIcon,
   Assignment as AssignmentIcon,
   Book as BookIcon,
 } from '@mui/icons-material';
+
+// Lazy load heavy chart/analytics components
+const ModernChart = lazy(() => import('../components/ModernChart'));
+const PerformanceMonitor = lazy(() => import('../components/PerformanceMonitor'));
 
 const DashboardPage = () => {
   const [stats, setStats] = useState({
@@ -286,7 +289,9 @@ const DashboardPage = () => {
 
           {/* Weekly Chart */}
           <Grid item xs={12} md={8}>
-            <ModernChart data={stats.weeklyData} type="line" title="Weekly Activity" height={300} />
+            <Suspense fallback={<Box display="flex" justifyContent="center" alignItems="center" minHeight="300px"><CircularProgress size={32} /></Box>}>
+              <ModernChart data={stats.weeklyData} type="line" title="Weekly Activity" height={300} />
+            </Suspense>
           </Grid>
         </Grid>
 
@@ -313,9 +318,15 @@ const DashboardPage = () => {
                     textAlign: 'center',
                     border: `1px solid ${theme.isDarkMode ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)'}`,
                     transition: 'all 0.3s ease',
-                    '&:hover': {
-                      transform: 'translateY(-2px)',
-                      boxShadow: theme.shadows.md,
+                    '@media (hover: hover)': {
+                      '&:hover': {
+                        transform: 'translateY(-2px)',
+                        boxShadow: theme.shadows.md,
+                      },
+                    },
+                    '&:active': {
+                      transform: 'scale(0.98)',
+                      opacity: 0.9,
                     },
                   }}
                 >
@@ -350,11 +361,13 @@ const DashboardPage = () => {
 
       {/* Performance Monitor - Only show in development */}
       {process.env.NODE_ENV === 'development' && (
-        <PerformanceMonitor
-          componentName="Dashboard"
-          loadingTime={loadingTime}
-          isVisible={!stats.loading && loadingTime > 0}
-        />
+        <Suspense fallback={null}>
+          <PerformanceMonitor
+            componentName="Dashboard"
+            loadingTime={loadingTime}
+            isVisible={!stats.loading && loadingTime > 0}
+          />
+        </Suspense>
       )}
     </Box>
   );

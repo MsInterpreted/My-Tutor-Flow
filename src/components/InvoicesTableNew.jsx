@@ -169,7 +169,7 @@ export default function InvoicesTable({ data, allData, student, reload }) {
                             color: theme.colors.brand.primary,
                             textTransform: 'none',
                             fontSize: '12px',
-                            minHeight: '36px',
+                            minHeight: '44px',
                             touchAction: 'manipulation',
                           }}
                         >

@@ -61,7 +61,7 @@ const StudentDebugInfo = () => {
       )}
 
       {error && (
-        <Paper sx={{ p: 2, mb: 2, backgroundColor: '#ffebee' }}>
+        <Paper sx={{ p: 2, mb: 2, backgroundColor: 'error.light' }}>
           <Typography color="error">Error: {error}</Typography>
         </Paper>
       )}

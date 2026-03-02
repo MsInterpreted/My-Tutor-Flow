@@ -29,7 +29,7 @@ import { formatCurrency } from '../utils/helpers';
 export default function RefundDialog({ open, onClose, invoice, onRefundComplete }) {
   const theme = useTheme();
   const muiTheme = useMuiTheme();
-  const isMobile = useMediaQuery(muiTheme.breakpoints.down('sm'));
+  const isMobile = useMediaQuery(muiTheme.breakpoints.down('md'));
 
   const [refundType, setRefundType] = useState('full');
   const [refundMethod, setRefundMethod] = useState('credit');
@@ -105,7 +105,7 @@ export default function RefundDialog({ open, onClose, invoice, onRefundComplete 
   };
 
   return (
-    <Dialog open={open} onClose={processing ? undefined : onClose} maxWidth="sm" fullWidth PaperProps={{ sx: dialogPaperSx }}>
+    <Dialog open={open} onClose={processing ? undefined : onClose} maxWidth="sm" fullWidth fullScreen={isMobile} PaperProps={{ sx: dialogPaperSx }}>
       <DialogTitle sx={{ color: theme.colors.text.primary, fontWeight: 600, display: 'flex', alignItems: 'center', gap: 1 }}>
         <Undo sx={{ color: theme.colors.brand.primary }} />
         Process Refund

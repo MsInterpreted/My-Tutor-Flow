@@ -15,6 +15,8 @@ import {
   Container,
   IconButton,
   InputAdornment,
+  useMediaQuery,
+  useTheme as useMuiTheme,
 } from '@mui/material';
 import {
   Google as GoogleIcon,
@@ -37,6 +39,8 @@ function LoginPage() {
 
   const navigate = useNavigate();
   const theme = useTheme();
+  const muiTheme = useMuiTheme();
+  const isMobile = useMediaQuery(muiTheme.breakpoints.down('md'));
   const { handleLogin: updateAuthState } = useContext(AuthContext);
 
   // Prevent auto-login with saved passwords - always require auth code
@@ -228,47 +232,51 @@ function LoginPage() {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        padding: 2,
+        padding: isMobile ? 2 : 4,
         position: 'relative',
         overflow: 'hidden',
       }}
       className={animationClass}
     >
-      {/* Animated background elements */}
-      <Box
-        sx={{
-          position: 'absolute',
-          top: '10%',
-          left: '10%',
-          width: '100px',
-          height: '100px',
-          borderRadius: '50%',
-          background: 'linear-gradient(135deg, #00D4AA, #4A90E2)',
-          opacity: 0.1,
-          animation: 'pulse 3s ease-in-out infinite',
-        }}
-      />
-      <Box
-        sx={{
-          position: 'absolute',
-          bottom: '20%',
-          right: '15%',
-          width: '150px',
-          height: '150px',
-          borderRadius: '50%',
-          background: 'linear-gradient(135deg, #FF6B9D, #7B68EE)',
-          opacity: 0.1,
-          animation: 'pulse 4s ease-in-out infinite reverse',
-        }}
-      />
+      {/* Animated background elements - hidden on mobile for performance */}
+      {!isMobile && (
+        <>
+          <Box
+            sx={{
+              position: 'absolute',
+              top: '10%',
+              left: '10%',
+              width: '100px',
+              height: '100px',
+              borderRadius: '50%',
+              background: 'linear-gradient(135deg, #00D4AA, #4A90E2)',
+              opacity: 0.1,
+              animation: 'pulse 3s ease-in-out infinite',
+            }}
+          />
+          <Box
+            sx={{
+              position: 'absolute',
+              bottom: '20%',
+              right: '15%',
+              width: '150px',
+              height: '150px',
+              borderRadius: '50%',
+              background: 'linear-gradient(135deg, #FF6B9D, #7B68EE)',
+              opacity: 0.1,
+              animation: 'pulse 4s ease-in-out infinite reverse',
+            }}
+          />
+        </>
+      )}
 
       {/* Theme toggle button */}
       <IconButton
         onClick={theme.toggleTheme}
         sx={{
           position: 'absolute',
-          top: 20,
-          right: 20,
+          top: isMobile ? 10 : 20,
+          right: isMobile ? 10 : 20,
           backgroundColor: theme.colors.background.secondary,
           color: theme.colors.text.primary,
           '&:hover': {
@@ -285,7 +293,7 @@ function LoginPage() {
         <Paper
           elevation={0}
           sx={{
-            padding: 4,
+            padding: isMobile ? 3 : 4,
             borderRadius: '24px',
             background: theme.colors.background.secondary,
             border: `1px solid ${theme.isDarkMode ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)'}`,
@@ -316,7 +324,7 @@ function LoginPage() {
               <SchoolIcon sx={{ fontSize: 40, color: 'white' }} />
             </Box>
             <Typography
-              variant="h4"
+              variant={isMobile ? 'h5' : 'h4'}
               sx={{
                 fontFamily: theme.typography.fontFamily.primary,
                 fontWeight: 700,
@@ -384,6 +392,7 @@ function LoginPage() {
               name="email"
               autoComplete="email"
               autoFocus
+              inputProps={{ inputMode: 'email' }}
               value={email}
               onChange={e => setEmail(e.target.value)}
               disabled={loading}

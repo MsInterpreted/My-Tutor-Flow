@@ -63,7 +63,7 @@ export default function ParentLogsList({ logs, onAdd, student }) {
       ) : (
         <List dense>
           {logs.map(l => (
-            <ListItem key={l.id} sx={{ px: 0 }}>
+            <ListItem key={l.id} sx={{ px: 0, py: 1, minHeight: 48 }}>
               <Avatar
                 sx={{
                   bgcolor:
@@ -74,9 +74,9 @@ export default function ParentLogsList({ logs, onAdd, student }) {
                         : l.type === 'sms'
                           ? '#fbc02d'
                           : '#bdbdbd',
-                  width: 32,
-                  height: 32,
-                  fontSize: 16,
+                  width: 40,
+                  height: 40,
+                  fontSize: 18,
                 }}
               >
                 {l.type ? l.type[0].toUpperCase() : '?'}

@@ -10,6 +10,8 @@ import {
   InputLabel,
   Select,
   MenuItem,
+  useMediaQuery,
+  useTheme as useMuiTheme,
 } from '@mui/material';
 import { useTheme } from '../theme/ThemeContext';
 import firebaseService from '../services/firebaseService';
@@ -69,6 +71,8 @@ export default function MarksEditModal({
   setSnackbar,
 }) {
   const theme = useTheme();
+  const muiTheme = useMuiTheme();
+  const isMobile = useMediaQuery(muiTheme.breakpoints.down('md'));
   const [editMark, setEditMark] = useState(mark || { term: '', subject: '', mark: '' });
   const [studentSubjects, setStudentSubjects] = useState([]);
   const [customTerm, setCustomTerm] = useState('');
@@ -178,7 +182,7 @@ export default function MarksEditModal({
   };
 
   return (
-    <Dialog open={open} onClose={onClose} maxWidth="xs">
+    <Dialog open={open} onClose={onClose} maxWidth="xs" fullScreen={isMobile}>
       <DialogTitle>{isEditing ? 'Edit Mark' : 'Add New Mark'}</DialogTitle>
       <DialogContent dividers>
         {/* Term Selection */}

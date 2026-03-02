@@ -13,6 +13,8 @@ import {
   Alert,
   CircularProgress,
   Container,
+  useMediaQuery,
+  useTheme as useMuiTheme,
 } from '@mui/material';
 
 const SignupPage = () => {
@@ -28,6 +30,8 @@ const SignupPage = () => {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const navigate = useNavigate();
+  const muiTheme = useMuiTheme();
+  const isMobile = useMediaQuery(muiTheme.breakpoints.down('md'));
 
   const handleChange = e => {
     setFormData({
@@ -108,16 +112,16 @@ const SignupPage = () => {
   };
 
   return (
-    <Container component="main" maxWidth="xs">
+    <Container component="main" maxWidth="xs" sx={{ px: isMobile ? 2 : 3 }}>
       <Box
         sx={{
-          marginTop: 8,
+          marginTop: isMobile ? 4 : 8,
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
         }}
       >
-        <Paper elevation={3} sx={{ padding: 4, width: '100%' }}>
+        <Paper elevation={3} sx={{ padding: isMobile ? 3 : 4, width: '100%' }}>
           <Typography component="h1" variant="h4" align="center" gutterBottom>
             My TutorFlow
           </Typography>
@@ -165,6 +169,7 @@ const SignupPage = () => {
               name="email"
               label="Email Address"
               type="email"
+              inputProps={{ inputMode: 'email' }}
               value={formData.email}
               onChange={handleChange}
               disabled={loading}

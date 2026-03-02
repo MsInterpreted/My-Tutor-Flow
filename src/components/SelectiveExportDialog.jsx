@@ -17,6 +17,8 @@ import {
   TextField,
   InputAdornment,
   Chip,
+  useMediaQuery,
+  useTheme as useMuiTheme,
 } from '@mui/material';
 import {
   Search as SearchIcon,
@@ -35,6 +37,8 @@ const SelectiveExportDialog = ({
   title = 'Select Students to Export',
 }) => {
   const theme = useTheme();
+  const muiTheme = useMuiTheme();
+  const isMobile = useMediaQuery(muiTheme.breakpoints.down('md'));
   const [selectedStudents, setSelectedStudents] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
 
@@ -80,6 +84,7 @@ const SelectiveExportDialog = ({
       onClose={handleClose}
       maxWidth="md"
       fullWidth
+      fullScreen={isMobile}
       PaperProps={{
         sx: {
           borderRadius: '16px',

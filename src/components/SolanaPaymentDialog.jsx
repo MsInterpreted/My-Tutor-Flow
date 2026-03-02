@@ -10,16 +10,21 @@ import {
   Stepper,
   Step,
   StepLabel,
+  MobileStepper,
   CircularProgress,
   Alert,
   Chip,
   IconButton,
+  useMediaQuery,
+  useTheme as useMuiTheme,
 } from '@mui/material';
 import {
   AccountBalanceWallet,
   CheckCircle,
   Error as ErrorIcon,
   ContentCopy,
+  KeyboardArrowLeft,
+  KeyboardArrowRight,
 } from '@mui/icons-material';
 import { useWallet, useConnection } from '@solana/wallet-adapter-react';
 import { useWalletModal } from '@solana/wallet-adapter-react-ui';
@@ -42,6 +47,8 @@ export default function SolanaPaymentDialog({
   onPaymentComplete,
 }) {
   const theme = useTheme();
+  const muiTheme = useMuiTheme();
+  const isMobile = useMediaQuery(muiTheme.breakpoints.down('md'));
   const { connection } = useConnection();
   const { publicKey, sendTransaction, connected, disconnect } = useWallet();
   const { setVisible } = useWalletModal();
@@ -294,6 +301,7 @@ export default function SolanaPaymentDialog({
       onClose={handleClose}
       maxWidth="sm"
       fullWidth
+      fullScreen={isMobile}
       PaperProps={{
         sx: {
           backgroundColor: theme.colors.background.secondary,
@@ -307,22 +315,40 @@ export default function SolanaPaymentDialog({
       </DialogTitle>
 
       <DialogContent>
-        <Stepper
-          activeStep={activeStep}
-          alternativeLabel
-          sx={{
-            mb: 3,
-            '& .MuiStepLabel-label': { color: theme.colors.text.secondary, fontSize: '0.75rem' },
-            '& .MuiStepLabel-label.Mui-active': { color: theme.colors.brand.primary },
-            '& .MuiStepLabel-label.Mui-completed': { color: theme.colors.status?.success || '#4CAF50' },
-          }}
-        >
-          {STEPS.map((label) => (
-            <Step key={label}>
-              <StepLabel>{label}</StepLabel>
-            </Step>
-          ))}
-        </Stepper>
+        {isMobile ? (
+          <MobileStepper
+            variant="dots"
+            steps={STEPS.length}
+            position="static"
+            activeStep={activeStep}
+            sx={{
+              mb: 2,
+              backgroundColor: 'transparent',
+              justifyContent: 'center',
+              '& .MuiMobileStepper-dot': { backgroundColor: theme.colors.text.tertiary },
+              '& .MuiMobileStepper-dotActive': { backgroundColor: theme.colors.brand.primary },
+            }}
+            backButton={null}
+            nextButton={null}
+          />
+        ) : (
+          <Stepper
+            activeStep={activeStep}
+            alternativeLabel
+            sx={{
+              mb: 3,
+              '& .MuiStepLabel-label': { color: theme.colors.text.secondary, fontSize: '0.75rem' },
+              '& .MuiStepLabel-label.Mui-active': { color: theme.colors.brand.primary },
+              '& .MuiStepLabel-label.Mui-completed': { color: theme.colors.status?.success || '#4CAF50' },
+            }}
+          >
+            {STEPS.map((label) => (
+              <Step key={label}>
+                <StepLabel>{label}</StepLabel>
+              </Step>
+            ))}
+          </Stepper>
+        )}
 
         {renderStepContent()}
       </DialogContent>

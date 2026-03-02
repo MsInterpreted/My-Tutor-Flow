@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext, Suspense } from 'react';
+import React, { useState, useEffect, useContext, Suspense, useMemo } from 'react';
 import {
   BrowserRouter as Router,
   Routes,
@@ -45,6 +45,9 @@ import { NavigationLogo } from './components/branding/TDLALogo';
 import { BrandingProvider } from './contexts/BrandingContext';
 import ErrorBoundary from './components/ErrorBoundary';
 import DiagnosticPanel from './components/DiagnosticPanel';
+import BottomNavBar, { NAV_HEIGHT } from './components/BottomNavBar';
+import PWAPrompt from './components/PWAPrompt';
+import pushNotificationService from './services/pushNotificationService';
 
 // Lazy load pages for better performance
 const LoginPage = React.lazy(() => import('./pages/LoginPage'));
@@ -66,11 +69,11 @@ const PaymentSettingsPage = React.lazy(() => import('./pages/PaymentSettingsPage
 const ParentDashboard = React.lazy(() => import('./pages/parent/ParentDashboard'));
 
 
-// Create theme for scalability
-const theme = createTheme({
+// Base theme values (mode is set dynamically in MuiThemeWrapper)
+const baseThemeOptions = {
   palette: {
     primary: {
-      main: '#1976d2',
+      main: '#00D4AA',
     },
     secondary: {
       main: '#dc004e',
@@ -79,7 +82,7 @@ const theme = createTheme({
   typography: {
     fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
   },
-});
+};
 
 // Auth Context import
 import { AuthContext, AuthProvider } from './contexts/AuthContext';
@@ -437,20 +440,46 @@ function ProtectedRoute({ children, requiredRole = null }) {
   return children;
 }
 
+// Dark-mode-aware MUI theme wrapper
+function MuiThemeWrapper({ children }) {
+  const customTheme = useTheme();
+  const muiTheme = useMemo(() => createTheme({
+    ...baseThemeOptions,
+    palette: {
+      ...baseThemeOptions.palette,
+      mode: customTheme.isDarkMode ? 'dark' : 'light',
+      background: {
+        default: customTheme.colors.background.primary,
+        paper: customTheme.colors.background.secondary,
+      },
+      text: {
+        primary: customTheme.colors.text.primary,
+        secondary: customTheme.colors.text.secondary,
+      },
+    },
+  }), [customTheme.isDarkMode, customTheme.colors]);
+
+  return (
+    <MuiThemeProvider theme={muiTheme}>
+      <CssBaseline />
+      {children}
+    </MuiThemeProvider>
+  );
+}
+
 // SIMPLIFIED App Component - NO COMPLEX ERROR HANDLING
 function App() {
   return (
     <ErrorBoundary>
       <BrandingProvider>
         <ThemeProvider>
-          <MuiThemeProvider theme={theme}>
-            <CssBaseline />
+          <MuiThemeWrapper>
             <Router>
               <AuthProvider>
                 <AppContent />
               </AuthProvider>
             </Router>
-          </MuiThemeProvider>
+          </MuiThemeWrapper>
         </ThemeProvider>
       </BrandingProvider>
     </ErrorBoundary>
@@ -478,6 +507,21 @@ function AppContent() {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
 
+  // Initialize push notifications for authenticated users
+  useEffect(() => {
+    if (!currentUser) return;
+    if (pushNotificationService.getPermissionStatus() !== 'granted') return;
+
+    // Set up foreground message listener
+    pushNotificationService.onForegroundMessage((message) => {
+      pushNotificationService.showLocalNotification(
+        message.title,
+        message.body,
+        { data: message.data }
+      );
+    });
+  }, [currentUser]);
+
   return (
     <>
       {currentUser && <NavBar userRole={userRole} handleLogout={handleLogout} />}
@@ -495,6 +539,7 @@ function AppContent() {
           },
           // Mobile-specific adjustments
           ...(isMobile && {
+            paddingBottom: `${NAV_HEIGHT}px`,
             '& .MuiContainer-root': {
               paddingLeft: '8px !important',
               paddingRight: '8px !important',
@@ -652,10 +697,18 @@ function AppContent() {
         </Suspense>
       </Box>
 
+      {/* Bottom Navigation Bar - Mobile Only */}
+      {currentUser && isMobile && (
+        <BottomNavBar handleLogout={handleLogout} />
+      )}
+
       {/* Diagnostic Panel - Press Ctrl+Shift+D to open */}
       {showDiagnostic && (
         <DiagnosticPanel onClose={() => setShowDiagnostic(false)} />
       )}
+
+      {/* PWA Install/Update Prompts */}
+      <PWAPrompt />
     </>
   );
 }

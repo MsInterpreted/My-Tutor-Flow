@@ -11,6 +11,7 @@ import {
   Step,
   StepLabel,
   StepContent,
+  MobileStepper,
   Checkbox,
   FormControl,
   FormControlLabel,
@@ -34,6 +35,8 @@ import {
   ListItem,
   ListItemText,
   ListItemIcon,
+  useMediaQuery,
+  useTheme as useMuiTheme,
 } from '@mui/material';
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
@@ -62,6 +65,8 @@ const steps = [
 
 function BillingWorkflow({ onInvoiceCreated }) {
   const theme = useTheme();
+  const muiTheme = useMuiTheme();
+  const isMobile = useMediaQuery(muiTheme.breakpoints.down('md'));
   const [activeStep, setActiveStep] = useState(0);
   const [loading, setLoading] = useState(false);
   const [students, setStudents] = useState([]);
@@ -1375,6 +1380,23 @@ function BillingWorkflow({ onInvoiceCreated }) {
           </Alert>
         )}
 
+        {isMobile && (
+          <MobileStepper
+            variant="dots"
+            steps={steps.length}
+            position="static"
+            activeStep={activeStep}
+            sx={{
+              mb: 2,
+              backgroundColor: 'transparent',
+              justifyContent: 'center',
+              '& .MuiMobileStepper-dot': { backgroundColor: theme.colors.text.tertiary },
+              '& .MuiMobileStepper-dotActive': { backgroundColor: theme.colors.brand.primary },
+            }}
+            backButton={null}
+            nextButton={null}
+          />
+        )}
         <Stepper activeStep={activeStep} orientation="vertical">
           {/* Step 1: Select Period & Students */}
           <Step>

@@ -282,11 +282,11 @@ const AddEditStudentPage = () => {
         sx={{
           maxWidth: 1000,
           mx: 'auto',
-          backgroundColor: '#ffffff',
+          backgroundColor: theme.colors.background.secondary,
           border: `1px solid ${theme.isDarkMode ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)'}`,
           borderRadius: '16px',
           overflow: 'hidden',
-          boxShadow: '0 4px 20px rgba(0,0,0,0.1)',
+          boxShadow: theme.isDarkMode ? '0 4px 20px rgba(0,0,0,0.4)' : '0 4px 20px rgba(0,0,0,0.1)',
         }}
       >
         {/* Header */}

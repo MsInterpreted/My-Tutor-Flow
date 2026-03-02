@@ -139,6 +139,7 @@ export default function QuickAddAttendanceModal({
       onClose={onClose}
       maxWidth={isMobile ? "sm" : "md"}
       fullWidth
+      fullScreen={isMobile}
       PaperProps={{
         sx: {
           borderRadius: '16px',

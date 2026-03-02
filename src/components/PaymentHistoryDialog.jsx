@@ -27,7 +27,7 @@ import dayjs from 'dayjs';
 export default function PaymentHistoryDialog({ open, onClose, invoice }) {
   const theme = useTheme();
   const muiTheme = useMuiTheme();
-  const isMobile = useMediaQuery(muiTheme.breakpoints.down('sm'));
+  const isMobile = useMediaQuery(muiTheme.breakpoints.down('md'));
 
   const [payments, setPayments] = useState([]);
   const [refunds, setRefunds] = useState([]);
@@ -108,7 +108,7 @@ export default function PaymentHistoryDialog({ open, onClose, invoice }) {
   };
 
   return (
-    <Dialog open={open} onClose={onClose} maxWidth="md" fullWidth PaperProps={{ sx: dialogPaperSx }}>
+    <Dialog open={open} onClose={onClose} maxWidth="md" fullWidth fullScreen={isMobile} PaperProps={{ sx: dialogPaperSx }}>
       <DialogTitle sx={{ color: theme.colors.text.primary, fontWeight: 600, display: 'flex', alignItems: 'center', gap: 1 }}>
         <History sx={{ color: theme.colors.brand.primary }} />
         Payment History

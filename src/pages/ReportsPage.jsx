@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, lazy, Suspense } from 'react';
 import {
   Box,
   Typography,
@@ -31,6 +31,7 @@ import {
   TableHead,
   TableRow,
   Alert,
+  CircularProgress,
 } from '@mui/material';
 import {
   Analytics as AnalyticsIcon,
@@ -45,9 +46,17 @@ import {
 } from '@mui/icons-material';
 import { useTheme } from '../theme/ThemeContext';
 import firebaseService from '../services/firebaseService';
-import OverviewAnalytics from '../components/OverviewAnalytics';
-import StudentProgressReports from '../components/StudentProgressReports';
 import SlidingReportsSelector from '../components/SlidingReportsSelector';
+
+// Lazy load heavy analytics components
+const OverviewAnalytics = lazy(() => import('../components/OverviewAnalytics'));
+const StudentProgressReports = lazy(() => import('../components/StudentProgressReports'));
+
+const TabFallback = () => (
+  <Box display="flex" justifyContent="center" alignItems="center" minHeight="200px">
+    <CircularProgress size={32} />
+  </Box>
+);
 
 const ReportsPage = () => {
   const theme = useTheme();
@@ -255,7 +264,7 @@ const ReportsPage = () => {
       sx={{
         minHeight: '100vh',
         background: theme.colors.background.primary,
-        p: 3,
+        p: { xs: 1.5, sm: 2, md: 3 },
       }}
     >
       <Typography
@@ -318,22 +327,26 @@ const ReportsPage = () => {
 
       {/* PERFORMANCE: Lazy load tab content only when active */}
       {activeTab === 0 && !loading && (
-        <OverviewAnalytics analyticsData={analyticsData} theme={theme} />
+        <Suspense fallback={<TabFallback />}>
+          <OverviewAnalytics analyticsData={analyticsData} theme={theme} />
+        </Suspense>
       )}
 
       {activeTab === 1 && !loading && (
-        <StudentProgressReports
-          students={students}
-          selectedStudent={selectedStudent}
-          setSelectedStudent={setSelectedStudent}
-          reportDialogOpen={reportDialogOpen}
-          setReportDialogOpen={setReportDialogOpen}
-          theme={theme}
-        />
+        <Suspense fallback={<TabFallback />}>
+          <StudentProgressReports
+            students={students}
+            selectedStudent={selectedStudent}
+            setSelectedStudent={setSelectedStudent}
+            reportDialogOpen={reportDialogOpen}
+            setReportDialogOpen={setReportDialogOpen}
+            theme={theme}
+          />
+        </Suspense>
       )}
 
       {loading && (
-        <Box display="flex" justifyContent="center" alignItems="center" minHeight="400px">
+        <Box display="flex" justifyContent="center" alignItems="center" minHeight={isMobile ? "200px" : "400px"}>
           <Typography variant="body1" sx={{ color: theme.colors.text.secondary }}>
             Loading analytics data...
           </Typography>

@@ -16,12 +16,14 @@ import {
   Divider,
 } from '@mui/material';
 import { useTheme } from '../theme/ThemeContext';
+import SwipeableRow from './SwipeableRow';
 
 // Mobile-optimized table that switches to card layout on small screens
 export default function MobileOptimizedTable({
   columns,
   data,
   renderActions,
+  swipeActions,  // { left: (row) => [...], right: (row) => [...] }
   emptyMessage = 'No data available',
   ...props
 }) {
@@ -46,55 +48,74 @@ export default function MobileOptimizedTable({
             </Typography>
           </Card>
         ) : (
-          data.map((row, index) => (
-            <Card
-              key={row.id || index}
-              sx={{
-                backgroundColor: theme.colors.background.secondary,
-                mb: 2,
-                border: `1px solid ${theme.isDarkMode ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)'}`,
-                borderRadius: '12px',
-              }}
-            >
-              <CardContent sx={{ p: 2, '&:last-child': { pb: 2 } }}>
-                {columns.map((column, colIndex) => (
-                  <Box key={column.key || colIndex} sx={{ mb: colIndex < columns.length - 1 ? 1.5 : 0 }}>
-                    <Typography
-                      variant="caption"
-                      sx={{
-                        color: theme.colors.text.secondary,
-                        fontWeight: 600,
-                        textTransform: 'uppercase',
-                        fontSize: '0.75rem',
-                        letterSpacing: '0.5px',
-                      }}
-                    >
-                      {column.label}
-                    </Typography>
-                    <Typography
-                      variant="body2"
-                      sx={{
-                        color: theme.colors.text.primary,
-                        fontWeight: 500,
-                        mt: 0.5,
-                        wordBreak: 'break-word',
-                      }}
-                    >
-                      {column.render ? column.render(row) : row[column.key]}
-                    </Typography>
-                    {colIndex < columns.length - 1 && (
-                      <Divider sx={{ mt: 1.5, borderColor: theme.colors.background.tertiary }} />
-                    )}
-                  </Box>
-                ))}
-                {renderActions && (
-                  <Box sx={{ mt: 2, pt: 1.5, borderTop: `1px solid ${theme.colors.background.tertiary}` }}>
-                    {renderActions(row)}
-                  </Box>
-                )}
-              </CardContent>
-            </Card>
-          ))
+          data.map((row, index) => {
+            const leftSwipeActions = swipeActions?.left ? swipeActions.left(row) : [];
+            const rightSwipeActions = swipeActions?.right ? swipeActions.right(row) : [];
+            const hasSwipe = leftSwipeActions.length > 0 || rightSwipeActions.length > 0;
+
+            const cardContent = (
+              <Card
+                sx={{
+                  backgroundColor: theme.colors.background.secondary,
+                  ...(hasSwipe ? {} : { mb: 2 }),
+                  border: `1px solid ${theme.isDarkMode ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)'}`,
+                  borderRadius: '12px',
+                }}
+              >
+                <CardContent sx={{ p: 2, '&:last-child': { pb: 2 } }}>
+                  {columns.map((column, colIndex) => (
+                    <Box key={column.key || colIndex} sx={{ mb: colIndex < columns.length - 1 ? 1.5 : 0 }}>
+                      <Typography
+                        variant="caption"
+                        sx={{
+                          color: theme.colors.text.secondary,
+                          fontWeight: 600,
+                          textTransform: 'uppercase',
+                          fontSize: '0.75rem',
+                          letterSpacing: '0.5px',
+                        }}
+                      >
+                        {column.label}
+                      </Typography>
+                      <Typography
+                        variant="body2"
+                        sx={{
+                          color: theme.colors.text.primary,
+                          fontWeight: 500,
+                          mt: 0.5,
+                          wordBreak: 'break-word',
+                        }}
+                      >
+                        {column.render ? column.render(row) : row[column.key]}
+                      </Typography>
+                      {colIndex < columns.length - 1 && (
+                        <Divider sx={{ mt: 1.5, borderColor: theme.colors.background.tertiary }} />
+                      )}
+                    </Box>
+                  ))}
+                  {renderActions && (
+                    <Box sx={{ mt: 2, pt: 1.5, borderTop: `1px solid ${theme.colors.background.tertiary}` }}>
+                      {renderActions(row)}
+                    </Box>
+                  )}
+                </CardContent>
+              </Card>
+            );
+
+            return hasSwipe ? (
+              <SwipeableRow
+                key={row.id || index}
+                leftActions={leftSwipeActions}
+                rightActions={rightSwipeActions}
+              >
+                {cardContent}
+              </SwipeableRow>
+            ) : (
+              <Box key={row.id || index} sx={{ mb: 2 }}>
+                {cardContent}
+              </Box>
+            );
+          })
         )}
       </Box>
     );

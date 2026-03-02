@@ -111,6 +111,16 @@ export default function MarksTable({ data, onEdit, student, reload }) {
         columns={columns}
         data={data}
         renderActions={renderActions}
+        swipeActions={{
+          left: (row) => [
+            {
+              icon: <EditIcon sx={{ fontSize: 20 }} />,
+              label: 'Edit',
+              color: theme.colors.brand.primary,
+              onClick: () => onEdit(row),
+            },
+          ],
+        }}
         emptyMessage="No marks recorded."
       />
     </Box>

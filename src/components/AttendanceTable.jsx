@@ -9,6 +9,7 @@ import {
   useTheme as useMuiTheme,
 } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import ExportCSVButton from './ExportCSVButton';
 import MobileOptimizedTable from './MobileOptimizedTable';
@@ -123,6 +124,16 @@ function AttendanceTable({ data, onEdit, allData, student, reload }) {
         columns={columns}
         data={data}
         renderActions={renderActions}
+        swipeActions={{
+          left: (row) => [
+            {
+              icon: <EditIcon sx={{ fontSize: 20 }} />,
+              label: 'Edit',
+              color: theme.colors.brand.primary,
+              onClick: () => onEdit(row),
+            },
+          ],
+        }}
         emptyMessage="No attendance records."
       />
     </Box>

@@ -37,7 +37,7 @@ import {
 } from '@mui/icons-material';
 import { useTheme } from '../theme/ThemeContext';
 import { formatCurrency } from '../utils/helpers';
-import BusinessIntelligenceDashboard from '../components/BusinessIntelligenceDashboard';
+const BusinessIntelligenceDashboard = React.lazy(() => import('../components/BusinessIntelligenceDashboard'));
 import {
   PieChart,
   Pie,
@@ -55,7 +55,7 @@ import {
   Area,
   AreaChart,
 } from 'recharts';
-import UserManagement from '../components/UserManagement';
+const UserManagement = React.lazy(() => import('../components/UserManagement'));
 import SlidingBusinessDashboardSelector from '../components/SlidingBusinessDashboardSelector';
 import { AuthContext } from '../contexts/AuthContext';
 import { getUserProfile } from '../services/authorizationService';
@@ -369,7 +369,9 @@ const BusinessDashboard = () => {
       )}
 
       {activeTab === 3 && !loading && userProfile?.roleInfo?.canManageUsers && currentUser && (
-        <UserManagement currentUser={currentUser} userProfile={userProfile} />
+        <React.Suspense fallback={<Box display="flex" justifyContent="center" alignItems="center" minHeight="200px"><Typography>Loading...</Typography></Box>}>
+          <UserManagement currentUser={currentUser} userProfile={userProfile} />
+        </React.Suspense>
       )}
 
       {loading && (
@@ -403,7 +405,9 @@ const BusinessIntelligenceTab = ({ businessData, timeframe, setTimeframe, theme 
       </Typography>
 
       {/* Import the full Business Intelligence Dashboard */}
-      <BusinessIntelligenceDashboard />
+      <React.Suspense fallback={<Box display="flex" justifyContent="center" alignItems="center" minHeight="200px"><Typography>Loading analytics...</Typography></Box>}>
+        <BusinessIntelligenceDashboard />
+      </React.Suspense>
     </Box>
   );
 };

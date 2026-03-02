@@ -224,7 +224,7 @@ export const ResponsiveText = ({ variant = 'body1', children, responsive = true,
 export const TouchButton = ({ children, size = 'medium', fullWidth = false, ...props }) => {
   const theme = useTheme();
   const muiTheme = useMuiTheme();
-  const isMobile = useMediaQuery(muiTheme.breakpoints.down('sm'));
+  const isMobile = useMediaQuery(muiTheme.breakpoints.down('md'));
 
   const sizeMap = {
     small: { minHeight: isMobile ? 44 : 36, px: 2 },

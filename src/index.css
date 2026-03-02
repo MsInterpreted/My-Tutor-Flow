@@ -766,6 +766,27 @@ html, body {
   }
 }
 
+/* Touch device optimizations - disable hover transforms, add press feedback */
+@media (hover: none) {
+  .MuiCard-root:hover { transform: none !important; }
+  .MuiCard-root:active { transform: scale(0.98); opacity: 0.9; }
+  .MuiButtonBase-root:active { opacity: 0.7; }
+  .activity-card:hover { transform: none !important; }
+  .activity-card:active { transform: scale(0.98) !important; opacity: 0.9; }
+  .card:hover { transform: none !important; }
+  .card:active { transform: scale(0.98); opacity: 0.9; }
+}
+
+/* Safe area insets for fullscreen dialogs */
+.MuiDialog-root .MuiDialog-container > .MuiDialog-paper[class*="MuiDialog-paperFullScreen"] .MuiDialogContent-root {
+  padding-top: max(16px, env(safe-area-inset-top));
+  padding-bottom: max(16px, env(safe-area-inset-bottom));
+}
+
+.MuiDialog-root .MuiDialog-container > .MuiDialog-paper[class*="MuiDialog-paperFullScreen"] .MuiDialogTitle-root {
+  padding-top: max(16px, env(safe-area-inset-top));
+}
+
 /* Scrollbar styling */
 ::-webkit-scrollbar {
   width: 8px;

@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Box, Typography, Paper, Grid, Button, Tabs, Tab, Card, CardContent, useMediaQuery, useTheme as useMuiTheme } from '@mui/material';
+import React, { useState, useEffect, lazy, Suspense } from 'react';
+import { Box, Typography, Paper, Grid, Button, Tabs, Tab, Card, CardContent, useMediaQuery, useTheme as useMuiTheme, CircularProgress } from '@mui/material';
 import {
   Add as AddIcon,
   Receipt as ReceiptIcon,
@@ -11,15 +11,23 @@ import {
 } from '@mui/icons-material';
 import { useTheme } from '../theme/ThemeContext';
 import InvoicesTable from '../components/InvoicesTableNew';
-import BillingWorkflow from '../components/BillingWorkflow';
-import RateConfiguration from '../components/RateConfiguration';
-import BillingAnalytics from '../components/BillingAnalytics';
-import AdvancedBillingFeatures from '../components/AdvancedBillingFeatures';
-import RecurringBillingSetup from '../components/RecurringBillingSetup';
 import BillingErrorBoundary from '../components/BillingErrorBoundary';
 import SlidingBillingSelector from '../components/SlidingBillingSelector';
 import { formatCurrency } from '../utils/helpers';
 import firebaseService from '../services/firebaseService';
+
+// Lazy load heavy tab components
+const BillingWorkflow = lazy(() => import('../components/BillingWorkflow'));
+const RateConfiguration = lazy(() => import('../components/RateConfiguration'));
+const BillingAnalytics = lazy(() => import('../components/BillingAnalytics'));
+const AdvancedBillingFeatures = lazy(() => import('../components/AdvancedBillingFeatures'));
+const RecurringBillingSetup = lazy(() => import('../components/RecurringBillingSetup'));
+
+const TabFallback = () => (
+  <Box display="flex" justifyContent="center" alignItems="center" minHeight="200px">
+    <CircularProgress size={32} />
+  </Box>
+);
 
 export default function BillingPage() {
   const theme = useTheme();
@@ -105,12 +113,18 @@ export default function BillingPage() {
         boxShadow: theme.shadows.card,
         borderRadius: '16px',
         transition: 'transform 0.2s ease-in-out',
-        '&:hover': {
-          transform: 'translateY(-2px)',
+        '@media (hover: hover)': {
+          '&:hover': {
+            transform: 'translateY(-2px)',
+          },
+        },
+        '&:active': {
+          transform: 'scale(0.98)',
+          opacity: 0.9,
         },
       }}
     >
-      <CardContent>
+      <CardContent sx={{ p: { xs: 2, md: 3 } }}>
         <Box display="flex" alignItems="center" justifyContent="space-between" mb={1}>
           <Typography variant="h6" sx={{ color: theme.colors.text.primary, fontWeight: 600 }}>
             {title}
@@ -152,7 +166,7 @@ export default function BillingPage() {
         sx={{
           minHeight: '100vh',
           background: theme.colors.background.primary,
-          p: 3,
+          p: { xs: 1.5, sm: 2, md: 3 },
         }}
       >
         <Box display="flex" alignItems="center" justifyContent="space-between" mb={3}>
@@ -302,15 +316,35 @@ export default function BillingPage() {
           </Box>
         )}
 
-        {activeTab === 1 && <BillingWorkflow onInvoiceCreated={loadBillingStats} />}
+        {activeTab === 1 && (
+          <Suspense fallback={<TabFallback />}>
+            <BillingWorkflow onInvoiceCreated={loadBillingStats} />
+          </Suspense>
+        )}
 
-        {activeTab === 2 && <AdvancedBillingFeatures />}
+        {activeTab === 2 && (
+          <Suspense fallback={<TabFallback />}>
+            <AdvancedBillingFeatures />
+          </Suspense>
+        )}
 
-        {activeTab === 3 && <RateConfiguration />}
+        {activeTab === 3 && (
+          <Suspense fallback={<TabFallback />}>
+            <RateConfiguration />
+          </Suspense>
+        )}
 
-        {activeTab === 4 && <BillingAnalytics billingStats={billingStats} />}
+        {activeTab === 4 && (
+          <Suspense fallback={<TabFallback />}>
+            <BillingAnalytics billingStats={billingStats} />
+          </Suspense>
+        )}
 
-        {activeTab === 5 && <RecurringBillingSetup />}
+        {activeTab === 5 && (
+          <Suspense fallback={<TabFallback />}>
+            <RecurringBillingSetup />
+          </Suspense>
+        )}
       </Box>
     </BillingErrorBoundary>
   );

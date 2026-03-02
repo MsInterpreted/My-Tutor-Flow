@@ -10,6 +10,8 @@ import {
   InputLabel,
   Select,
   MenuItem,
+  useMediaQuery,
+  useTheme as useMuiTheme,
 } from '@mui/material';
 import { DURATION_OPTIONS, SESSION_TYPE_LABELS } from '../utils/constants';
 import { useTheme } from '../theme/ThemeContext';
@@ -24,6 +26,8 @@ export default function AttendanceEditModal({
   setSnackbar,
 }) {
   const theme = useTheme();
+  const muiTheme = useMuiTheme();
+  const isMobile = useMediaQuery(muiTheme.breakpoints.down('md'));
   const [editData, setEditData] = useState(
     attendance || {
       date: new Date().toISOString().split('T')[0],
@@ -94,7 +98,7 @@ export default function AttendanceEditModal({
   };
 
   return (
-    <Dialog open={open} onClose={onClose} maxWidth="xs">
+    <Dialog open={open} onClose={onClose} maxWidth="xs" fullScreen={isMobile}>
       <DialogTitle>{isEditing ? 'Edit Attendance' : 'Add New Attendance'}</DialogTitle>
       <DialogContent dividers>
         <TextField
