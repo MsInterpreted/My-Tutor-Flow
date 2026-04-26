@@ -24,3 +24,13 @@ dist-ssr
 *.sw?
 .env
 .env.local
+
+# Commercial platform — separate product, not part of this repo
+my-tutor-flow-commercial-platform/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Backup files
+*.bak
