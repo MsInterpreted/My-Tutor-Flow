@@ -272,7 +272,7 @@ class MessagingService {
         touser: openId,
         template_id: 'your_template_id', // Configure in WeChat backend
         data: {
-          first: { value: 'TD Learning Academy Invoice', color: '#173177' },
+          first: { value: 'My Tutor Flow Invoice', color: '#173177' },
           keyword1: { value: messageData.studentName, color: '#173177' },
           keyword2: { value: messageData.invoiceNumber, color: '#173177' },
           keyword3: { value: this.formatCurrency(messageData.amount), color: '#173177' },

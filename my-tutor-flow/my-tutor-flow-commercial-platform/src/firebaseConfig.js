@@ -1,4 +1,4 @@
-// TD Learning Academy Firebase Configuration
+// TD Learning Academy Commercial - Firebase Configuration
 // Import the functions you need from the Firebase SDKs
 import { initializeApp } from 'firebase/app';
 import { getAnalytics, isSupported as analyticsIsSupported } from 'firebase/analytics';
@@ -14,24 +14,23 @@ if (!validation.isValid) {
   throw new Error(`Environment configuration errors: ${validation.errors.join(', ')}`);
 }
 
-// TD Learning Academy Firebase configuration
+// TD Learning Academy Commercial Firebase configuration
 const firebaseConfig = {
   ...FIREBASE_CONFIG,
   measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID,
 };
 
-// Initialize Firebase for TD Learning Academy
+// Initialize Firebase for TD Learning Academy Commercial
 let app;
 let analytics = null;
 let auth;
 let db;
 let storage;
 
-console.log('🎓 Initializing Firebase for TD Learning Academy...');
+console.log('🎓 Initializing Firebase for TD Learning Academy Commercial...');
 
-// FIREBASE INITIALIZATION FOR TDLA.CO.ZA
 try {
-  console.log('🔥 Initializing Firebase for TD Learning Academy...');
+  console.log('🔥 Initializing Firebase for TD Learning Academy Commercial...');
   console.log('📋 Firebase Configuration:');
   console.log('- Project ID:', firebaseConfig.projectId);
   console.log('- Auth Domain:', firebaseConfig.authDomain);

@@ -28,7 +28,7 @@ const InvoicePreview = () => {
   };
 
   const companyInfo = {
-    name: 'TD Learning Academy',
+    name: 'My Tutor Flow',
     address: '123 Education Street',
     city: 'Learning City, LC 12345',
     phone: '(555) 123-4567',
@@ -107,7 +107,7 @@ const InvoicePreview = () => {
             fontSize: '2.5rem',
           }}
         >
-          🧾 TD Learning Academy Invoice Preview
+          🧾 My Tutor Flow Invoice Preview
         </h1>
         <h2
           style={{
@@ -257,7 +257,7 @@ const InvoicePreview = () => {
           }}
         >
           <p style={{ color: '#2c3e50', margin: 0, fontWeight: 600 }}>
-            🎯 <strong>Professional Impact:</strong> Your new logo positions TD Learning Academy as
+            🎯 <strong>Professional Impact:</strong> Your new logo positions My Tutor Flow as
             a premium tutoring service, helping you command higher rates and attract
             quality-conscious parents who value educational excellence.
           </p>

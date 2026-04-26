@@ -80,7 +80,7 @@ export default function FirebaseSetupGuide() {
       content: (
         <Box>
           <Typography variant="body2" sx={{ mb: 2 }}>
-            Your current Firebase project: <strong>my-tutor-flow</strong>
+            Your current Firebase project: <strong>my-tutor-flow-commercial</strong>
           </Typography>
           <List dense>
             <ListItem>
@@ -92,7 +92,7 @@ export default function FirebaseSetupGuide() {
             </ListItem>
             <ListItem>
               <ListItemIcon><InfoIcon color="info" /></ListItemIcon>
-              <ListItemText primary="Select your project: my-tutor-flow" />
+              <ListItemText primary="Select your project: my-tutor-flow-commercial" />
             </ListItem>
           </List>
         </Box>
@@ -105,7 +105,7 @@ export default function FirebaseSetupGuide() {
         <Box>
           <Alert severity="warning" sx={{ mb: 2 }}>
             <AlertTitle>Domain Mismatch Detected</AlertTitle>
-            Your app is running on <strong>tdla.co.za</strong> but Firebase is configured for <strong>my-tutor-flow.firebaseapp.com</strong>
+            Your app is running on <strong>tdla.co.za</strong> but Firebase is configured for <strong>my-tutor-flow-commercial.firebaseapp.com</strong>
           </Alert>
           <List dense>
             <ListItem>
@@ -331,7 +331,7 @@ service firebase.storage {
         <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
           <Button
             variant="contained"
-            onClick={() => window.open('https://console.firebase.google.com/project/my-tutor-flow', '_blank')}
+            onClick={() => window.open('https://console.firebase.google.com/project/my-tutor-flow-commercial', '_blank')}
             startIcon={<LaunchIcon />}
           >
             Open Firebase Console
@@ -355,8 +355,8 @@ service firebase.storage {
         <Box sx={{ mt: 3, p: 2, bgcolor: theme.colors.background.secondary, borderRadius: 1 }}>
           <Typography variant="subtitle2" sx={{ mb: 1 }}>Current Configuration:</Typography>
           <Typography variant="body2" component="div">
-            • Project ID: <code>my-tutor-flow</code><br/>
-            • Auth Domain: <code>my-tutor-flow.firebaseapp.com</code><br/>
+            • Project ID: <code>my-tutor-flow-commercial</code><br/>
+            • Auth Domain: <code>my-tutor-flow-commercial.firebaseapp.com</code><br/>
             • Current Domain: <code>{window.location.hostname}</code><br/>
             • Status: <strong>{connectionStatus?.healthy ? 'Partially Working' : 'Not Connected'}</strong>
           </Typography>

@@ -39,7 +39,7 @@ export function AuthProvider({ children }) {
                 const defaultProfile = {
                   role: 'tutor',
                   permissions: ['students', 'attendance', 'reports', 'dashboard', 'billing'],
-                  name: user.displayName || 'TD Learning Academy User',
+                  name: user.displayName || 'My Tutor Flow User',
                   email: user.email,
                 };
                 setUserRole(defaultProfile.role);
@@ -58,7 +58,7 @@ export function AuthProvider({ children }) {
               setUserProfile({
                 role: 'tutor',
                 permissions: ['students', 'attendance', 'reports', 'dashboard', 'billing'],
-                name: user.displayName || 'TD Learning Academy User',
+                name: user.displayName || 'My Tutor Flow User',
                 email: user.email,
               });
             }

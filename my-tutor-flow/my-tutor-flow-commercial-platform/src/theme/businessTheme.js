@@ -1,14 +1,14 @@
-// TD Learning Academy Custom Theme
-// Business-specific theme configuration with TDLA branding
+// My Tutor Flow Commercial - Custom Theme
+// Business-specific theme configuration
 
 import { businessConfig } from '../config/businessConfig';
 
 /**
- * TD Learning Academy Theme Configuration
+ * My Tutor Flow Commercial Theme Configuration
  * Emerald Green (#00D4AA) & Gold (#FFD93D) Color Scheme
  */
 
-// Base color palette for TD Learning Academy
+// Base color palette for My Tutor Flow
 const tdlaColors = {
   // Primary Brand Colors
   emeraldGreen: '#00D4AA',
@@ -41,7 +41,7 @@ const tdlaColors = {
 
 // Light theme configuration
 export const tdlaLightTheme = {
-  name: 'TD Learning Academy Light',
+  name: 'My Tutor Flow Light',
   isDarkMode: false,
   
   colors: {
@@ -196,7 +196,7 @@ export const tdlaLightTheme = {
 // Dark theme configuration
 export const tdlaDarkTheme = {
   ...tdlaLightTheme,
-  name: 'TD Learning Academy Dark',
+  name: 'My Tutor Flow Dark',
   isDarkMode: true,
   
   colors: {

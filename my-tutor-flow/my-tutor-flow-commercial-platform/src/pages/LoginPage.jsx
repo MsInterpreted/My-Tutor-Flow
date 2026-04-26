@@ -113,7 +113,7 @@ function LoginPage() {
         profile = {
           role: 'tutor',
           permissions: ['students', 'attendance', 'reports', 'dashboard', 'billing'],
-          name: user.displayName || 'TD Learning Academy User',
+          name: user.displayName || 'My Tutor Flow User',
           email: user.email,
           authorizationCode: authorizationCode || null,
         };
@@ -179,7 +179,7 @@ function LoginPage() {
         profile = {
           role: 'tutor',
           permissions: ['students', 'attendance', 'reports', 'dashboard', 'billing'],
-          name: user.displayName || 'TD Learning Academy User',
+          name: user.displayName || 'My Tutor Flow User',
           email: user.email,
         };
       }
@@ -289,18 +289,17 @@ function LoginPage() {
           <Box sx={{ textAlign: 'center', mb: 4 }}>
             <Box
               sx={{
-                width: 80,
-                height: 80,
-                borderRadius: '50%',
-                background: 'linear-gradient(135deg, #00D4AA, #4A90E2)',
                 display: 'flex',
-                alignItems: 'center',
                 justifyContent: 'center',
                 margin: '0 auto 16px auto',
-                animation: 'glow 2s ease-in-out infinite',
               }}
             >
-              <SchoolIcon sx={{ fontSize: 40, color: 'white' }} />
+              <Box
+                component="img"
+                src="/assets/logos/my-tutor-flow-logo.png"
+                alt="My Tutor Flow"
+                sx={{ height: 100, width: 'auto', objectFit: 'contain' }}
+              />
             </Box>
             <Typography
               variant="h4"

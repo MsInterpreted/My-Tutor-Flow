@@ -41,6 +41,7 @@ import {
 import { createTheme, ThemeProvider as MuiThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider, useTheme } from './theme/ThemeContext';
+import { createMuiTheme, getTheme } from './theme/businessTheme';
 import { NavigationLogo } from './components/branding/TDLALogo';
 import { BrandingProvider } from './contexts/BrandingContext';
 import ErrorBoundary from './components/ErrorBoundary';
@@ -62,25 +63,26 @@ const BusinessDashboard = React.lazy(() => import('./pages/BusinessDashboard'));
 const InvoicePreview = React.lazy(() => import('./components/InvoicePreview'));
 
 
-// Create theme for scalability
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: '#1976d2',
-    },
-    secondary: {
-      main: '#dc004e',
-    },
-  },
-  typography: {
-    fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
-  },
-});
+// Dynamic MUI theme bridge - reads from ThemeContext and creates a proper MUI theme
+function DynamicMuiThemeProvider({ children }) {
+  const themeCtx = useTheme();
+  const muiTheme = React.useMemo(() => {
+    const tdlaTheme = getTheme(themeCtx.isDarkMode);
+    return createTheme(createMuiTheme(tdlaTheme));
+  }, [themeCtx.isDarkMode]);
+
+  return (
+    <MuiThemeProvider theme={muiTheme}>
+      <CssBaseline />
+      {children}
+    </MuiThemeProvider>
+  );
+}
 
 // Auth Context import
 import { AuthContext, AuthProvider } from './contexts/AuthContext';
 
-// Enhanced Loading component with My Tutor Flow branding
+// Enhanced Loading component with TD Learning Academy branding
 const LoadingSpinner = () => (
   <Box
     sx={{
@@ -439,14 +441,13 @@ function App() {
     <ErrorBoundary>
       <BrandingProvider>
         <ThemeProvider>
-          <MuiThemeProvider theme={theme}>
-            <CssBaseline />
+          <DynamicMuiThemeProvider>
             <Router>
               <AuthProvider>
                 <AppContent />
               </AuthProvider>
             </Router>
-          </MuiThemeProvider>
+          </DynamicMuiThemeProvider>
         </ThemeProvider>
       </BrandingProvider>
     </ErrorBoundary>

@@ -20,7 +20,7 @@ const TDLearningAcademyLogo = ({
 
   const currentSize = sizeMap[size] || sizeMap.medium;
 
-  // TD Learning Academy Official Colors - Emerald & Gold
+  // My Tutor Flow Official Colors - Emerald & Gold
   const logoColors = {
     emeraldPrimary: '#00796B',
     emeraldMedium: '#00695C',
@@ -297,7 +297,7 @@ const TDLearningAcademyLogo = ({
             ml: 1,
           }}
         >
-          TD Learning Academy
+          My Tutor Flow
         </Typography>
       )}
     </Box>

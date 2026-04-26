@@ -2,14 +2,14 @@
 // Centralized environment variable management with validation and defaults
 
 /**
- * Environment Configuration for TD Learning Academy
+ * Environment Configuration for TD Learning Academy Platform
  * Provides type-safe access to environment variables with validation
  */
 
 // Application Configuration
 export const APP_CONFIG = {
-  name: import.meta.env.VITE_APP_NAME || 'TD Learning Academy',
-  shortName: import.meta.env.VITE_APP_SHORT_NAME || 'TDLA',
+  name: import.meta.env.VITE_APP_NAME || 'My Tutor Flow',
+  shortName: import.meta.env.VITE_APP_SHORT_NAME || 'MTF',
   version: import.meta.env.VITE_APP_VERSION || '1.0.0',
   environment: import.meta.env.VITE_APP_ENVIRONMENT || 'production',
   mode: import.meta.env.VITE_APP_MODE || 'private',
@@ -17,9 +17,9 @@ export const APP_CONFIG = {
 
 // Business Information
 export const BUSINESS_INFO = {
-  name: import.meta.env.VITE_BUSINESS_NAME || 'TD Learning Academy',
+  name: import.meta.env.VITE_BUSINESS_NAME || 'My Tutor Flow',
   domain: import.meta.env.VITE_BUSINESS_DOMAIN || 'tdla.co.za',
-  email: import.meta.env.VITE_BUSINESS_EMAIL || 'info@tdla.co.za',
+  email: import.meta.env.VITE_BUSINESS_EMAIL || 'support@tdla.co.za',
   phone: import.meta.env.VITE_BUSINESS_PHONE || '+27 XX XXX XXXX',
   address: import.meta.env.VITE_CONTACT_ADDRESS || 'Your Business Address',
   postalCode: import.meta.env.VITE_CONTACT_POSTAL_CODE || 'XXXX',
@@ -156,17 +156,17 @@ export const LEGAL_CONFIG = {
 
 // Branding Assets
 export const BRANDING_ASSETS = {
-  logoPath: import.meta.env.VITE_LOGO_PATH || '/assets/logos/tdla-logo-main.png',
+  logoPath: import.meta.env.VITE_LOGO_PATH || '/assets/logos/my-tutor-flow-logo.png',
   faviconPath: import.meta.env.VITE_FAVICON_PATH || '/assets/logos/tdla-favicon.ico',
-  appleTouchIcon: import.meta.env.VITE_APPLE_TOUCH_ICON || '/assets/logos/tdla-icon.png',
+  appleTouchIcon: import.meta.env.VITE_APPLE_TOUCH_ICON || '/assets/logos/my-tutor-flow-logo.png',
 };
 
 // SEO Meta Tags
 export const SEO_CONFIG = {
-  title: import.meta.env.VITE_META_TITLE || 'TD Learning Academy - Excellence in Education',
-  description: import.meta.env.VITE_META_DESCRIPTION || 'Professional tutoring services for academic success in South Africa',
-  keywords: import.meta.env.VITE_META_KEYWORDS || 'tutoring, education, South Africa, academic support, TDLA',
-  author: import.meta.env.VITE_META_AUTHOR || 'TD Learning Academy',
+  title: import.meta.env.VITE_META_TITLE || 'My Tutor Flow - Professional Tutoring Management Platform',
+  description: import.meta.env.VITE_META_DESCRIPTION || 'Streamline your tutoring business with comprehensive student management, billing, and analytics',
+  keywords: import.meta.env.VITE_META_KEYWORDS || 'tutoring, education, management platform, student management, billing, commercial',
+  author: import.meta.env.VITE_META_AUTHOR || 'My Tutor Flow',
 };
 
 // Monitoring and Logging

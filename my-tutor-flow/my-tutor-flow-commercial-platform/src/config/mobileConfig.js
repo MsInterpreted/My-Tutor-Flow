@@ -1,4 +1,4 @@
-// TD Learning Academy - Latest Android Compatibility (Android 15 & Beyond - July 2025)
+// TD Learning Academy Commercial - Latest Android Compatibility (Android 15 & Beyond)
 // Optimized for cutting-edge Android devices with advanced features
 
 export const MOBILE_CONFIG = {
@@ -92,9 +92,9 @@ export const MOBILE_CONFIG = {
 
     // Advanced Web App Manifest
     manifest: {
-      name: 'TD Learning Academy',
-      shortName: 'TDLA',
-      description: 'Professional Tutoring Management System',
+      name: 'My Tutor Flow',
+      shortName: 'MTF',
+      description: 'Professional Tutoring Management Platform',
       startUrl: '/',
       display: 'standalone',
       displayOverride: ['window-controls-overlay', 'minimal-ui'],
@@ -236,7 +236,7 @@ export const MOBILE_CONFIG = {
         version: 'latest',
         fallback: 'device-credential',
         negativeButton: 'Cancel',
-        subtitle: 'Authenticate to access TD Learning Academy',
+        subtitle: 'Authenticate to access My Tutor Flow',
       },
 
       // Advanced Biometric Options

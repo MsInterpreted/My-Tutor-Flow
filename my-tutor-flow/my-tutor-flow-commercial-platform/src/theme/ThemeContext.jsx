@@ -14,7 +14,7 @@ export const useTheme = () => {
 };
 
 export const ThemeProvider = ({ children }) => {
-  // Initialize theme from localStorage or default to light for TD Learning Academy
+  // Initialize theme from localStorage or default to light
   const [isDarkMode, setIsDarkMode] = useState(() => {
     const saved = localStorage.getItem('tdla-theme');
     return saved ? JSON.parse(saved) : false; // Default to light mode for business

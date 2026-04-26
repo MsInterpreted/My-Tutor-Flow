@@ -1,5 +1,5 @@
-// TD Learning Academy - Business Constants
-// Centralized constants for the TD Learning Academy platform
+// TD Learning Academy Commercial - Business Constants
+// Centralized constants for the TD Learning Academy Commercial platform
 
 import { businessConfig } from '../config/businessConfig';
 
@@ -117,7 +117,7 @@ export const INVOICE_STATUS = {
   CANCELLED: "cancelled"
 };
 
-// User Roles for TD Learning Academy
+// User Roles for TD Learning Academy Commercial
 export const USER_ROLES = {
   ADMIN: "admin", // You (business owner)
   TUTOR: "tutor", // Additional tutors (if any)
@@ -164,7 +164,7 @@ export const THEME_MODES = {
   AUTO: "auto"
 };
 
-// Application Routes (TD Learning Academy specific)
+// Application Routes (TD Learning Academy Commercial specific)
 export const ROUTES = {
   DASHBOARD: "/dashboard",
   STUDENTS: "/students", 

@@ -4,8 +4,8 @@
 export const businessConfig = {
   // Company Information
   company: {
-    name: "TD Learning Academy",
-    shortName: "TDLA",
+    name: "My Tutor Flow",
+    shortName: "MTF",
     tagline: "Excellence in Education",
     description: "Personalized tutoring services for academic success",
     website: "https://tdla.co.za",
@@ -41,12 +41,12 @@ export const businessConfig = {
   // Branding Configuration
   branding: {
     logo: {
-      main: "/assets/logos/tdla-logo-main.png",
-      icon: "/assets/logos/tdla-icon.png",
-      favicon: "/assets/logos/tdla-favicon.ico",
-      loginLogo: "/assets/logos/tdla-login-logo.png",
-      darkMode: "/assets/logos/tdla-logo-dark.png",
-      lightMode: "/assets/logos/tdla-logo-light.png",
+      main: "/assets/logos/my-tutor-flow-logo.png",
+      icon: "/assets/logos/my-tutor-flow-logo.png",
+      favicon: "/assets/logos/my-tutor-flow-logo.png",
+      loginLogo: "/assets/logos/my-tutor-flow-logo.png",
+      darkMode: "/assets/logos/my-tutor-flow-logo.png",
+      lightMode: "/assets/logos/my-tutor-flow-logo.png",
       // SVG Logo - OPTION 2: Geometric Faceted + Braided Tassels (User's Final Choice)
       svg: `<svg viewBox="0 0 250 130" xmlns="http://www.w3.org/2000/svg">
         <defs>
@@ -172,7 +172,7 @@ export const businessConfig = {
       { value: "term4", label: "Term 4", months: ["October", "December"] }
     ],
 
-    // Session Types for TD Learning Academy
+    // Session Types
     sessionTypes: [
       { value: "individual", label: "Individual Tutoring", rate: 350 },
       { value: "group", label: "Group Session (2-3 students)", rate: 250 },
@@ -198,7 +198,7 @@ export const businessConfig = {
     analyticsReporting: true,
     exportFunctionality: true,
     
-    // TD Learning Academy Specific
+    // TD Learning Academy Commercial Specific
     southAfricanCurriculum: true,
     multiLanguageSupport: true, // English & Afrikaans
     localizedReports: true,

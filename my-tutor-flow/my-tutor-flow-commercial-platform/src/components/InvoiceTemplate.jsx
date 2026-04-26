@@ -21,7 +21,7 @@ const InvoiceTemplate = ({
   invoice,
   student,
   companyInfo = {
-    name: 'TD Learning Academy',
+    name: 'My Tutor Flow',
     address: '',
     city: '',
     phone: '',
@@ -240,7 +240,7 @@ const InvoiceTemplate = ({
       {/* Footer */}
       <Box sx={{ mt: 4, textAlign: 'center' }}>
         <Typography variant="body2" sx={{ color: theme.colors.text.secondary }}>
-          Thank you for choosing TD Learning Academy for your educational needs!
+          Thank you for choosing My Tutor Flow for your educational needs!
         </Typography>
       </Box>
     </Paper>

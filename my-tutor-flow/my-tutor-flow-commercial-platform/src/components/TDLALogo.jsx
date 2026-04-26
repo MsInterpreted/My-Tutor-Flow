@@ -40,7 +40,7 @@ export const TDLALogo = ({
             fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
           }}
         >
-          TD Learning Academy
+          My Tutor Flow
         </Typography>
       )}
     </Box>
@@ -126,7 +126,7 @@ export const TDLALogo1 = ({ size = 120, showText = true }) => (
     </svg>
     {showText && (
       <Box mt={1} textAlign="center">
-        <Box sx={{ fontSize: '12px', fontWeight: 600, color: '#1565C0' }}>TD Learning Academy</Box>
+        <Box sx={{ fontSize: '12px', fontWeight: 600, color: '#1565C0' }}>My Tutor Flow</Box>
       </Box>
     )}
   </Box>
@@ -247,7 +247,7 @@ export const TDLALogo2 = ({ size = 120, showText = true }) => (
     </svg>
     {showText && (
       <Box mt={1} textAlign="center">
-        <Box sx={{ fontSize: '12px', fontWeight: 600, color: '#00695C' }}>TD Learning Academy</Box>
+        <Box sx={{ fontSize: '12px', fontWeight: 600, color: '#00695C' }}>My Tutor Flow</Box>
       </Box>
     )}
   </Box>
@@ -340,7 +340,7 @@ export const TDLALogo3 = ({ size = 120, showText = true }) => (
     </svg>
     {showText && (
       <Box mt={1} textAlign="center">
-        <Box sx={{ fontSize: '12px', fontWeight: 600, color: '#6A1B9A' }}>TD Learning Academy</Box>
+        <Box sx={{ fontSize: '12px', fontWeight: 600, color: '#6A1B9A' }}>My Tutor Flow</Box>
       </Box>
     )}
   </Box>
@@ -432,7 +432,7 @@ export const TDLALogo4 = ({ size = 120, showText = true }) => (
     </svg>
     {showText && (
       <Box mt={1} textAlign="center">
-        <Box sx={{ fontSize: '12px', fontWeight: 600, color: '#1A237E' }}>TD Learning Academy</Box>
+        <Box sx={{ fontSize: '12px', fontWeight: 600, color: '#1A237E' }}>My Tutor Flow</Box>
       </Box>
     )}
   </Box>
@@ -526,7 +526,7 @@ export const TDLALogo5 = ({ size = 120, showText = true }) => (
     </svg>
     {showText && (
       <Box mt={1} textAlign="center">
-        <Box sx={{ fontSize: '12px', fontWeight: 600, color: '#004D40' }}>TD Learning Academy</Box>
+        <Box sx={{ fontSize: '12px', fontWeight: 600, color: '#004D40' }}>My Tutor Flow</Box>
       </Box>
     )}
   </Box>
@@ -536,7 +536,7 @@ export const TDLALogo5 = ({ size = 120, showText = true }) => (
 export const TDLALogoShowcase = () => (
   <Box p={3}>
     <Box mb={4} textAlign="center">
-      <h2>TD Learning Academy Logo Options</h2>
+      <h2>My Tutor Flow Logo Options</h2>
       <p>Choose your preferred logo design for the tutoring academy</p>
     </Box>
 

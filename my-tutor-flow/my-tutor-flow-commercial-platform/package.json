@@ -3,10 +3,10 @@
   "private": false,
   "version": "1.0.0",
   "type": "module",
-  "description": "My Tutor Flow - Professional Tutoring Management Platform for Commercial Use",
-  "author": "My Tutor Flow Team",
+  "description": "TD Learning Academy - Professional Tutoring Management Platform",
+  "author": "TD Learning Academy",
   "license": "Commercial",
-  "homepage": "https://mytutorflow.com",
+  "homepage": "https://tdla.co.za",
   "repository": {
     "type": "git",
     "url": "https://github.com/mytutorflow/platform.git"

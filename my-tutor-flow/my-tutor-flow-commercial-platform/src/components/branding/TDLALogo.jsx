@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
 import { useTheme } from '../../theme/ThemeContext';
+import { useTheme as useMuiTheme } from '@mui/material/styles';
 import { businessConfig } from '../../config/businessConfig';
 import { TDLALogo as MainTDLALogo } from '../TDLALogo';
 
@@ -176,25 +177,74 @@ const TDLALogo = ({
   );
 };
 
-// Preset logo components for common use cases - Using your chosen Option 2 design
-export const NavigationLogo = (props) => (
-  <MainTDLALogo size={props.size === "small" ? 80 : 120} showText={props.showText !== false} {...props} />
+const LOGO_PATH = '/assets/logos/my-tutor-flow-logo.png';
+
+export const NavigationLogo = ({ size = 'medium' }) => {
+  const theme = useTheme();
+  return (
+    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+      <Box
+        component="img"
+        src={LOGO_PATH}
+        alt="My Tutor Flow"
+        sx={{
+          height: size === 'small' ? 52 : 68,
+          width: 'auto',
+          objectFit: 'contain',
+        }}
+      />
+      <Box
+        component="span"
+        sx={{
+          fontWeight: 700,
+          fontSize: size === 'small' ? '0.95rem' : '1.1rem',
+          color: theme.isDarkMode ? '#ffffff' : '#1a1a1a',
+          letterSpacing: '0.5px',
+          fontFamily: '"Inter", "Roboto", "Helvetica", sans-serif',
+          lineHeight: 1.2,
+          whiteSpace: 'nowrap',
+        }}
+      >
+        My Tutor Flow
+      </Box>
+    </Box>
+  );
+};
+
+export const LoginLogo = () => (
+  <Box
+    component="img"
+    src={LOGO_PATH}
+    alt="My Tutor Flow"
+    sx={{ height: 100, width: 'auto', objectFit: 'contain' }}
+  />
 );
 
-export const LoginLogo = (props) => (
-  <MainTDLALogo size={150} showText={true} {...props} />
+export const IconLogo = () => (
+  <Box
+    component="img"
+    src={LOGO_PATH}
+    alt="My Tutor Flow"
+    sx={{ height: 40, width: 'auto', objectFit: 'contain' }}
+  />
 );
 
-export const IconLogo = (props) => (
-  <MainTDLALogo size={40} showText={false} {...props} />
+export const DocumentLogo = () => (
+  <Box
+    component="img"
+    src={LOGO_PATH}
+    alt="My Tutor Flow"
+    sx={{ height: 80, width: 'auto', objectFit: 'contain' }}
+  />
 );
 
-export const DocumentLogo = (props) => (
-  <MainTDLALogo size={120} showText={true} {...props} />
-);
-
-export const MobileLogo = (props) => (
-  <TDLALogo size="small" variant="main" showText={false} {...props} />
+export const MobileLogo = () => (
+  <Box
+    component="img"
+    src={LOGO_PATH}
+    alt="My Tutor Flow"
+    sx={{ height: 32, width: 'auto', objectFit: 'contain' }}
+  />
 );
 
 export default TDLALogo;

@@ -26,6 +26,7 @@ import {
   TableHead,
   TableRow,
   Divider,
+  Alert,
   useMediaQuery,
   useTheme as useMuiTheme,
 } from '@mui/material';
@@ -38,6 +39,8 @@ import {
 } from '@mui/icons-material';
 import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
+import { generateProgressComments } from '../services/agentService';
+import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
 
 const StudentProgressReports = ({
   students,
@@ -59,6 +62,8 @@ const StudentProgressReports = ({
 
   const [newSubject, setNewSubject] = useState('');
   const [editingMark, setEditingMark] = useState(null);
+  const [aiLoading, setAiLoading] = useState(false);
+  const [aiError, setAiError] = useState('');
 
   const termOptions = {
     '4-term': ['1st Term', '2nd Term', '3rd Term', '4th Term'],
@@ -105,6 +110,41 @@ const StudentProgressReports = ({
     const marks = Object.values(subjectMarks).filter(mark => mark !== '');
     if (marks.length === 0) return 0;
     return (marks.reduce((sum, mark) => sum + parseFloat(mark || 0), 0) / marks.length).toFixed(1);
+  };
+
+  const handleGenerateAIComments = async () => {
+    if (!selectedStudent) return;
+    if (reportData.subjects.length === 0) {
+      setAiError('Add at least one subject with marks before generating AI comments.');
+      return;
+    }
+
+    setAiLoading(true);
+    setAiError('');
+
+    try {
+      const subjects = reportData.subjects.map(subject => ({
+        name: subject,
+        marks: reportData.marks[subject] || {},
+        average: calculateAverage(reportData.marks[subject] || {}),
+      }));
+
+      const termLabel = termOptions[reportData.termSystem][reportData.currentTerm - 1];
+
+      const result = await generateProgressComments({
+        name: selectedStudent.name,
+        grade: selectedStudent.grade ? `Grade ${selectedStudent.grade}` : 'Unknown Grade',
+        school: selectedStudent.school || '',
+        term: termLabel,
+        subjects,
+      });
+
+      setReportData(prev => ({ ...prev, comments: result.comments }));
+    } catch (err) {
+      setAiError(err.message || 'Failed to generate comments. Is the AI server running?');
+    } finally {
+      setAiLoading(false);
+    }
   };
 
   const generatePDFReport = async () => {
@@ -591,6 +631,9 @@ const StudentProgressReports = ({
         handleAddMark={handleAddMark}
         calculateAverage={calculateAverage}
         generatePDFReport={generatePDFReport}
+        handleGenerateAIComments={handleGenerateAIComments}
+        aiLoading={aiLoading}
+        aiError={aiError}
         theme={theme}
       />
     </Grid>
@@ -612,6 +655,9 @@ const ProgressReportDialog = ({
   handleAddMark,
   calculateAverage,
   generatePDFReport,
+  handleGenerateAIComments,
+  aiLoading,
+  aiError,
   theme,
 }) => {
   const muiTheme = useMuiTheme();
@@ -902,14 +948,53 @@ const ProgressReportDialog = ({
 
           {/* Comments */}
           <Grid item xs={12}>
+            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 1 }}>
+              <Typography variant="body2" sx={{ color: theme.colors.text.secondary, fontWeight: 500 }}>
+                Comments
+              </Typography>
+              <Button
+                variant="outlined"
+                size="small"
+                startIcon={<AutoAwesomeIcon />}
+                onClick={handleGenerateAIComments}
+                disabled={aiLoading || !selectedStudent || reportData.subjects.length === 0}
+                sx={{
+                  borderColor: theme.colors.brand.primary,
+                  color: theme.colors.brand.primary,
+                  borderWidth: '2px',
+                  fontWeight: 600,
+                  textTransform: 'none',
+                  borderRadius: '8px',
+                  '&:hover': {
+                    backgroundColor: `${theme.colors.brand.primary}10`,
+                    borderColor: theme.colors.brand.primary,
+                    borderWidth: '2px',
+                  },
+                  '&:disabled': {
+                    color: theme.isDarkMode ? 'rgba(255,255,255,0.3)' : 'rgba(0,0,0,0.3)',
+                    borderColor: theme.isDarkMode ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)',
+                  },
+                }}
+              >
+                {aiLoading ? 'Generating...' : 'Generate AI Comments'}
+              </Button>
+            </Box>
+            {aiError && (
+              <Alert severity="error" sx={{ mb: 1, borderRadius: '8px' }}>
+                {aiError}
+              </Alert>
+            )}
             <TextField
-              label="Comments"
               multiline
-              rows={4}
+              rows={6}
               value={reportData.comments}
               onChange={e => setReportData(prev => ({ ...prev, comments: e.target.value }))}
               fullWidth
-              placeholder="Add teacher comments about student progress..."
+              placeholder={
+                reportData.subjects.length === 0
+                  ? 'Add subjects above, then use Generate AI Comments — or type manually.'
+                  : 'Click "Generate AI Comments" to auto-fill based on marks, or type manually.'
+              }
               sx={{
                 '& .MuiInputLabel-root': {
                   color: theme.colors.brand.primary,

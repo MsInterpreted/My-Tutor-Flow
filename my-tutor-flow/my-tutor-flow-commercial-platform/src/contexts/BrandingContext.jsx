@@ -2,7 +2,7 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 import { businessConfig } from '../config/businessConfig';
 
 /**
- * Branding Context for TD Learning Academy
+ * Branding Context for TD Learning Academy Commercial
  * Provides centralized access to branding configuration and utilities
  */
 const BrandingContext = createContext();
