@@ -1,0 +1,208 @@
+TD Learning Academy — All 24 Illustration Prompts
+====================================================
+Paste each prompt into your image generator (Midjourney, DALL-E 3, Adobe Firefly, etc.)
+Save images as: public/images/[filename].jpg  (800×500px landscape recommended)
+Then add  image: '/images/[filename].jpg'  to the matching unit in the data file.
+
+====================================================
+COMPREHENSION — BEGINNER (8 units)
+====================================================
+
+[Unit 1 — My Family]
+Filename: comprehension-beginner-unit-1.jpg
+Data file: src/data/comprehension/beginner.js  → units[0].image
+Prompt:
+A warm family scene inside a cosy kitchen: a mother with an apron stirring a pot on the stove, a father in work clothes hanging up his jacket, a young girl with braids setting the table, and a slightly older boy holding a football under one arm. Soft yellow light from a window, a ginger cat on the floor, family photos on the wall. Bright, inclusive, colourful children's book illustration.
+
+----------------------------------------------------
+[Unit 2 — Animals on the Farm]
+Filename: comprehension-beginner-unit-2.jpg
+Data file: src/data/comprehension/beginner.js  → units[1].image
+Prompt:
+A sunny farm with a big red barn, green hills in the background and a winding path. In the foreground: a brown-and-white cow chewing grass, a pink pig rolling in a muddy puddle, a small hen with fluffy chicks, a tall brown horse by a fence, a woolly white sheep, and a black-and-white dog barking happily. Bright sky with a few fluffy clouds. Warm, colourful children's book illustration.
+
+----------------------------------------------------
+[Unit 3 — At the Park]
+Filename: comprehension-beginner-unit-3.jpg
+Data file: src/data/comprehension/beginner.js  → units[2].image
+Prompt:
+A bright, busy neighbourhood park on a sunny afternoon. In the centre: a long blue slide with a child sliding down, two swings with children swinging high, and a green grass field where three children kick a red football. On a wooden bench under a leafy tree, an older man reads a newspaper. A mother pushes a pram along the path. Flowers along the edges. Warm, cheerful, inclusive children's book illustration.
+
+----------------------------------------------------
+[Unit 4 — My School Day]
+Filename: comprehension-beginner-unit-4.jpg
+Data file: src/data/comprehension/beginner.js  → units[3].image
+Prompt:
+A cheerful primary classroom. A kind teacher with a purple dress stands at a whiteboard pointing at numbers. Children in neat school uniforms sit at wooden desks with open books and colourful pencils. Posters on the wall show the alphabet, a world map, and a poem. A window shows green trees outside. Warm natural light, bright and welcoming, children's book illustration style.
+
+----------------------------------------------------
+[Unit 5 — Food I Like]
+Filename: comprehension-beginner-unit-5.jpg
+Data file: src/data/comprehension/beginner.js  → units[4].image
+Prompt:
+A warm family breakfast scene: a wooden table with a bowl of colourful fruit (bananas, apples, oranges), a plate of brown bread with jam, a glass of orange juice, and a steaming bowl of porridge. In the background, a pot of vegetable stew on the stove. A smiling child sits at the table holding a spoon. Cheerful morning light, inviting, children's book illustration style.
+
+----------------------------------------------------
+[Unit 6 — The Weather]
+Filename: comprehension-beginner-unit-6.jpg
+Data file: src/data/comprehension/beginner.js  → units[5].image
+Prompt:
+A four-part illustration showing different weather: a sunny scene with children in shorts playing on grass; a rainy scene with a child under a red umbrella splashing in a puddle; a cold winter scene with a child in a blue jacket and scarf beside bare trees; and a windy scene with leaves flying and a child holding their hat. Bright, clear, educational, children's book illustration.
+
+----------------------------------------------------
+[Unit 7 — My Body]
+Filename: comprehension-beginner-unit-7.jpg
+Data file: src/data/comprehension/beginner.js  → units[6].image
+Prompt:
+A friendly, labelled illustration of a smiling child standing with arms out. Clear, gentle labels point to: eyes (to see), ears (to hear), nose (to smell), mouth (to taste and speak), hands (to touch and hold), and feet (to walk and run). Around the child: a small picture of a toothbrush, an apple, and a bed to show healthy habits. Bright, educational, inclusive children's book illustration.
+
+----------------------------------------------------
+[Unit 8 — Colours and Shapes]
+Filename: comprehension-beginner-unit-8.jpg
+Data file: src/data/comprehension/beginner.js  → units[7].image
+Prompt:
+A bright, playful scene showing everyday objects grouped by shape and colour: a round yellow sun in the sky, a red ball on the ground, a square blue book on a table, a green triangular slice of watermelon, and a long orange rectangular door. A curious child points at each object. Clean lines, bold colours, educational children's book illustration.
+
+====================================================
+COMPREHENSION — INTERMEDIATE (8 units)
+====================================================
+
+[Unit 1 — Life in the City]
+Filename: comprehension-intermediate-unit-1.jpg
+Data file: src/data/comprehension/intermediate.js  → units[0].image
+Prompt:
+A vibrant, wide-angle illustration of a diverse African city skyline at dusk, with minibus taxis, cyclists, and commuters on busy streets below. Include tall apartment buildings with glowing windows, a bustling street market, and a modern train passing overhead. Show people of different ages and backgrounds walking, talking on phones, and carrying groceries. Warm orange and purple sunset tones blending with the cool blue lights of the city.
+
+----------------------------------------------------
+[Unit 2 — The Ocean]
+Filename: comprehension-intermediate-unit-2.jpg
+Data file: src/data/comprehension/intermediate.js  → units[1].image
+Prompt:
+A dramatic split-view illustration showing the ocean above and below the surface. Above: a clear blue horizon with gentle waves and seabirds. Below: a thriving coral reef bursting with colourful fish, sea turtles, and swaying kelp forests, but with subtle warning signs — a plastic bottle drifting past, a patch of bleached coral, and a fishing net tangled on rocks. Use vivid turquoise, coral pink, and deep navy tones to convey both beauty and fragility.
+
+----------------------------------------------------
+[Unit 3 — How Plants Grow]
+Filename: comprehension-intermediate-unit-3.jpg
+Data file: src/data/comprehension/intermediate.js  → units[2].image
+Prompt:
+A detailed, educational cross-section illustration showing the life cycle of a plant. On the left, a seed buried in rich brown soil with tiny roots beginning to emerge. In the middle, a young sprout pushing up through the earth toward a bright yellow sun. On the right, a fully grown green plant with broad leaves, clearly labelled arrows showing sunlight entering leaves, water travelling up from the roots, and oxygen being released. Bright, clear colours suitable for a science classroom.
+
+----------------------------------------------------
+[Unit 4 — A Day at the Market]
+Filename: comprehension-intermediate-unit-4.jpg
+Data file: src/data/comprehension/intermediate.js  → units[3].image
+Prompt:
+A warm, richly detailed illustration of a traditional African outdoor market at mid-morning. A young child holding the hand of a smiling grandmother in a bright headwrap walks between colourful stalls of oranges, tomatoes, spices in woven baskets, folded fabrics, and handmade wooden crafts. Vendors chat, a chicken wanders past, and steam rises from a pot of food at a corner stall. Sunlight filters through cloth awnings in warm yellows, reds, and greens.
+
+----------------------------------------------------
+[Unit 5 — Endangered Animals]
+Filename: comprehension-intermediate-unit-5.jpg
+Data file: src/data/comprehension/intermediate.js  → units[4].image
+Prompt:
+A poignant collage illustration featuring four endangered animals in their natural habitats: a black rhino on African savannah, a mountain gorilla in a misty forest, a sea turtle swimming near a coral reef, and a pangolin curled on a leafy forest floor. In the background, subtle imagery shows both threats (smoke from deforestation, a distant fishing net) and hope (a ranger patrolling, children planting trees). Warm earth tones with hopeful greens and blues.
+
+----------------------------------------------------
+[Unit 6 — Seasons and Change]
+Filename: comprehension-intermediate-unit-6.jpg
+Data file: src/data/comprehension/intermediate.js  → units[5].image
+Prompt:
+A circular illustration divided into four equal sections, each showing the same tree and landscape across the four seasons. Spring: pink blossoms, baby birds in a nest, green shoots. Summer: full leafy canopy, bright sunshine, children playing in the grass. Autumn: golden, red, and orange leaves falling, a squirrel gathering nuts. Winter: bare branches with snow or frost, a deer standing quietly, a warm sunset in a pale sky. Gentle, harmonious colour palette.
+
+----------------------------------------------------
+[Unit 7 — Friendship]
+Filename: comprehension-intermediate-unit-7.jpg
+Data file: src/data/comprehension/intermediate.js  → units[6].image
+Prompt:
+A heart-warming illustration of two friends of different backgrounds — one wearing a school uniform, the other in casual clothes — sitting on a wooden bench under a large tree. One friend has an arm around the other's shoulder as they share a quiet, supportive conversation. In the background, other children play, but the focus is on this pair. Soft golden afternoon light, leaves drifting gently, warm and hopeful mood.
+
+----------------------------------------------------
+[Unit 8 — Jobs People Do]
+Filename: comprehension-intermediate-unit-8.jpg
+Data file: src/data/comprehension/intermediate.js  → units[7].image
+Prompt:
+A detailed, cheerful illustration showing a diverse group of workers from many professions arranged like a community scene: a doctor with a stethoscope, a teacher at a chalkboard, a farmer holding produce, an engineer with a laptop, a chef at a stove, a nurse, a mechanic, a software developer at a screen, and a street cleaner smiling. People of different genders, ages, and backgrounds. Bright colours, friendly expressions, set against a simple town backdrop.
+
+====================================================
+COMPREHENSION — PRE-ADVANCED (8 units)
+====================================================
+
+[Unit 1 — Climate Change and Our World]
+Filename: comprehension-preadvanced-unit-1.jpg
+Data file: src/data/comprehension/preAdvanced.js  → units[0].image
+Prompt:
+A split-screen editorial illustration: on the left, a pristine boreal forest reflected in a glassy lake under a cool blue sky; on the right, the same landscape fractured by wildfire smoke, a receding glacier, and flooded coastline. In the foreground, a scientist in a field jacket holds a tablet displaying a rising CO2 graph, while a young activist holds a handwritten sign. Muted documentary palette, cinematic lighting, shallow depth of field.
+
+----------------------------------------------------
+[Unit 2 — The Power of Music]
+Filename: comprehension-preadvanced-unit-2.jpg
+Data file: src/data/comprehension/preAdvanced.js  → units[1].image
+Prompt:
+A layered illustration in warm, saturated colours: at the centre, a pair of headphones radiating concentric sound waves; within the waves, silhouettes of people across eras — a tribal drummer, a 1960s civil rights marcher singing, a hospice patient listening with a therapist, a teenager streaming on a phone. Subtle neural pathways thread between the figures, suggesting music's cognitive reach. Painterly style with a touch of surrealism.
+
+----------------------------------------------------
+[Unit 3 — The Importance of Education]
+Filename: comprehension-preadvanced-unit-3.jpg
+Data file: src/data/comprehension/preAdvanced.js  → units[2].image
+Prompt:
+A documentary-style composition: in the foreground, a girl in a rural village reads under a single solar lamp; in the middle distance, a half-built schoolhouse with a faded UN flag; in the background, a modern urban classroom with screens but empty desks. A chalkboard in the centre reads "Article 26" in several languages. Warm late-afternoon light, a palette of earth tones and deep blues, suggesting both hope and unfinished work.
+
+----------------------------------------------------
+[Unit 4 — Technology in Modern Life]
+Filename: comprehension-preadvanced-unit-4.jpg
+Data file: src/data/comprehension/preAdvanced.js  → units[3].image
+Prompt:
+A double-exposure illustration: on one face of a smartphone screen, a surgeon uses AI imaging to find a tumour, a child in a remote village attends a video lesson, and a deaf user signs through a translation app; on the reverse, a teenager scrolls anxiously at midnight, a surveillance camera watches a crowd, and an elderly hand struggles with a locked interface. The phone is held in the centre of the frame by a diverse pair of hands. Clean editorial illustration, muted gradients, high contrast.
+
+----------------------------------------------------
+[Unit 5 — Biodiversity and Ecosystems]
+Filename: comprehension-preadvanced-unit-5.jpg
+Data file: src/data/comprehension/preAdvanced.js  → units[4].image
+Prompt:
+A painterly cross-section of a coral reef transitioning into a tropical forest and then into agricultural monoculture, each zone losing species as the eye moves rightward. Above, an aeroplane in flight has rivets being pulled one by one from its wing. Scientific illustration aesthetic meets editorial surrealism. Rich blues and greens fading into bleached ochres.
+
+----------------------------------------------------
+[Unit 6 — Human Rights]
+Filename: comprehension-preadvanced-unit-6.jpg
+Data file: src/data/comprehension/preAdvanced.js  → units[5].image
+Prompt:
+A diptych illustration: on the left, the 1948 signing of the Universal Declaration of Human Rights, Eleanor Roosevelt holding a printed copy against a bright backdrop of hopeful post-war reconstruction; on the right, contemporary scenes — a journalist typing under surveillance, a lawyer speaking with prisoners, a protester facing riot police, a judge in robes. A faint grid of Declaration articles overlays both halves. Solemn, dignified, painterly style.
+
+----------------------------------------------------
+[Unit 7 — The Art of Storytelling]
+Filename: comprehension-preadvanced-unit-7.jpg
+Data file: src/data/comprehension/preAdvanced.js  → units[6].image
+Prompt:
+A sweeping illustration showing storytelling across time: an ancestral fire-circle with figures casting animal shadows on a cave wall on the left, transitioning through a medieval scribe, a 19th-century novelist, a cinema projectionist, and finally a modern phone displaying short-form video. In the centre, a single warm thread of light connects each scene. At the edges, a chorus of faces listens with changing emotion. Cinematic, luminous, slightly mythic.
+
+----------------------------------------------------
+[Unit 8 — Artificial Intelligence: Opportunity or Threat?]
+Filename: comprehension-preadvanced-unit-8.jpg
+Data file: src/data/comprehension/preAdvanced.js  → units[7].image
+Prompt:
+A centred illustration of a stylised neural network weaving through human life: one strand diagnoses a medical scan, another tutors a child, another reads aloud for a blind user; a second cluster of strands shows a worker replaced by a robot, a biased algorithm rejecting a loan, and a surveillance feed parsing a crowd. At the heart of the network sits a set of balance scales held by a hand in a judge's sleeve. Sleek editorial style, cool tones with accents of warm amber.
+
+====================================================
+HOW TO ADD IMAGES TO THE PLATFORM
+====================================================
+
+Step 1: Generate each image using the prompt above.
+        Recommended tools: Midjourney, DALL-E 3 (ChatGPT Plus), Adobe Firefly
+        Size: 800×500px landscape (16:9 or wider crop)
+        Format: .jpg or .webp
+
+Step 2: Save the image to:
+        C:/Users/dalz2/edubooks-platform/public/images/[filename].jpg
+
+Step 3: Open the matching data file and add an  image  field to that unit:
+
+        Example — beginner Unit 1:
+        Open: src/data/comprehension/beginner.js
+        Find: id: 1,
+        Add below it:  image: '/images/comprehension-beginner-unit-1.jpg',
+
+Step 4: Rebuild and redeploy:
+        npm run build
+        Drag dist/ to netlify.com/drop
+
+The placeholder disappears automatically when the image field is present.
+If the image fails to load (wrong filename etc.), the error state shows the filename to help debug.

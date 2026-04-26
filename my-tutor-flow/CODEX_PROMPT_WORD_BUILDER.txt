@@ -1,0 +1,955 @@
+════════════════════════════════════════════════════════════════════════
+MYTUTORFLOW — INTERACTIVE WORD BUILDER  |  FULL CODEX BUILD BRIEF
+════════════════════════════════════════════════════════════════════════
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SECTION 1 — PROJECT CONTEXT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Codebase root:  C:\Users\dalz2\edubooks-platform\
+Stack:          React 18 + Vite + Tailwind CSS v3
+Routing:        React Router v6
+Auth:           Firebase Auth via src/contexts/AuthContext.jsx
+                (user = authenticated, user.role = 'teacher' | 'student')
+Theme:          src/contexts/ThemeContext.jsx  (dark/light, useTheme hook)
+Progress ctx:   src/contexts/StudentProgressContext.jsx
+Style rule:     Tailwind utility classes only — no CSS modules, no inline
+                style objects except for dynamic colours.
+Existing routes studied for convention:
+  /              → src/pages/HomePage.jsx
+  /dashboard     → src/pages/StudentDashboard.jsx  (ProtectedRoute)
+  /teacher       → src/pages/TeacherDashboard.jsx  (TeacherRoute)
+  /assess        → src/pages/FreeAssessmentPage.jsx
+
+Component patterns: look at src/pages/StudentDashboard.jsx and
+  src/components/interactive/ before writing any new component —
+  match padding, card radius, colour usage, and font conventions
+  already established.
+
+All new files go in:  src/features/wordBuilder/
+Only existing files to modify:
+  • src/App.jsx              — add /words/* route
+  • src/pages/HomePage.jsx   — add Word Builder nav card
+  • src/pages/TeacherDashboard.jsx  — add Word Builder class panel
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SECTION 2 — FEATURE OVERVIEW
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+The Word Builder is a 100-level progressive vocabulary programme.
+Students climb through four stages by completing levels in sequence.
+Each level introduces a set of new words and puts them through five
+interactive activities. Progress is saved to Firebase Firestore
+(when authenticated) and localStorage (always, as fallback/cache).
+Teachers can watch their students' progress update in real time from
+the Teacher Dashboard without refreshing the page.
+
+There are NO age labels anywhere in the UI. Levels communicate
+progress entirely. A student's current level tells the story.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SECTION 3 — LEVEL ARCHITECTURE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Four stages, 100 levels total. Stages unlock sequentially.
+
+┌─────────────────┬──────────────┬────────────────┬─────────────────┐
+│ Stage           │ Levels       │ Words/level    │ Review pattern  │
+├─────────────────┼──────────────┼────────────────┼─────────────────┤
+│ Beginner        │  1 – 10      │ 6 new words    │ Level 5, 10     │
+│ Intermediate    │ 11 – 30      │ 8 new words    │ Every 5th       │
+│ Pre-Advanced    │ 31 – 60      │ 10 new words   │ Every 5th       │
+│ Advanced        │ 61 – 100     │ 12 new words   │ Every 5th       │
+└─────────────────┴──────────────┴────────────────┴─────────────────┘
+
+REVIEW LEVELS
+Every 5th level within a stage is a REVIEW LEVEL — it contains no
+new words. Instead it replays all words from the previous 4 levels
+in harder activity combinations. Review levels are marked with a
+special recycling icon on the game map.
+  Example: Level 5 reviews words from Levels 1–4.
+           Level 10 reviews all of Levels 1–9 (stage finale).
+           Level 15 reviews words from Levels 11–14.
+
+WORD COUNTS
+New-word levels only (review levels use previous words):
+  Beginner:     8 new-word levels × 6  =   48 unique words
+  Intermediate: 16 new-word levels × 8  =  128 unique words
+  Pre-Advanced: 24 new-word levels × 10 =  240 unique words
+  Advanced:     32 new-word levels × 12 =  384 unique words
+  ─────────────────────────────────────────────────────────
+  TOTAL unique words in bank:             800
+
+STAR RATINGS PER LEVEL
+After completing all activities in a level, award stars:
+  < 60%  = 0 stars  (must replay before unlocking next level)
+  60-79% = 1 star   ⭐
+  80-89% = 2 stars  ⭐⭐
+  90-99% = 3 stars  ⭐⭐⭐
+  100% first attempt = GOLD STAR  🌟  (special badge trigger)
+
+STAGE TRANSITIONS
+Completing the final level of a stage triggers a full-screen
+STAGE COMPLETE celebration (animated trophy, confetti, stat summary)
+before the next stage map is revealed.
+
+ADAPTIVE FAST-TRACK
+If a student earns 3 stars on 3 consecutive levels without replaying,
+a "You're flying! ⚡ Skip ahead 2 levels?" prompt appears.
+Skipping is optional and parents can disable it in settings.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SECTION 4 — WORD DATA STRUCTURE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+File: src/features/wordBuilder/data/wordBank.js
+
+Export a flat array named WORD_BANK. Each entry:
+
+{
+  id: 'curious-adj',              // unique kebab-case slug
+  word: 'curious',
+  stage: 'intermediate',          // 'beginner'|'intermediate'|'preadvanced'|'advanced'
+  level: 13,                      // overall level number (11–30 for intermediate)
+  levelInStage: 3,                // position within the stage (1–20 for intermediate)
+  category: 'character traits',   // thematic group (see categories below)
+  partOfSpeech: 'adjective',
+  pronunciation: 'KYOOR-ee-us',   // spoken syllable stress guide
+  syllables: 'cu·ri·ous',         // middot-separated syllables
+  definition: 'eager to know or learn about something',
+  simpleDefinition: 'really wanting to find out more about something',
+  emoji: '🔍',
+  examples: [
+    'The curious child opened every drawer in the room.',
+    'Scientists are naturally curious people.',
+  ],
+  synonyms: ['inquisitive', 'nosy', 'interested'],
+  antonyms: ['indifferent', 'uninterested'],
+  wordFamily: {
+    noun: 'curiosity',          // include only forms that genuinely exist
+    adverb: 'curiously',
+    negative: 'incurious',
+  },
+  etymology: 'From Latin "curiosus" — careful, eager to know',
+                                  // omit field for Beginner stage entirely
+  bookCrossRef: [                 // cross-reference to the 9 literacy books
+    { bookId: 'comprehension-intermediate', unitId: 3,
+      note: 'Appears in the reading passage for Unit 3.' },
+  ],                              // empty array [] if word does not appear in any book
+  grammarCheck: [
+    {
+      sentence: 'She was curious about the strange noise.',
+      correct: true,
+    },
+    {
+      sentence: 'He curiousness made everyone laugh.',
+      correct: false,
+      errorType: 'wrong word form',
+      correction: 'His curiosity made everyone laugh.',
+      highlightWrong: 'curiousness',     // substring to highlight red
+      highlightFix:  'curiosity',        // substring to highlight green
+    },
+  ],
+  contextClue: {                  // for the Context Clues activity (Stage 3+)
+    passage: 'Mia pressed her nose against the glass. She HAD to know what was inside the box. Her mother said she was too [BLANK] for her own good.',
+    blankWord: 'curious',
+    options: ['curious', 'lazy', 'frightened', 'generous'],
+    correct: 0,
+    explanation: 'The passage shows Mia desperately wanting to know — that is curiosity.',
+  },
+  matchingHint: 'Think: this is how you feel when you see a wrapped present.',
+}
+
+ADVANCED STAGE EXTRA FIELD  (Advanced entries only)
+Add an 'idiomsAndCollocations' field for words that have fixed-phrase usage:
+  idiomsAndCollocations: [
+    { phrase: 'raise the spectre of', meaning: 'to make people think about a frightening possibility' },
+    { phrase: 'the spectre of inflation', meaning: 'used when discussing economic fears' },
+  ],
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SECTION 5 — WORD BANK POPULATION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Populate ALL 800 words. Quality matters — these words are the entire
+value of the feature. Populate thoughtfully, not just to hit the count.
+
+BEGINNER STAGE CATEGORIES (used across Levels 1–10, 8 words per group):
+  family & home, animals & nature, food & drink, feelings & emotions,
+  action words (verbs), shapes colours & sizes, school & learning,
+  the human body
+
+INTERMEDIATE CATEGORIES (Levels 11–30):
+  character traits, emotions (nuanced), environment & ecology,
+  science & discovery, community & society, time & sequence,
+  conflict & resolution, literature & storytelling, the arts,
+  sport & perseverance, health & wellbeing, food culture (global)
+
+PRE-ADVANCED CATEGORIES (Levels 31–60):
+  All Intermediate categories, plus:
+  philosophy & ethics, psychology & behaviour,
+  rhetoric & argument, global issues, language & linguistics,
+  architecture & design
+
+ADVANCED CATEGORIES (Levels 61–100):
+  All Pre-Advanced categories, plus:
+  political & economic concepts, literary criticism & theory,
+  scientific discourse, law & justice, history & historiography,
+  idioms collocations & phrases (separate category for fixed expressions)
+
+TONE GUIDE — sample words to calibrate each stage:
+
+Beginner:
+  cosy, brave, gentle, enormous, whisper, scurry, delicious,
+  gloomy, dazzle, cheerful, grumpy, tender, fierce, wander,
+  precious, soggy, peculiar, graceful
+
+Intermediate:
+  empathy, resilient, perspective, elaborate, tranquil, diligent,
+  exhilarating, ambiguous, rivalry, compassion, persevere, subtle,
+  convey, dedicate, flourish, impact, instinct, vibrant
+
+Pre-Advanced:
+  tenacious, eloquent, paradox, scrutinise, benevolent, ambivalent,
+  vindicate, ephemeral, ostracise, lucid, reverence, nuance,
+  catalyst, contemplate, deteriorate, validate, profound, austere
+
+Advanced:
+  polemic, sycophant, equivocate, specious, hegemony, verisimilitude,
+  cogent, incendiary, obfuscate, rhetoric, solipsism, truncate,
+  reductive, solace, epistemology, dogma, cacophony, lament
+
+BOOK CROSS-REFERENCES
+Scan the book data files in src/data/ and wherever a word from the
+bank appears in a passage, vocabulary list, or activity, add the
+bookCrossRef entry. This is a KEY differentiator — it shows parents
+and students that the Word Builder reinforces what they read.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SECTION 6 — PLACEMENT TEST
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Route: /words/placement
+
+Shown to a user the FIRST time they open the Word Builder (tracked
+in localStorage / Firestore). Can be re-taken from settings.
+
+Structure:
+  - 15 adaptive MCQ questions
+  - Questions start at Beginner difficulty
+  - If student answers 4+ correctly in a row, questions step up a stage
+  - If student answers 2 wrong in a row, questions step down
+  - After 15 questions the algorithm places the student at a starting level:
+    ≤ 5 correct → Level 1 (Beginner)
+    6–9 correct → Level 5 (mid-Beginner)
+    10–12 correct → Level 11 (Intermediate start)
+    13–14 correct → Level 20 (mid-Intermediate)
+    15 correct all at Pre-Advanced → Level 31 (Pre-Advanced start)
+
+Question format is identical to the Grammar Check activity (single sentence,
+4 options). Questions must cover a mix of: definition match, synonym choice,
+word-in-context, fill-in-the-blank sentence.
+
+After the test, show:
+  "We've placed you at Level [N] — [Stage Name]"
+  A brief explanation of why: "You got the Intermediate questions right
+  but found the Pre-Advanced ones tricky. Level 20 is a great starting point."
+  Large "Start Level [N]" button.
+
+The placement result is stored as startingLevel in the user's progress.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SECTION 7 — GAME MAP (Level Select)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Route: /words  (the Word Builder home)
+
+VISUAL DESIGN
+The level select screen is a VERTICAL SCROLLING GAME MAP — a winding
+path with circular nodes for each level, like a trail through four
+distinct landscape zones:
+
+  Beginner zone (Levels 1–10):
+    Visual theme: green meadow, bright sunshine, simple flora
+    Colour palette: teal (#0D9488) tones
+
+  Intermediate zone (Levels 11–30):
+    Visual theme: a town with buildings and bridges
+    Colour palette: purple (#7C3AED) tones
+
+  Pre-Advanced zone (Levels 31–60):
+    Visual theme: mountainous terrain, more complex and dramatic
+    Colour palette: blue (#2563EB) tones
+
+  Advanced zone (Levels 61–100):
+    Visual theme: a city at night with glowing windows and stars
+    Colour palette: gold (#D97706) tones
+
+Each level node shows:
+  - Level number
+  - Stars earned (0–3, or gold star 🌟)
+  - Lock icon (grey) if not yet reachable
+  - Review level nodes use a ♻️ recycling symbol instead of a number
+  - Current level pulses with a soft glow animation
+  - Tapping a completed node replays it; tapping locked nodes shows
+    "Complete Level [N-1] to unlock"
+
+At the TOP of the screen (sticky header):
+  - Student name + avatar
+  - Current level badge: "Level 23 · Intermediate"
+  - Overall XP bar
+  - Streak counter with flame: "🔥 7 days"
+  - "Continue →" button jumps straight to current level
+
+Zones are separated by animated BRIDGE segments — a visual milestone
+the student sees when moving between stages.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SECTION 8 — SESSION FLOW (one level = one session)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Route: /words/level/:levelNumber
+
+A level session has FIVE STAGES shown sequentially. A thin progress
+bar at the top of the screen shows Stage 1–5. Each stage has a
+distinct visual identity and animation style.
+
+─────────────────────────────────────────
+STAGE 1 — WORD REVEAL
+─────────────────────────────────────────
+One word at a time. For each word in the level:
+
+CARD FRONT (initial view):
+  ┌───────────────────────────────────────┐
+  │  [emoji]   curious          🔊        │  ← tap speaker for TTS
+  │  adjective · cu·ri·ous                │
+  │  KYOOR-ee-us                          │
+  │  ─────────────────────────────────    │
+  │  eager to know or learn               │
+  │  about something                      │
+  │                                       │
+  │  [example 1 in light tinted box]      │
+  │  [example 2 in light tinted box]      │
+  │  ─────────────────────────────────    │
+  │  Also: curiosity · curiously          │  ← word family chips
+  │  ─────────────────────────────────    │
+  │  Synonyms: inquisitive · interested   │  ← pill badges
+  │                                       │
+  │  ▼ Word origin  (tap to expand)       │  ← Pre-Advanced+ only
+  │                                       │
+  │  [📚 Seen in: Comprehension           │  ← bookCrossRef badge
+  │     Intermediate Unit 3]             │    (if present)
+  │                                       │
+  │   [See it again]    [Got it! →]       │
+  └───────────────────────────────────────┘
+
+TTS: use window.speechSynthesis with lang 'en-GB' if available.
+     Trigger on card appear AND on speaker tap.
+
+After all words are revealed, auto-advance to Stage 2 with a
+"Now let's practise!" transition screen (1.5 seconds, animated).
+
+─────────────────────────────────────────
+STAGE 2 — SENTENCE TASK
+─────────────────────────────────────────
+One word at a time. Varies by level:
+
+BEGINNER (Levels 1–10) — STRUCTURED SENTENCE BUILDER:
+  Do NOT show a free-text area. Instead show a word-bank sentence
+  completion activity:
+  - Display a sentence with one blank: "The ___ cat hid under the bed."
+  - Show 4 word-bank buttons below (one is the correct word, three
+    are plausible distractors from the same level)
+  - On correct tap: green flash, sentence completes, audio cheer
+  - On wrong tap: gentle red shake, hint appears: "Think about the
+    definition: [simpleDefinition]"
+
+INTERMEDIATE AND ABOVE — FREE WRITE:
+  - Large text area: "Write your own sentence using [word]"
+  - Character minimum: Intermediate 15 chars, Pre-Advanced 25 chars,
+    Advanced 40 chars (with a character counter shown)
+  - A "Hint" button reveals a sentence starter scaffold, e.g.:
+    "Try: 'She was [word] because...'"  or  "Try: 'The most [word]
+    thing about the situation was...'"
+  - After submitting: "Nice sentence! ✓" with a sparkle animation
+  - Sentences saved to localStorage AND Firestore (see Section 10)
+  - Do NOT grammar-check free writing here — this is creative output
+
+─────────────────────────────────────────
+STAGE 3 — GRAMMAR CHECK
+─────────────────────────────────────────
+8 sentences drawn from all the current level's words (grammarCheck
+arrays). Mix correct and incorrect sentences roughly 50/50.
+
+Each sentence card shows:
+  - The sentence in large readable type
+  - Two big tap targets: ✅ CORRECT   ❌ INCORRECT
+  - Countdown timer bar (10 seconds — purely visual, no penalty for
+    taking longer, but completing under 5s awards a "Speed" bonus point)
+
+After tapping:
+  - Correct answer: green card flash + "That's right! ✓"
+    If the sentence WAS incorrect, show corrected version:
+    • Wrong part highlighted in red strikethrough
+    • Corrected part highlighted in green
+    • One-line explanation of the grammar error type
+  - Wrong answer: red shake + correct answer revealed immediately +
+    explanation shown
+
+Streak counter: "🔥 4 in a row!" fires a confetti burst at streaks
+of 3, 5, and 8.
+
+End of stage: score card "7 / 8 — Grammar Star! ⭐" with animated
+badge if 8/8.
+
+─────────────────────────────────────────
+STAGE 4 — CONTEXT CLUES  (Intermediate and above only)
+         MATCHING GAME  (Beginner — no context clues)
+─────────────────────────────────────────
+FOR BEGINNER — MATCHING GAME ONLY (simple):
+  Two columns, 6 pairs. Tap a word on the left, tap its definition
+  on the right. Correct pairs lock green. Wrong pairs shake red.
+  No timer. Encouraging only.
+
+FOR INTERMEDIATE AND ABOVE — TWO-PART STAGE:
+
+  PART A — CONTEXT CLUES  (one per level session):
+  Show a short passage (3–5 sentences) with one word blanked [BLANK].
+  Four options below. Student taps the word that fits.
+  Use the contextClue field from the word data.
+  Show the explanation after answering, whether right or wrong.
+
+  PART B — MATCHING GAME  (all levels):
+  Word-to-definition drag or tap-to-match.
+  Left column: words. Right column: definitions (shuffled).
+
+  BONUS ROUND (Pre-Advanced and Advanced):
+  After standard matching completes, a second round appears:
+  "Now match each word to its SYNONYM"
+  Uses synonyms array. Harder — no definition hint this time.
+
+  BONUS ROUND 2 (Advanced only):
+  "Match the word to its ANTONYM"
+
+Scoring: +15 per correct match, −5 per incorrect attempt.
+         Part A context clue: +20 if correct first try, +10 second try.
+
+─────────────────────────────────────────
+STAGE 5 — SESSION COMPLETE
+─────────────────────────────────────────
+Full-screen celebration card:
+
+  [Animated trophy or star burst at top]
+
+  Level [N] Complete!
+  ⭐⭐⭐  (earned stars, animated fill-in)
+
+  This session:
+    [score]% accuracy   [XP earned] XP   [time taken]
+
+  Your streak: 🔥 [N] days in a row
+
+  [XP bar filling toward next badge, with badge name shown]
+
+  [Grid of today's word pills — tap any to flip open its Word Card]
+
+  [Buttons:]
+    "Save to Vocabulary Journal"  →  stores session to journal
+    "Share"  →  copies text to clipboard:
+      "I mastered [N] new words on MyTutorFlow today! 💪
+       curious · resilient · elaborate · [etc]"
+    "Back to Map"  →  returns to /words game map, level node
+                       now shows earned stars
+
+SPELLING CHALLENGE  (appears after every 5th completed level)
+  Before going back to map, an optional bonus:
+  "Want a quick spelling challenge?"  [Yes]  [Skip]
+
+  Each word shown for 3 seconds → disappears → student types it.
+  Correct = green sparkle. Wrong = shows word with each mismatched
+  letter highlighted in orange. No score impact — pure practice.
+  Completing all words = "Spelling Champion!" badge trigger check.
+
+REVIEW LEVELS — DIFFERENT FLOW
+For review levels (every 5th), all 5 stages run but source words
+from ALL previous levels in the stage. The Word Reveal stage is
+replaced with a "How well do you remember?" challenge:
+  - Show the emoji + word, student taps the correct definition from 4 options
+  - No TTS re-read (they should know it by now)
+  - Harder matching (more words, smaller cards)
+  - No new context clues — use a mix of all previous ones
+  - Completing a review level with 3 stars unlocks a special
+    "Consistent Learner" badge.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SECTION 9 — GAMIFICATION & PROGRESS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+localStorage key:  'mtf_wb_progress'
+Firestore path:    /users/{uid}/wordBuilderStats  (see Section 10)
+
+Progress object shape:
+{
+  currentLevel: 1,           // overall level 1–100
+  currentStage: 'beginner',
+  levelInStage: 1,
+  startingLevel: 1,          // set by placement test
+  totalXP: 0,
+  streak: 0,
+  longestStreak: 0,
+  lastSessionDate: null,     // ISO date string "2026-04-25"
+  totalWordsLearned: 0,
+  totalLevelsCompleted: 0,
+  badges: [],                // array of badge IDs earned
+  levelHistory: [],          // [{ level, stars, score, date, timeSeconds }]
+  savedSentences: [],        // [{ wordId, sentence, date, level }]
+  wordsStruggling: [],       // wordIds where grammarCheck accuracy < 50%
+  wordsMastered: [],         // wordIds where all activities correct first try
+  teacherAssignedLevel: null,// set by teacher, overrides placement
+  fastTrackOffered: 0,       // count of times fast-track was triggered
+}
+
+XP AWARDS
+  Complete a level (any stars):    +50 XP
+  Each additional star:            +25 XP per star above 1
+  Grammar Check perfect:           +30 XP bonus
+  Context Clue correct first try:  +20 XP bonus
+  Daily streak maintained:         +10 XP × streak day (capped at 100)
+  Spelling Challenge complete:     +40 XP bonus
+
+BADGE SYSTEM
+Award badge modal immediately when triggered. Each badge has:
+  id, name, description, icon (emoji), rarity ('common'|'rare'|'legendary')
+
+Badges to implement:
+  'first_step'         🐾  Complete Level 1                    common
+  'streak_3'           🔥  3-day streak                        common
+  'streak_7'           🌟  7-day streak                        rare
+  'streak_30'          🏆  30-day streak                       legendary
+  'perfect_level'      💯  100% score on any level             rare
+  'gold_star'          🌟  Gold Star on any level (100% 1st try) rare
+  'grammar_star'       📝  8/8 Grammar Check                   common
+  'context_master'     🔍  10 Context Clues correct first try  rare
+  'speed_reader'       ⚡  Complete Grammar Check 5× under 5s  common
+  'spelling_champion'  🔤  Spelling Challenge 5 times complete rare
+  'century'            💯  100 words in mastered list          rare
+  'wordsmith'          ✍️   500 words in mastered list          legendary
+  'stage_1_complete'   🌱  Complete all Beginner levels        rare
+  'stage_2_complete'   🏙️   Complete all Intermediate levels    rare
+  'stage_3_complete'   🏔️   Complete all Pre-Advanced levels    legendary
+  'stage_4_complete'   🌆  Complete all 100 levels             legendary
+  'consistent_learner' ♻️   3 stars on a review level          common
+  'fast_tracker'       ⚡  Accepted a fast-track skip          common
+  'journal_keeper'     📓  50 sentences in Vocabulary Journal  rare
+  'book_connector'     📚  Found a bookCrossRef word in a book rare
+  'synonym_master'     🔄  Bonus synonym rounds ×10           rare
+
+Badge earned → full-screen modal with:
+  [Large badge icon]
+  [Badge name in large type]
+  [Description]
+  [Rarity chip: RARE / LEGENDARY in gold if applicable]
+  "You've earned [N] badges total" → View Collection button
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SECTION 10 — FIREBASE & REAL-TIME DATA
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Firebase is already configured in src/firebaseConfig.js.
+Import Firestore functions from 'firebase/firestore'.
+
+WRITE STRATEGY
+After every level completion AND after every sentence submission:
+  1. Always write to localStorage immediately (no latency, offline safe)
+  2. If user is authenticated (useAuth hook returns user):
+     → Write to Firestore using setDoc with merge: true
+
+FIRESTORE DOCUMENT: /users/{uid}/wordBuilderStats
+  {
+    currentLevel: number,
+    currentStage: string,
+    totalXP: number,
+    streak: number,
+    longestStreak: number,
+    lastSessionDate: string,
+    totalWordsLearned: number,
+    totalLevelsCompleted: number,
+    badges: string[],
+    levelHistory: [...],       // last 100 entries max (trim oldest)
+    wordsStruggling: string[],
+    wordsMastered: string[],
+    lastUpdated: serverTimestamp(),
+  }
+
+FIRESTORE DOCUMENT: /users/{uid}/wordBuilderSentences/{sentenceId}
+  {
+    wordId: string,
+    word: string,
+    sentence: string,
+    level: number,
+    stage: string,
+    date: string,
+    teacherComment: string | null,   // teachers can add comments
+    teacherRating: number | null,    // 1–5, set by teacher
+  }
+
+REAL-TIME TEACHER READS
+Teachers read student data using onSnapshot (real-time listener):
+  /users/{studentUid}/wordBuilderStats   — live stats
+  /users/{studentUid}/wordBuilderSentences — all saved sentences
+
+The teacher dashboard listens to ALL students in their class.
+Class membership is stored at:
+  /classes/{classId}/studentIds: string[]    (array of UIDs)
+  /classes/{classId}/teacherId: string       (teacher UID)
+
+On mount, the teacher component:
+  1. Reads /classes/{classId}/studentIds
+  2. Fetches each student's display name from /users/{uid}/displayName
+  3. Attaches onSnapshot listener to each student's wordBuilderStats
+  4. Cleanup all listeners on unmount
+
+This gives the teacher a live-updating table without any refresh.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SECTION 11 — REAL-TIME TEACHER DASHBOARD
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Add a "Word Builder" tab/panel to the existing TeacherDashboard.jsx.
+The panel has two views: CLASS OVERVIEW and STUDENT DETAIL.
+
+─────────────────────────────────────────
+CLASS OVERVIEW  (default view)
+─────────────────────────────────────────
+A live-updating table. Each row = one student in the teacher's class.
+Columns:
+
+  Student name | Level (badge chip) | Stage | Streak | Words mastered
+  | Last active | Today's XP | Status (dot: 🟢 active today / 🟡 active
+  this week / ⚫ inactive 7+ days)
+
+  Live updates: when a student completes a level while the teacher
+  has this page open, their row visually pulses briefly to signal
+  the update (use a CSS ring flash animation).
+
+At the top of the panel:
+  - Class average level: "Class average: Level 14"
+  - Class streak leaders: top 3 streaks shown as leaderboard chips
+  - Filter dropdown: All students | Behind (< Level 5) | On track |
+    Excelling (3+ stars every level)
+  - "Assign Level" dropdown (bulk): set a target level for selected
+    students. This writes teacherAssignedLevel to their Firestore doc.
+
+─────────────────────────────────────────
+STUDENT DETAIL  (click any student row)
+─────────────────────────────────────────
+Full panel slides in. Sections:
+
+1. HEADER STATS
+   Name | Avatar | Current Level badge | XP bar | Streak |
+   Total words mastered | Struggling words count
+
+2. LEVEL PROGRESS MAP (mini version)
+   A compact scrollable visual of the student's game map.
+   Each completed level shows 1/2/3 stars. Locked levels are grey.
+   The student's current position is highlighted.
+   Teacher can tap any completed level to see its session detail:
+   score, time taken, date, words correct/incorrect.
+
+3. VOCABULARY JOURNAL  (all saved sentences)
+   Chronological list of all sentences the student has written.
+   Each entry shows: word | sentence | date | level
+   Teacher can:
+     → Add a comment: small text input under each sentence
+     → Add a rating: ★ 1–5 stars
+   Comments and ratings write back to Firestore in real time.
+   The student sees teacher comments in their own Vocabulary Journal.
+
+4. STRUGGLING WORDS
+   List of words where the student's Grammar Check accuracy < 50%.
+   Shows the word, their error pattern, and a
+   "Assign extra practice" button (marks the word for spaced review).
+
+5. TEACHER WORD INJECTION
+   A text input: "Add custom words for [student name] this week"
+   Teacher types a word → if it exists in the word bank, it's added
+   to the student's current level session as a bonus word.
+   If it doesn't exist in the bank, show: "This word isn't in the bank
+   yet — ask an admin to add it."
+   Custom words use the same data structure but with
+   source: 'teacher-assigned' flag.
+
+6. NOTES FIELD
+   A free-text notes area for the teacher about this student.
+   Auto-saves to Firestore on blur.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SECTION 12 — VOCABULARY JOURNAL
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Route: /words/journal
+
+Student-facing view of all their saved sentences.
+
+Layout:
+  - Search bar (filter by word or date)
+  - Filter chips: All | Beginner | Intermediate | Pre-Advanced | Advanced
+  - Sorted newest first by default, toggle to sort by word A–Z
+  - Each entry card:
+    [word] [emoji]  [level badge]  [date]
+    "[Their sentence in italics]"
+    [Teacher comment card if present, shown in a distinct tinted box]
+    [Teacher star rating if present: ★★★☆☆]
+  - "Print Journal" button at top → window.print() with clean layout
+    (words on left, sentences on right, teacher comments in grey)
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SECTION 13 — WORD SEARCH MINI-GAME
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Route: /words/search
+
+Accessible from Stage 5 (Session Complete) as an optional bonus.
+
+A 12×12 letter grid with the current level's words hidden horizontally,
+vertically, and diagonally (both directions). Tap the first letter,
+drag or tap the last letter of the word to select. Found words:
+highlight permanently in the level's stage colour. All words shown
+below the grid as clues; found words get a strikethrough.
+
+Timer counts up. On completion:
+  "All [N] words found in [time]!"
+  Personal best if faster than previous attempt.
+  +20 XP bonus.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SECTION 14 — WORD OF THE DAY WIDGET
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Export: src/features/wordBuilder/WordOfTheDayCard.jsx
+Used on: src/pages/StudentDashboard.jsx  (import and place in dashboard grid)
+
+Shows the FIRST word of the student's current level.
+If level already completed today, shows first word of NEXT level.
+
+Card displays:
+  [emoji]  word
+  Simple definition
+  One example sentence in a tinted box
+  "Start today's level →" button → /words/level/[current]
+
+If no authenticated user: show word for Beginner Level 1.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SECTION 15 — PARENT DIGEST (DATA PREP ONLY)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Email sending is handled by Resend and is not yet live. However,
+build a Firestore document that a future email function can read:
+
+/users/{uid}/weeklyDigestData  (overwrite each Sunday)
+{
+  studentName: string,
+  weekStarting: string,        // ISO date of Monday
+  levelsCompleted: number,
+  wordsLearned: number,
+  currentLevel: number,
+  streak: number,
+  topBadgeEarned: string | null,
+  sentenceHighlight: {         // the highest-rated sentence of the week
+    word: string,
+    sentence: string,
+    teacherComment: string | null,
+  } | null,
+  strugglingWords: string[],   // top 3 struggling words for parent awareness
+}
+
+Write this document at the END of every session on a Sunday,
+or whenever totalLevelsCompleted % 7 === 0 (once per 7 levels
+completed as a fallback trigger).
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SECTION 16 — PRINTABLE WORKSHEET
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+From any completed level's Session Complete screen, a
+"Print Worksheet" button generates a print-friendly page:
+
+  Header:  MyTutorFlow — Level [N] Vocabulary Worksheet
+  Student: [name]     Date: [today]
+
+  For each word in the level:
+    [word]  ([partOfSpeech])  [syllables]
+    Definition: ___________________
+    My sentence: ___________________
+    Draw a picture: [empty box]
+
+  Grammar Check practice section: 4 sentences (mix correct/incorrect)
+  with a "Correct / Incorrect" circle to ring.
+
+Use window.print() with @media print CSS that hides all nav/buttons
+and formats this cleanly as an A4 page.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SECTION 17 — ANIMATION & DESIGN
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+General rules:
+  - Tailwind transition/animation utilities throughout
+  - No heavy animation libraries — use CSS keyframes via Tailwind's
+    @keyframes in index.css if custom animations are needed
+  - For confetti on badge awards and Stage 5: use canvas-confetti
+    (add to package.json: "canvas-confetti": "^1.9.3")
+  - All interactive elements must have :hover, :focus-visible, and
+    :active states
+  - Fully responsive: works from 360px mobile to 1440px desktop
+  - Dark mode: read theme from useTheme() context, NOT from a class check
+
+Specific animations required:
+  - Word card entrance: fade-in + slide up (150ms ease-out)
+  - Correct answer: green pulse ring expanding outward (300ms)
+  - Wrong answer: horizontal shake keyframes (300ms)
+  - Grammar Check streak fire: bouncing flame emoji (loop while active)
+  - Level complete stars: each star flips in sequentially 200ms apart
+  - XP bar fill: smooth width transition (800ms ease-in-out)
+  - Badge modal: scale from 0.8 + fade in (250ms) + confetti burst
+  - Stage transition: slide left (300ms ease-in-out)
+  - Level map: locked nodes are desaturated; unlocked nodes pulse
+    gently (subtle 2s loop scale 1.0→1.04→1.0)
+  - Bridge/zone transition: brief sparkle sweep animation
+  - Live teacher table row update: ring flash (yellow → transparent, 1s)
+
+Typography:
+  - Word titles on cards: text-4xl font-bold (or larger on wide screens)
+  - Definitions: text-lg for Beginner, text-base for others
+  - Syllable display: monospace font, letter-spacing-wide
+  - Example sentences: italic, slightly lighter text colour
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SECTION 18 — TECHNICAL REQUIREMENTS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  - React hooks only (no class components)
+  - No new npm packages except canvas-confetti
+  - Touch events for drag interactions (no drag-and-drop library).
+    Matching game defaults to tap-to-select (tap word, tap definition).
+    Drag is progressive enhancement via pointer events if time allows.
+  - Web Speech API for TTS — always check 'speechSynthesis' in window
+    before calling. Graceful no-op if unavailable (hide speaker icon).
+  - Firestore writes use try/catch — never crash if Firestore is
+    unavailable. Fall through to localStorage silently.
+  - All localStorage reads use try/catch (corrupted data must not crash).
+  - The word bank file will be large (~800 entries). Export it as a
+    default export array for tree-shaking. Do not import the entire bank
+    into components — filter by level number at the hook level and
+    pass only the needed words down.
+  - Daily determinism: to select words for a session use
+    the level number as the source — levels are fixed, not rotated daily.
+    (Daily rotation is replaced by level progression.)
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SECTION 19 — FILES TO DELIVER
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+src/features/wordBuilder/
+├── data/
+│   └── wordBank.js                  ← 800-word bank, fully populated
+├── hooks/
+│   └── useWordBuilder.js            ← all localStorage + Firestore
+│                                      read/write, scoring, badge logic
+├── pages/
+│   ├── GameMapPage.jsx              ← /words  (level select map)
+│   ├── PlacementTestPage.jsx        ← /words/placement
+│   ├── SessionPage.jsx              ← /words/level/:levelNumber
+│   │                                   (manages 5-stage flow)
+│   ├── JournalPage.jsx              ← /words/journal
+│   └── WordSearchPage.jsx           ← /words/search
+├── components/
+│   ├── WordCard.jsx                 ← Stage 1 word reveal card
+│   ├── StructuredSentenceTask.jsx   ← Stage 2 Beginner word-bank mode
+│   ├── FreeWriteSentenceTask.jsx    ← Stage 2 Intermediate+ free write
+│   ├── GrammarCheck.jsx             ← Stage 3
+│   ├── ContextClues.jsx             ← Stage 4 Part A
+│   ├── MatchingGame.jsx             ← Stage 4 Part B + bonus rounds
+│   ├── SessionComplete.jsx          ← Stage 5
+│   ├── SpellingChallenge.jsx        ← post-level bonus
+│   ├── BadgeModal.jsx               ← badge award overlay
+│   ├── LevelNode.jsx                ← single node on game map
+│   └── ZoneBridge.jsx               ← stage-transition map segment
+├── teacher/
+│   ├── WordBuilderClassOverview.jsx ← live-updating class table
+│   └── WordBuilderStudentDetail.jsx ← drill-down student panel
+├── WordOfTheDayCard.jsx             ← standalone widget for dashboard
+└── index.jsx                        ← WordBuilderRouter + exports
+
+MODIFIED EXISTING FILES:
+  src/App.jsx
+    → import WordBuilderRouter from './features/wordBuilder/index.jsx'
+    → add inside AppRoutes():
+        <Route path="/words/*" element={<WordBuilderRouter />} />
+        (no auth guard — Word Builder is accessible to all,
+         Firestore sync activates only when user is logged in)
+
+  src/pages/HomePage.jsx
+    → Add a "Word Builder" feature card alongside the existing cards
+      (match existing card style, use gradient in Advanced gold colour)
+
+  src/pages/TeacherDashboard.jsx
+    → Add a "Word Builder" tab to the existing tab bar
+    → Import and render WordBuilderClassOverview inside that tab
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SECTION 20 — GAPS TO NOTE FOR FUTURE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+These are OUT OF SCOPE for this build but document them as
+// TODO comments in the relevant files so they are easy to pick up:
+
+1. AUDIO PRONUNCIATION FILES
+   TTS covers most cases. For a richer experience, short .mp3
+   pronunciation clips per word could replace TTS at Beginner level.
+   // TODO: replace speechSynthesis with /audio/{wordId}.mp3 when
+   // audio files are available
+
+2. PARENT EMAIL DIGEST
+   weeklyDigestData is written to Firestore. A Firebase Cloud Function
+   (or Resend scheduled call) should read it and send a weekly email.
+   // TODO: wire up Resend weekly digest function
+
+3. COMPETITIVE MODE
+   Two students race to complete a matching round in real time.
+   Requires WebSockets or Firebase Realtime Database presence.
+   // TODO: multiplayer matching via Firebase RTDB
+
+4. TEACHER CUSTOM WORD BANK ADMIN
+   A UI for admins/teachers to add entirely new words to the bank
+   (stored in Firestore, merged with the static bank at runtime).
+   // TODO: /teacher/words/admin route
+
+5. OFFLINE / PWA
+   Register a service worker that caches the word bank and current
+   level assets. Critical for students with poor connectivity (SA market).
+   // TODO: Vite PWA plugin + cache strategy
+
+════════════════════════════════════════════════════════════════════════
+END OF BRIEF
+════════════════════════════════════════════════════════════════════════

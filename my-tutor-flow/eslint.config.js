@@ -1,48 +1,29 @@
-import js from '@eslint/js';
-import globals from 'globals';
-import reactHooks from 'eslint-plugin-react-hooks';
-import reactRefresh from 'eslint-plugin-react-refresh';
-import tseslint from '@typescript-eslint/eslint-plugin';
-import tsparser from '@typescript-eslint/parser';
-import prettier from 'eslint-plugin-prettier';
-import prettierConfig from 'eslint-config-prettier';
+import js from '@eslint/js'
+import globals from 'globals'
+import reactHooks from 'eslint-plugin-react-hooks'
+import reactRefresh from 'eslint-plugin-react-refresh'
+import { defineConfig, globalIgnores } from 'eslint/config'
 
-export default [
-  { ignores: ['dist', 'node_modules', '*.config.js'] },
+export default defineConfig([
+  globalIgnores(['dist']),
   {
-    files: ['**/*.{js,jsx,ts,tsx}'],
+    files: ['**/*.{js,jsx}'],
+    extends: [
+      js.configs.recommended,
+      reactHooks.configs.flat.recommended,
+      reactRefresh.configs.vite,
+    ],
     languageOptions: {
       ecmaVersion: 2020,
       globals: globals.browser,
-      parser: tsparser,
       parserOptions: {
-        ecmaFeatures: {
-          jsx: true,
-        },
         ecmaVersion: 'latest',
+        ecmaFeatures: { jsx: true },
         sourceType: 'module',
       },
     },
-    plugins: {
-      'react-hooks': reactHooks,
-      'react-refresh': reactRefresh,
-      '@typescript-eslint': tseslint,
-      prettier: prettier,
-    },
     rules: {
-      ...js.configs.recommended.rules,
-      ...reactHooks.configs.recommended.rules,
-      ...prettierConfig.rules,
-      'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
-      'prettier/prettier': 'error',
-      '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
-      '@typescript-eslint/no-explicit-any': 'warn',
-      '@typescript-eslint/explicit-function-return-type': 'off',
-      '@typescript-eslint/explicit-module-boundary-types': 'off',
-      '@typescript-eslint/no-non-null-assertion': 'warn',
-      'react-hooks/exhaustive-deps': 'warn',
-      'no-console': ['warn', { allow: ['warn', 'error'] }],
-      'no-unused-vars': 'off', // Use TypeScript version instead
+      'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
     },
   },
-];
+])

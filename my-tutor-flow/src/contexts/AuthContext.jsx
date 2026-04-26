@@ -1,158 +1,118 @@
-import React, { createContext, useState, useEffect } from 'react';
-import { getUserProfile, updateLastLogin } from '../services/authorizationService';
+import { createContext, useContext, useEffect, useState } from 'react'
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  signOut,
+  onAuthStateChanged,
+  updateProfile,
+  sendPasswordResetEmail
+} from 'firebase/auth'
+import { doc, setDoc, getDoc, serverTimestamp } from 'firebase/firestore'
+import { auth, db, googleProvider } from '../firebase.js'
 
-// Auth Context for global state management
-export const AuthContext = createContext(null);
+const AuthContext = createContext(null)
+export const useAuth = () => useContext(AuthContext)
 
-// Auth Provider Component
 export function AuthProvider({ children }) {
-  const [currentUser, setCurrentUser] = useState(null);
-  const [userRole, setUserRole] = useState(null);
-  const [userProfile, setUserProfile] = useState(null);
-  const [loadingAuth, setLoadingAuth] = useState(true);
+  const [user, setUser] = useState(null)
+  const [profile, setProfile] = useState(null)
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    const initAuth = async () => {
-      try {
-        console.log('🔐 Initializing Firebase Authentication...');
-
-        // Import Firebase auth functions
-        const { onAuthStateChanged } = await import('firebase/auth');
-        const { auth } = await import('../firebaseConfig');
-
-        // Set up Firebase auth state listener
-        const unsubscribe = onAuthStateChanged(auth, async (user) => {
-          try {
-            setCurrentUser(user);
-            if (user) {
-              console.log('✅ User authenticated:', user.email);
-
-              // Get user profile with authorization data
-              const profile = await getUserProfile(user.uid);
-              if (profile) {
-                setUserProfile(profile);
-                setUserRole(profile.role);
-                // Update last login
-                await updateLastLogin(user.uid);
-              } else {
-                // Create default profile for new users
-                const defaultProfile = {
-                  role: 'tutor',
-                  permissions: ['students', 'attendance', 'reports', 'dashboard', 'billing'],
-                  name: user.displayName || 'TD Learning Academy User',
-                  email: user.email,
-                };
-                setUserRole(defaultProfile.role);
-                setUserProfile(defaultProfile);
-              }
-            } else {
-              console.log('🔐 No user authenticated');
-              setUserRole(null);
-              setUserProfile(null);
-            }
-          } catch (error) {
-            console.error('Error processing auth state:', error);
-            // Set default fallback
-            if (user) {
-              setUserRole('tutor');
-              setUserProfile({
-                role: 'tutor',
-                permissions: ['students', 'attendance', 'reports', 'dashboard', 'billing'],
-                name: user.displayName || 'TD Learning Academy User',
-                email: user.email,
-              });
-            }
-          } finally {
-            setLoadingAuth(false);
-          }
-        });
-
-        return () => unsubscribe();
-      } catch (error) {
-        console.error('Firebase auth initialization failed:', error);
-        // Fallback to localStorage auth if Firebase fails
-        try {
-          const persistedAuth = localStorage.getItem('tdla_auth');
-          const persistedUser = localStorage.getItem('tdla_user');
-          const persistedProfile = localStorage.getItem('tdla_profile');
-
-          if (persistedAuth === 'true' && persistedUser && persistedProfile) {
-            const user = JSON.parse(persistedUser);
-            const profile = JSON.parse(persistedProfile);
-
-            console.log('⚠️ Using localStorage fallback authentication');
-            setCurrentUser(user);
-            setUserRole(profile.role);
-            setUserProfile(profile);
-          }
-        } catch (fallbackError) {
-          console.error('Fallback auth failed:', fallbackError);
-        } finally {
-          setLoadingAuth(false);
-        }
+    const unsub = onAuthStateChanged(auth, async (firebaseUser) => {
+      setUser(firebaseUser)
+      if (firebaseUser) {
+        const snap = await getDoc(doc(db, 'users', firebaseUser.uid))
+        setProfile(snap.exists() ? snap.data() : null)
+      } else {
+        setProfile(null)
       }
-    };
+      setLoading(false)
+    })
+    return unsub
+  }, [])
 
-    initAuth();
-  }, []);
+  async function signup({ email, password, displayName, isUnder13, parentEmail, role = 'student' }) {
+    const cred = await createUserWithEmailAndPassword(auth, email, password)
+    await updateProfile(cred.user, { displayName })
+    const profileData = {
+      uid: cred.user.uid,
+      email,
+      displayName,
+      role,
+      isUnder13: !!isUnder13,
+      parentEmail: isUnder13 ? parentEmail : null,
+      parentApproved: !isUnder13,
+      subscription: 'free',
+      purchasedBooks: [],
+      createdAt: serverTimestamp(),
+      lastActive: serverTimestamp()
+    }
+    await setDoc(doc(db, 'users', cred.user.uid), profileData)
+    setProfile(profileData)
+    return cred.user
+  }
 
-  const handleLogout = async () => {
-    try {
-      console.log('🚪 Logging out...');
-
-      // Try Firebase signOut first
-      try {
-        const { auth } = await import('../firebaseConfig');
-        await auth.signOut();
-        console.log('✅ Firebase logout successful');
-      } catch (firebaseError) {
-        console.warn('⚠️ Firebase logout failed, clearing local state:', firebaseError.message);
+  async function loginWithGoogle() {
+    const cred = await signInWithPopup(auth, googleProvider)
+    const snap = await getDoc(doc(db, 'users', cred.user.uid))
+    if (!snap.exists()) {
+      const profileData = {
+        uid: cred.user.uid,
+        email: cred.user.email,
+        displayName: cred.user.displayName,
+        role: 'student',
+        isUnder13: false,
+        parentEmail: null,
+        parentApproved: true,
+        subscription: 'free',
+        purchasedBooks: [],
+        createdAt: serverTimestamp(),
+        lastActive: serverTimestamp()
       }
-
-      // Clear localStorage as backup
-      localStorage.removeItem('tdla_auth');
-      localStorage.removeItem('tdla_user');
-      localStorage.removeItem('tdla_profile');
-
-      // Clear state
-      setCurrentUser(null);
-      setUserRole(null);
-      setUserProfile(null);
-    } catch (error) {
-      console.error('Error logging out:', error);
+      await setDoc(doc(db, 'users', cred.user.uid), profileData)
+      setProfile(profileData)
+    } else {
+      setProfile(snap.data())
     }
-  };
+    return cred.user
+  }
 
-  const handleLogin = (user, profile) => {
-    try {
-      console.log('✅ Logging in - persisting to localStorage');
+  async function login(email, password) {
+    const cred = await signInWithEmailAndPassword(auth, email, password)
+    const snap = await getDoc(doc(db, 'users', cred.user.uid))
+    if (snap.exists()) setProfile(snap.data())
+    return cred.user
+  }
 
-      // Persist authentication to localStorage
-      localStorage.setItem('tdla_auth', 'true');
-      localStorage.setItem('tdla_user', JSON.stringify(user));
-      localStorage.setItem('tdla_profile', JSON.stringify(profile));
+  async function logout() {
+    await signOut(auth)
+    setProfile(null)
+  }
 
-      // Update state
-      setCurrentUser(user);
-      setUserProfile(profile);
-      setUserRole(profile?.role || 'tutor');
-    } catch (error) {
-      console.error('Error persisting login:', error);
-      // Still update state even if localStorage fails
-      setCurrentUser(user);
-      setUserProfile(profile);
-      setUserRole(profile?.role || 'tutor');
-    }
-  };
+  async function resetPassword(email) {
+    await sendPasswordResetEmail(auth, email)
+  }
 
-  const value = {
-    currentUser,
-    userRole,
-    userProfile,
-    loadingAuth,
-    handleLogout,
-    handleLogin,
-  };
+  function hasAccessToBook(bookId) {
+    if (!profile) return false
+    const trialBookId = 'comprehension-beginner'
+    if (bookId === trialBookId) return true
+    if (profile.subscription === 'premium' || profile.subscription === 'institution') return true
+    if (profile.purchasedBooks?.includes(bookId)) return true
+    return false
+  }
 
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+  const isTeacher = profile?.role === 'teacher' || profile?.role === 'admin'
+
+  return (
+    <AuthContext.Provider value={{
+      user, profile, loading,
+      signup, login, loginWithGoogle, logout, resetPassword,
+      hasAccessToBook, isTeacher
+    }}>
+      {!loading && children}
+    </AuthContext.Provider>
+  )
 }

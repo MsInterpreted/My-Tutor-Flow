@@ -1,0 +1,541 @@
+MyTutorFlow — Illustration Prompts: Phonics & Language Skills
+==============================================================
+60 images needed across 6 books.
+The 24 Comprehension images are already done — do NOT regenerate those.
+
+GLOBAL SPECS (apply to every single image in this file)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Dimensions : 800 × 500 px
+  Orientation: Landscape
+  Format     : WebP (.webp)
+  Save to    : C:\Users\dalz2\edubooks-platform\public\images\
+  Naming     : Use the EXACT filename shown — no spaces, no capitals
+  Tool tips  : Midjourney, DALL-E 3 (ChatGPT Plus), Adobe Firefly, Ideogram
+
+STYLE GUIDE BY SECTION
+  Beginner     → warm, bright, bold outlines, children's book illustration
+  Intermediate → bold, clear, slightly more sophisticated illustration
+  Pre-Advanced → editorial, painterly, mature — suitable for older students
+
+==============================================================
+SECTION 1 — PHONICS BEGINNER  (10 images)
+==============================================================
+
+────────────────────────────────────────────────────────────
+Unit 1 — The Alphabet
+────────────────────────────────────────────────────────────
+Filename  : phonics-beginner-unit-1.webp
+Dimensions: 800 × 500 px  |  Landscape  |  WebPPrompt    :
+A cheerful classroom display showing the full alphabet in large, colourful letters from A to Z. Each letter is paired with a bright picture: A for apple, B for ball, C for cat, D for dog, E for egg. A smiling child points up at the letters with a stick, and a rainbow arc frames the display. Bold, warm, educational children's book illustration style. Bright primary colours, clean white background behind the alphabet strip, wide landscape composition.
+
+────────────────────────────────────────────────────────────
+Unit 2 — Short Vowel 'a'
+────────────────────────────────────────────────────────────
+Filename  : phonics-beginner-unit-2.webp
+Dimensions: 800 × 500 px  |  Landscape  |  WebPPrompt    :
+A bright scene filled with short 'a' objects arranged across a wide landscape: a black cat sitting on a mat, a red cap on a hat rack, a bat and a ball on a table, a bag on the floor, and a smiling boy holding a pan. Each object has a small word label with the letter 'a' highlighted in a bold contrasting colour. Primary colours, thick outlines, educational phonics illustration for young children, landscape orientation.
+
+────────────────────────────────────────────────────────────
+Unit 3 — Short Vowel 'e'
+────────────────────────────────────────────────────────────
+Filename  : phonics-beginner-unit-3.webp
+Dimensions: 800 × 500 px  |  Landscape  |  WebPPrompt    :
+A fun farm and bedroom scene in wide landscape format featuring short 'e' words: a red hen on a wooden fence, a boy named Ben holding a pen, a purple bed with a colourful quilt, and a net catching a yellow butterfly. Each object is labelled with its word, with the letter 'e' highlighted in red. Bright, cheerful, educational children's book illustration, wide composition.
+
+────────────────────────────────────────────────────────────
+Unit 4 — Short Vowel 'i'
+────────────────────────────────────────────────────────────
+Filename  : phonics-beginner-unit-4.webp
+Dimensions: 800 × 500 px  |  Landscape  |  WebPPrompt    :
+A wide outdoor scene featuring short 'i' words spread across the landscape: a big pig rolling in mud, a fish on a dish, a child sitting on a grassy hill holding a stick, and a twig with a dragonfly perched on it. Each item has a bright banner showing its word, with the letter 'i' highlighted in a bold colour. Bold colours, simple shapes, educational children's book illustration, landscape format.
+
+────────────────────────────────────────────────────────────
+Unit 5 — Short Vowel 'o'
+────────────────────────────────────────────────────────────
+Filename  : phonics-beginner-unit-5.webp
+Dimensions: 800 × 500 px  |  Landscape  |  WebPPrompt    :
+A warm kitchen scene in wide landscape format with short 'o' words: a round pot on the stove, a friendly dog sitting on a log, a boy wearing a striped sock, a mop leaning against the wall, and a clock on the shelf. Each object has a small word label with the letter 'o' highlighted in orange. Cheerful, educational, children's book illustration style.
+
+────────────────────────────────────────────────────────────
+Unit 6 — Short Vowel 'u'
+────────────────────────────────────────────────────────────
+Filename  : phonics-beginner-unit-6.webp
+Dimensions: 800 × 500 px  |  Landscape  |  WebPPrompt    :
+A sunny outdoor scene in wide landscape format with short 'u' words spread across: a yellow bus on the road, a child running in the sun with arms out, a puppy carrying a mug, and a striped rug on the grass. A bold banner at the top reads "Short U". Bright, clear, educational children's book illustration for young learners, wide composition.
+
+────────────────────────────────────────────────────────────
+Unit 7 — Ending Consonants
+────────────────────────────────────────────────────────────
+Filename  : phonics-beginner-unit-7.webp
+Dimensions: 800 × 500 px  |  Landscape  |  WebPPrompt    :
+A playful wide display of picture-and-word pairs illustrating ending consonant sounds, arranged in a grid across the landscape: a red cap next to a black cat, a big tin beside a white pin, a spotted bug next to a brown jug, a dog beside a log. The ending consonant is highlighted in bold on each word card. Bright, simple, educational phonics illustration for young children, landscape orientation.
+
+────────────────────────────────────────────────────────────
+Unit 8 — S-Blends
+────────────────────────────────────────────────────────────
+Filename  : phonics-beginner-unit-8.webp
+Dimensions: 800 × 500 px  |  Landscape  |  WebPPrompt    :
+A lively wide landscape scene showing s-blend words in action: a child on a swing, a snail on a green leaf, a spotted snake in the grass, a bright star in the sky, and a spoon in a bowl of soup. Each image is paired with its word, with the s-blend (sw, sn, sl, st, sp) highlighted in a contrasting colour. Bright, cheerful, educational children's book illustration, landscape format.
+
+────────────────────────────────────────────────────────────
+Unit 9 — Consonant Digraphs ch and sh
+────────────────────────────────────────────────────────────
+Filename  : phonics-beginner-unit-9.webp
+Dimensions: 800 × 500 px  |  Landscape  |  WebPPrompt    :
+A cosy wide seaside scene with digraph words spread across the landscape: a child eating chips at the shore, a big ship on the water, a shell and a chunk of cheese on a picnic blanket, a fluffy chick in the sand, and a cheerful child holding cherries. The 'ch' and 'sh' in each word label are highlighted in bold colours. Warm, inviting, children's book illustration style, landscape orientation.
+
+────────────────────────────────────────────────────────────
+Unit 10 — Review: Short Vowels and Blends
+────────────────────────────────────────────────────────────
+Filename  : phonics-beginner-unit-10.webp
+Dimensions: 800 × 500 px  |  Landscape  |  WebPPrompt    :
+A celebratory phonics festival scene in wide landscape format: a giant spinning wheel divided into five coloured sections labelled a, e, i, o, u, each section filled with small pictures of short-vowel and blend words. Children stand around the wheel pointing and cheering, holding word cards. Streamers and bunting decorate the scene. Bright, celebratory, educational children's book illustration.
+
+==============================================================
+SECTION 2 — PHONICS INTERMEDIATE  (10 images)
+==============================================================
+
+────────────────────────────────────────────────────────────
+Unit 1 — L-Blends at the Start of Words
+────────────────────────────────────────────────────────────
+Filename  : phonics-intermediate-unit-1.webp
+Dimensions: 800 × 500 px  |  Landscape  |  WebPPrompt    :
+A cheerful wide indoor and outdoor scene featuring l-blend objects spread across the landscape: a blue flag waving in the breeze, a flower in a pot, a flat plate on a table, a clock on the wall, a globe on a school desk, and a purple plum in a bowl. Each word has its l-blend (fl, pl, cl, bl, gl) highlighted in a bright accent colour. Bold, clean lines, educational intermediate phonics illustration, landscape orientation.
+
+────────────────────────────────────────────────────────────
+Unit 2 — R-Blends at the Start of Words
+────────────────────────────────────────────────────────────
+Filename  : phonics-intermediate-unit-2.webp
+Dimensions: 800 × 500 px  |  Landscape  |  WebPPrompt    :
+A lively wide street and garden scene featuring r-blend words: a brown brick wall, fresh green grass in a garden, a girl in a red dress, a bright orange drum, a toy truck on the road, and a bunch of grapes on a vine. Each word has its r-blend (br, gr, dr, tr, pr) highlighted in a different colour. Bright, educational, intermediate phonics illustration, landscape format.
+
+────────────────────────────────────────────────────────────
+Unit 3 — Digraphs: th, wh, ph
+────────────────────────────────────────────────────────────
+Filename  : phonics-intermediate-unit-3.webp
+Dimensions: 800 × 500 px  |  Landscape  |  WebPPrompt    :
+A modern classroom whiteboard in wide landscape format displaying three large digraph cards side by side: TH (with illustrations of "thick" and "the"), WH (with a wheel and a whale), and PH (a phone and a photo). A smiling teacher points to each card, and children hold up matching picture cards. Clean, bold, organised, educational illustration, landscape orientation.
+
+────────────────────────────────────────────────────────────
+Unit 4 — Long Vowel A: a_e, ai, ay
+────────────────────────────────────────────────────────────
+Filename  : phonics-intermediate-unit-4.webp
+Dimensions: 800 × 500 px  |  Landscape  |  WebPPrompt    :
+A warm wide summer landscape scene with long 'A' words spread across: a child flying a kite on a sunny day, a snail on a leaf, a tray of cakes, a train on the tracks, and a superhero in a cape. Each word is labelled below its image, with the long A pattern (a_e, ai, ay) highlighted in warm yellow. Bright, inviting, educational phonics illustration, wide landscape format.
+
+────────────────────────────────────────────────────────────
+Unit 5 — Long Vowel E: ee, ea, e_e
+────────────────────────────────────────────────────────────
+Filename  : phonics-intermediate-unit-5.webp
+Dimensions: 800 × 500 px  |  Landscape  |  WebPPrompt    :
+A lush wide green outdoor landscape scene with long 'E' words: a bee on a flower, a child asleep under a shady tree, a teacher reading by a stream, and an eagle soaring in the clear sky. Each word is labelled, with the ee, ea, and e_e patterns highlighted in green. Warm natural tones, educational phonics illustration, landscape orientation.
+
+────────────────────────────────────────────────────────────
+Unit 6 — Long Vowel I: i_e, igh, ie, y
+────────────────────────────────────────────────────────────
+Filename  : phonics-intermediate-unit-6.webp
+Dimensions: 800 × 500 px  |  Landscape  |  WebPPrompt    :
+A wide night-and-day landscape scene featuring long 'I' words: a child flying a kite against a bright sky on the left, a lighthouse with a strong beam in the centre, a spy in a tie crouching behind a tree, and a sunrise on the right horizon. Word labels highlight the i_e, igh, ie, and y patterns in blue and yellow. Educational, colourful intermediate phonics illustration, landscape format.
+
+────────────────────────────────────────────────────────────
+Unit 7 — Long Vowel O: o_e, oa, ow
+────────────────────────────────────────────────────────────
+Filename  : phonics-intermediate-unit-7.webp
+Dimensions: 800 × 500 px  |  Landscape  |  WebPPrompt    :
+A wide coastal and countryside landscape combining long 'O' words spread across the scene: a wooden boat on the water, a stone path through a garden, a child rowing down a slow river, a yellow road with a signpost, and a rainbow over a rose bush. Each word label highlights the oa, o_e, or ow pattern. Warm coastal colours, educational intermediate phonics illustration, landscape orientation.
+
+────────────────────────────────────────────────────────────
+Unit 8 — Long Vowel U and Cousins: u_e, ue, ew, oo
+────────────────────────────────────────────────────────────
+Filename  : phonics-intermediate-unit-8.webp
+Dimensions: 800 × 500 px  |  Landscape  |  WebPPrompt    :
+A wide playful landscape scene featuring long 'U' words spread across: a flute player performing on a stage, a blue balloon floating upward, a spoon in a bowl of soup, a new shoe being laced up, and a detective writing a clue on a notepad. Word labels highlight the u_e, ue, ew, and oo patterns. Clean, colourful, educational phonics illustration, landscape format.
+
+────────────────────────────────────────────────────────────
+Unit 9 — R-Controlled Vowels: ar, or, er, ir, ur
+────────────────────────────────────────────────────────────
+Filename  : phonics-intermediate-unit-9.webp
+Dimensions: 800 × 500 px  |  Landscape  |  WebPPrompt    :
+A peaceful wide nature landscape featuring r-controlled vowel words spread across the scene: a bright star in the sky, a bird on a branch, a purple flower in the garden, a red barn on a farm, and a turtle on a mossy rock by a stream. Each scene labels its word, with the ar, or, er, ir, or ur pattern highlighted in warm earthy colours. Educational, intermediate phonics illustration, landscape orientation.
+
+────────────────────────────────────────────────────────────
+Unit 10 — Multi-Syllable Words and Syllable Division
+────────────────────────────────────────────────────────────
+Filename  : phonics-intermediate-unit-10.webp
+Dimensions: 800 × 500 px  |  Landscape  |  WebPPrompt    :
+A wide "word factory" landscape illustration: long words arrive on a conveyor belt from the left, a slicing machine with colourful dividers cuts them into syllables in the centre, and the reassembled words roll out on the right. Words shown: "hap-py", "fan-tas-tic", "but-ter-fly". Children in hard hats work the controls and cheer. Educational, slightly whimsical, intermediate phonics illustration, landscape format.
+
+==============================================================
+SECTION 3 — PHONICS PRE-ADVANCED  (10 images)
+==============================================================
+
+────────────────────────────────────────────────────────────
+Unit 1 — Diphthongs: ou and ow
+────────────────────────────────────────────────────────────
+Filename  : phonics-preadvanced-unit-1.webp
+Dimensions: 800 × 500 px  |  Landscape  |  WebPPrompt    :
+A dramatic wide outdoor landscape with diphthong words spread across the scene: a dark thundercloud pouring rain over a town on the left, a crowd cheering loudly at a stadium in the centre, a brown owl perched on a branch at dusk, and a stone tower above rooftops on the right. Word labels highlight the 'ou' and 'ow' patterns. Deep blues and warm amber tones, editorial illustration style for older students, landscape orientation.
+
+────────────────────────────────────────────────────────────
+Unit 2 — Diphthongs: oi and oy
+────────────────────────────────────────────────────────────
+Filename  : phonics-preadvanced-unit-2.webp
+Dimensions: 800 × 500 px  |  Landscape  |  WebPPrompt    :
+A bold wide landscape scene with oi/oy words: a boy pointing at gold coins in a jar on the left, a royal flag flying above a stone castle in the centre, a bubbling pot of oil with foil on a kitchen counter, and a coil of thick rope on a dock on the right. Labels highlight the 'oi' and 'oy' patterns in each word. Bold colours, expressive, educational editorial illustration for upper-primary students, landscape format.
+
+────────────────────────────────────────────────────────────
+Unit 3 — Vowel Teams: au, aw, and short oo
+────────────────────────────────────────────────────────────
+Filename  : phonics-preadvanced-unit-3.webp
+Dimensions: 800 × 500 px  |  Landscape  |  WebPPrompt    :
+A cosy wide autumn landscape featuring vowel team words spread across the scene: a laundry line with clothes drying in the breeze on the left, a hawk sitting on a wooden fence in the centre-left, an author writing at a desk by a window in the centre, a wooden hook on the wall, and an open book on a table on the right. Warm amber and brown autumn tones, educational pre-advanced illustration, landscape orientation.
+
+────────────────────────────────────────────────────────────
+Unit 4 — Silent Letters
+────────────────────────────────────────────────────────────
+Filename  : phonics-preadvanced-unit-4.webp
+Dimensions: 800 × 500 px  |  Landscape  |  WebPPrompt    :
+A wide "silent detective" landscape illustration: a large magnifying glass in the centre focuses on words with their silent letters circled in dotted outlines — a knight in armour (silent k) on the left, a garden gnome on a sign (silent g), a lamb on a farm (silent b), a wrench on a workbench (silent w), and a whistle (silent h) on the right. Slightly whimsical, editorial pre-advanced illustration, landscape format.
+
+────────────────────────────────────────────────────────────
+Unit 5 — Prefixes
+────────────────────────────────────────────────────────────
+Filename  : phonics-preadvanced-unit-5.webp
+Dimensions: 800 × 500 px  |  Landscape  |  WebPPrompt    :
+A wide "word construction site" landscape illustration: a crane on the left lifts prefixes (un-, re-, pre-, dis-, mis-) and attaches them to word-bases displayed on a large construction board in the centre. Children in hard hats hold up prefix blocks like building materials on the right. Words shown on the board: "rebuild", "unhappy", "precook". Clean, educational, slightly playful pre-advanced illustration, landscape orientation.
+
+────────────────────────────────────────────────────────────
+Unit 6 — Suffixes: -ing, -ed, -er, -est
+────────────────────────────────────────────────────────────
+Filename  : phonics-preadvanced-unit-6.webp
+Dimensions: 800 × 500 px  |  Landscape  |  WebPPrompt    :
+A wide "word evolution" race track landscape: a runner illustrates how "run" transforms across four stages spread left to right — "running" mid-sprint, "ran" crossing a finish line, "runner" on a trophy podium, "fastest" winning a race against two others. Suffix banners hang above each stage. Bold, clear, educational pre-advanced illustration, landscape format.
+
+────────────────────────────────────────────────────────────
+Unit 7 — Suffixes: -tion, -sion, -ment, -ness, -ful, -less
+────────────────────────────────────────────────────────────
+Filename  : phonics-preadvanced-unit-7.webp
+Dimensions: 800 × 500 px  |  Landscape  |  WebPPrompt    :
+A wide library landscape with six shelves spread across the scene, each labelled by a suffix family: -tion (books stacked), -ment (tools on a rack), -ness (a lamp shifting from dark to bright), -ful (a cup overflowing), -less (an empty vessel), -sion (a presentation stage). Students browse the shelves, each holding a word card. Warm, educational, editorial pre-advanced illustration, landscape orientation.
+
+────────────────────────────────────────────────────────────
+Unit 8 — Homophones and Homographs
+────────────────────────────────────────────────────────────
+Filename  : phonics-preadvanced-unit-8.webp
+Dimensions: 800 × 500 px  |  Landscape  |  WebPPrompt    :
+A witty wide split-panel landscape illustration: on the left half, three characters representing "Their/There/They're" look identical but stand in completely different scenes (a family home, an arrow pointing at a spot, a speech bubble). On the right half, "lead" shown as a heavy grey metal bar and as a dog leash walking ahead. Slightly humorous, editorial, pre-advanced illustration, landscape format.
+
+────────────────────────────────────────────────────────────
+Unit 9 — Etymology: Greek and Latin Roots
+────────────────────────────────────────────────────────────
+Filename  : phonics-preadvanced-unit-9.webp
+Dimensions: 800 × 500 px  |  Landscape  |  WebPPrompt    :
+A wide "word archaeology" landscape scene: a young scholar at an excavation site in the centre, uncovering ancient root words beneath layers of soil. Labelled clay tablet artefacts spread across the dig: "bio" (Greek — life), "terra" (Latin — earth), "graph" (Greek — write), "port" (Latin — carry). A timeline along the bottom runs from ancient Greece and Rome on the left to modern English words on the right. Warm sepia and gold tones with pops of teal, editorial illustration, landscape orientation.
+
+────────────────────────────────────────────────────────────
+Unit 10 — Fluency and Advanced Reading
+────────────────────────────────────────────────────────────
+Filename  : phonics-preadvanced-unit-10.webp
+Dimensions: 800 × 500 px  |  Landscape  |  WebPPrompt    :
+A sophisticated wide library reading landscape: a teenager comfortably reclined in a leather chair on the left, completely absorbed in a thick book. Around them, imagery from different genres floats as thought-bubbles spread across the wide scene — a treasure map, a poem on parchment, a newspaper headline, a science diagram. A clock on the wall shows several hours have passed. Warm, immersive, celebratory editorial illustration, landscape format.
+
+==============================================================
+SECTION 4 — LANGUAGE SKILLS BEGINNER  (10 images)
+==============================================================
+
+────────────────────────────────────────────────────────────
+Unit 1 — Nouns
+────────────────────────────────────────────────────────────
+Filename  : language-beginner-unit-1.webp
+Dimensions: 800 × 500 px  |  Landscape  |  WebPPrompt    :
+A bright wide classroom landscape with noun labels pointing to everyday objects spread across the scene: a chair, a table, a window, a book, a pencil, a teacher, a child, a school bag, and a dog by the door. Each tag is on a colourful label. The whiteboard in the background reads: "A NOUN names a person, place or thing!" Cheerful, warm, educational children's book illustration, landscape orientation.
+
+────────────────────────────────────────────────────────────
+Unit 2 — Verbs
+────────────────────────────────────────────────────────────
+Filename  : language-beginner-unit-2.webp
+Dimensions: 800 × 500 px  |  Landscape  |  WebPPrompt    :
+A lively wide park landscape showing children and animals in action spread across the scene: a girl running on the left, a boy jumping in the centre-left, a dog barking, a bird flying overhead, a cat sleeping on a bench, a child eating an apple, and a man reading a newspaper on the right. Each action is labelled in bold with its verb. Bright, energetic, educational children's book illustration, landscape format.
+
+────────────────────────────────────────────────────────────
+Unit 3 — Adjectives
+────────────────────────────────────────────────────────────
+Filename  : language-beginner-unit-3.webp
+Dimensions: 800 × 500 px  |  Landscape  |  WebPPrompt    :
+A colourful wide market landscape where adjectives describe everything spread across the scene: a big red apple beside a small green apple, a fluffy white cat beside a sleek black cat, a tall tree and a short bush side by side, a noisy crowd on one side and a quiet woman reading on the other. Each adjective is attached by a label. Vivid, educational, children's book illustration, landscape orientation.
+
+────────────────────────────────────────────────────────────
+Unit 4 — Simple Sentences
+────────────────────────────────────────────────────────────
+Filename  : language-beginner-unit-4.webp
+Dimensions: 800 × 500 px  |  Landscape  |  WebPPrompt    :
+A cheerful wide four-panel comic-strip landscape showing a child's morning routine spread left to right: Panel 1 — "I wake up." (child stretching in bed), Panel 2 — "I eat breakfast." (child at the table), Panel 3 — "I brush my teeth." (child at the bathroom mirror), Panel 4 — "I go to school." (child with a backpack at the door). Simple shapes, bold labels, bright colours, educational beginner illustration, landscape format.
+
+────────────────────────────────────────────────────────────
+Unit 5 — Capital Letters and Full Stops
+────────────────────────────────────────────────────────────
+Filename  : language-beginner-unit-5.webp
+Dimensions: 800 × 500 px  |  Landscape  |  WebPPrompt    :
+A fun wide character landscape: "Captain Capital" (a cheerful letter C wearing a superhero cape and crown) stands proudly at the far left, and "Freddie Full Stop" (a friendly round dot with a smiling face) stands at the far right. A bright colourful sentence stretches between them across the wide scene. Bold labels explain each character's job. Fun, educational, children's book character-style illustration, landscape orientation.
+
+────────────────────────────────────────────────────────────
+Unit 6 — Questions
+────────────────────────────────────────────────────────────
+Filename  : language-beginner-unit-6.webp
+Dimensions: 800 × 500 px  |  Landscape  |  WebPPrompt    :
+A wide curious-child landscape: the ground is shaped like a giant question mark, the trees are curled like question marks, and a child in the centre raises their hand. Six colourful speech bubbles float across the wide scene, each with a question word: Why? Who? What? Where? When? How? Playful, educational, children's book illustration, landscape format.
+
+────────────────────────────────────────────────────────────
+Unit 7 — Plurals
+────────────────────────────────────────────────────────────
+Filename  : language-beginner-unit-7.webp
+Dimensions: 800 × 500 px  |  Landscape  |  WebPPrompt    :
+A wide "one and many" split landscape illustration: on the left half, one cat, one box, one child, one tooth, one foot — each clearly drawn. On the right half, many cats, many boxes, many children, many teeth, many feet. Each plural form is labelled, with special accent colours for -s, -es, and irregular plurals. Clean lines, educational children's book illustration, landscape orientation.
+
+────────────────────────────────────────────────────────────
+Unit 8 — Pronouns
+────────────────────────────────────────────────────────────
+Filename  : language-beginner-unit-8.webp
+Dimensions: 800 × 500 px  |  Landscape  |  WebPPrompt    :
+A warm wide family living room landscape where each person has a floating pronoun label spread across the scene: "He" above the father on the left, "She" above the mother, "They" above two children playing together in the centre, "It" above the family dog, and "We" on a banner held by the whole family in a group hug on the right. Inclusive, warm, educational children's book illustration, landscape format.
+
+────────────────────────────────────────────────────────────
+Unit 9 — Prepositions
+────────────────────────────────────────────────────────────
+Filename  : language-beginner-unit-9.webp
+Dimensions: 800 × 500 px  |  Landscape  |  WebPPrompt    :
+A comical wide bedroom landscape showing a cheeky cat in multiple positions spread across the scene: on the bed, under the table, in the wardrobe, behind the curtain, next to the lamp, between two pillows. Each position is labelled with its preposition in a bold colourful banner. Humorous, energetic, educational children's book illustration, landscape orientation.
+
+────────────────────────────────────────────────────────────
+Unit 10 — Sight Words and Review
+────────────────────────────────────────────────────────────
+Filename  : language-beginner-unit-10.webp
+Dimensions: 800 × 500 px  |  Landscape  |  WebPPrompt    :
+A colourful wide "word wall" landscape: a giant brick wall stretching across the full width with high-frequency sight words written in each brick — the, is, are, was, said, they, have, like, come, look, can, we. A group of cheerful children paint, decorate, and stick new bricks onto the wall. A teacher stands to one side with a pointer. Celebratory, educational, children's book illustration, landscape format.
+
+==============================================================
+SECTION 5 — LANGUAGE SKILLS INTERMEDIATE  (10 images)
+==============================================================
+
+────────────────────────────────────────────────────────────
+Unit 1 — Common and Proper Nouns
+────────────────────────────────────────────────────────────
+Filename  : language-intermediate-unit-1.webp
+Dimensions: 800 × 500 px  |  Landscape  |  WebPPrompt    :
+A wide split landscape illustration comparing common nouns on the left (a city skyline, a river, a dog, a girl — all unlabelled generically) with their proper noun equivalents on the right (Cape Town, the Nile, Bingo, Amara). Each pair is connected by an arrow, and the capital letters in the proper nouns glow in gold. Clean, clear, educational intermediate illustration, landscape orientation.
+
+────────────────────────────────────────────────────────────
+Unit 2 — Present and Past Tense
+────────────────────────────────────────────────────────────
+Filename  : language-intermediate-unit-2.webp
+Dimensions: 800 × 500 px  |  Landscape  |  WebPPrompt    :
+A wide split-panel time landscape: on the left half labelled "TODAY", a boy walks to school, a girl writes at a desk, a dog runs in the park — all in bright vivid daytime colours with present tense verb labels. On the right half labelled "YESTERDAY", the same scenes appear in softer slightly faded tones with past tense labels: "walked", "wrote", "ran". A central timeline divides the panels. Narrative, clear, educational intermediate illustration, landscape format.
+
+────────────────────────────────────────────────────────────
+Unit 3 — Adjectives and Comparatives
+────────────────────────────────────────────────────────────
+Filename  : language-intermediate-unit-3.webp
+Dimensions: 800 × 500 px  |  Landscape  |  WebPPrompt    :
+A wide comparison race landscape: three versions of the same character on a podium spread left to right — small, smaller, smallest. Three dogs side by side below: fluffy, fluffier, fluffiest. Three mountains in the background: tall, taller, tallest. Word transformation banners fly above each group. Bright, energetic, educational intermediate illustration, landscape orientation.
+
+────────────────────────────────────────────────────────────
+Unit 4 — Compound Sentences: FANBOYS
+────────────────────────────────────────────────────────────
+Filename  : language-intermediate-unit-4.webp
+Dimensions: 800 × 500 px  |  Landscape  |  WebPPrompt    :
+A colourful wide "conjunction train" landscape: seven carriages stretch across the full width, each labelled For, And, Nor, But, Or, Yet, So. Each carriage connects two simpler sentence-wagons and passengers inside hold sentence cards. The engine steams cheerfully from left to right. A large banner above reads "FANBOYS". Educational, slightly playful, intermediate illustration, landscape format.
+
+────────────────────────────────────────────────────────────
+Unit 5 — Punctuation: Commas, Apostrophes, Exclamation Marks
+────────────────────────────────────────────────────────────
+Filename  : language-intermediate-unit-5.webp
+Dimensions: 800 × 500 px  |  Landscape  |  WebPPrompt    :
+Three friendly punctuation characters in a wide busy newspaper office landscape spread across the scene: a comma as a curved character organising items in a list on the left, an apostrophe as a sharp-suited detective explaining ownership and contractions in the centre, and an exclamation mark as an energetic shouting character with arms raised on the right. Each character holds an example sentence. Humorous, editorial, educational intermediate illustration, landscape orientation.
+
+────────────────────────────────────────────────────────────
+Unit 6 — Conjunctions: Coordinating and Subordinating
+────────────────────────────────────────────────────────────
+Filename  : language-intermediate-unit-6.webp
+Dimensions: 800 × 500 px  |  Landscape  |  WebPPrompt    :
+A wide bridge-building landscape metaphor: on the left half, coordinating conjunctions (FANBOYS) form wide symmetrical bridges between two equal-height pillars — each clause equally important. On the right half, subordinating conjunctions (because, although, while, since, if) form asymmetrical bridges where one pillar is shorter, showing the dependent clause below. Clean architectural diagram style, educational intermediate illustration, landscape format.
+
+────────────────────────────────────────────────────────────
+Unit 7 — Homophones and Homonyms
+────────────────────────────────────────────────────────────
+Filename  : language-intermediate-unit-7.webp
+Dimensions: 800 × 500 px  |  Landscape  |  WebPPrompt    :
+A humorous wide corridor landscape in a "House of Words": four doors spread across the full width, each labelled with homophone pairs — "there/their/they're", "to/too/two", "bear/bare", "right/write". A puzzled student opens each door to find a completely different scene behind it. Slightly absurd, educational, intermediate illustration, landscape orientation.
+
+────────────────────────────────────────────────────────────
+Unit 8 — Prefixes and Suffixes
+────────────────────────────────────────────────────────────
+Filename  : language-intermediate-unit-8.webp
+Dimensions: 800 × 500 px  |  Landscape  |  WebPPrompt    :
+A wide "word machine" factory landscape: bare root words enter on a conveyor belt from the left, prefixes attach at the front station, suffixes attach at the back station, and finished words roll out on the right: "unhelpful", "rethinking", "remarkable". Children in lab coats manage the machine with enthusiasm. Educational, slightly whimsical, intermediate illustration, landscape format.
+
+────────────────────────────────────────────────────────────
+Unit 9 — Direct Speech and Quotation Marks
+────────────────────────────────────────────────────────────
+Filename  : language-intermediate-unit-9.webp
+Dimensions: 800 × 500 px  |  Landscape  |  WebPPrompt    :
+A wide lively dialogue landscape: two children face each other across the full width, their spoken words enclosed in large clearly drawn quotation marks. The narrator's reporting clause sits between them in plain text without marks. The quotation marks themselves are drawn as large friendly characters hugging the words on each side. Colourful, educational, intermediate illustration, landscape orientation.
+
+────────────────────────────────────────────────────────────
+Unit 10 — Paragraph Writing
+────────────────────────────────────────────────────────────
+Filename  : language-intermediate-unit-10.webp
+Dimensions: 800 × 500 px  |  Landscape  |  WebPPrompt    :
+A wide "paragraph house" construction landscape: a topic sentence forms the roof at the top, three supporting detail sentences form the walls spread across the middle (each labelled: detail, example, explanation), and the concluding sentence is the foundation stone at the bottom. A student with a hard hat and pencil reviews the blueprints on the left. Warm, educational, slightly playful intermediate illustration, landscape format.
+
+==============================================================
+SECTION 6 — LANGUAGE SKILLS PRE-ADVANCED  (10 images)
+==============================================================
+
+────────────────────────────────────────────────────────────
+Unit 1 — Active and Passive Voice
+────────────────────────────────────────────────────────────
+Filename  : language-preadvanced-unit-1.webp
+Dimensions: 800 × 500 px  |  Landscape  |  WebPPrompt    :
+A wide split sports commentary landscape: on the left half labelled "Active Voice", a footballer mid-kick — "David kicked the ball." Subject, verb, and object highlighted in three accent colours with labelled brackets. On the right half labelled "Passive Voice", the ball soaring through the air — "The ball was kicked by David." The roles reversed and highlighted. Clean, editorial, pre-advanced illustration, landscape orientation.
+
+────────────────────────────────────────────────────────────
+Unit 2 — Reported Speech
+────────────────────────────────────────────────────────────
+Filename  : language-preadvanced-unit-2.webp
+Dimensions: 800 × 500 px  |  Landscape  |  WebPPrompt    :
+A wide two-panel speech transformation landscape: on the left, a woman speaks directly — "I am going to the market" in a bright round speech bubble. An arrow points right to the second panel where a man relays the message — "She said she was going to the market" in a transformed flatter bubble. Tense markers (am → was, I → she) glow in a highlight colour. Clean, editorial, pre-advanced illustration, landscape format.
+
+────────────────────────────────────────────────────────────
+Unit 3 — Complex Sentences
+────────────────────────────────────────────────────────────
+Filename  : language-preadvanced-unit-3.webp
+Dimensions: 800 × 500 px  |  Landscape  |  WebPPrompt    :
+A wide "sentence architecture" blueprint landscape: a long complex sentence is deconstructed across the full width — a strong main pillar on the left labelled "Main Clause (Independent)" and a smaller attached wing on the right labelled "Subordinate Clause (Dependent)". The connecting word (although, because, since) is drawn as the architectural joint in the centre. Clean, technical, educational pre-advanced illustration, landscape orientation.
+
+────────────────────────────────────────────────────────────
+Unit 4 — Figurative Language
+────────────────────────────────────────────────────────────
+Filename  : language-preadvanced-unit-4.webp
+Dimensions: 800 × 500 px  |  Landscape  |  WebPPrompt    :
+A dramatic wide illustrated poem landscape spread: a thunderstorm that "roars like a lion" on the left, a moon that "hangs like a silver coin" in the centre-sky, a city that "never sleeps" glowing in the distance, and shadows that "dance on the wall" on the right. Each figurative device (simile, metaphor, personification) is labelled beside its image. Painterly, atmospheric, pre-advanced editorial illustration, landscape format.
+
+────────────────────────────────────────────────────────────
+Unit 5 — Idioms and Expressions
+────────────────────────────────────────────────────────────
+Filename  : language-preadvanced-unit-5.webp
+Dimensions: 800 × 500 px  |  Landscape  |  WebPPrompt    :
+A comical wide split landscape — literal vs. figurative meanings spread across the full width: top half shows idioms taken literally — a person actually kicking a bucket, another letting a real cat out of a bag, a third standing under a rain cloud labelled "under the weather". Bottom half shows the real figurative meaning of each idiom in calm normal scenes. Witty, editorial, pre-advanced illustration, landscape orientation.
+
+────────────────────────────────────────────────────────────
+Unit 6 — Academic Vocabulary (Tier 2)
+────────────────────────────────────────────────────────────
+Filename  : language-preadvanced-unit-6.webp
+Dimensions: 800 × 500 px  |  Landscape  |  WebPPrompt    :
+A sophisticated wide library landscape: a student at a research desk in the centre, surrounded by open books spread across the wide scene. Each book glows softly with a Tier 2 academic word on its spine: analyse, evaluate, synthesise, justify, contrast, significant, interpret. Notes and highlighted pages are scattered on the desk. Warm lamplight, scholarly atmosphere, pre-advanced editorial illustration, landscape format.
+
+────────────────────────────────────────────────────────────
+Unit 7 — Text Types and Features
+────────────────────────────────────────────────────────────
+Filename  : language-preadvanced-unit-7.webp
+Dimensions: 800 × 500 px  |  Landscape  |  WebPPrompt    :
+A wide newsroom-meets-library landscape with different text types arranged as physical objects spread across the full scene: a folded newspaper for news reports on the far left, a handwritten letter for personal writing, a recipe card for procedural texts, a science poster for expository writing, and a storybook for narrative on the far right. Arrows and labels point to key features of each type. Clean, editorial, educational pre-advanced illustration, landscape orientation.
+
+────────────────────────────────────────────────────────────
+Unit 8 — Essay Writing Structure
+────────────────────────────────────────────────────────────
+Filename  : language-preadvanced-unit-8.webp
+Dimensions: 800 × 500 px  |  Landscape  |  WebPPrompt    :
+A wide architectural blueprint landscape of a multi-storey essay building: the introduction forms the entrance archway with a "Thesis Statement" column on the left, three body paragraph floors in the centre each with labelled "Evidence Windows" and "Analysis Walls", and the conclusion as the roof with a "Restate and Reflect" weathervane on the right. A student with a hard hat studies the blueprints in the foreground. Detailed, editorial, pre-advanced illustration, landscape format.
+
+────────────────────────────────────────────────────────────
+Unit 9 — Synonyms, Antonyms and Word Choice
+────────────────────────────────────────────────────────────
+Filename  : language-preadvanced-unit-9.webp
+Dimensions: 800 × 500 px  |  Landscape  |  WebPPrompt    :
+A wide "word wardrobe" landscape: a writer stands before a large open wardrobe stretching across most of the scene. Hangers on the left rail are labelled with synonyms for "said" — whispered, announced, muttered, shouted, replied, pleaded. Hangers on the right rail hold synonyms for "good" — excellent, admirable, satisfactory, brilliant. The writer thoughtfully selects one hanger. Warm, slightly whimsical, pre-advanced editorial illustration, landscape orientation.
+
+────────────────────────────────────────────────────────────
+Unit 10 — Editing and Proofreading
+────────────────────────────────────────────────────────────
+Filename  : language-preadvanced-unit-10.webp
+Dimensions: 800 × 500 px  |  Landscape  |  WebPPrompt    :
+A wide detective-style landscape: a student in a long coat with a magnifying glass examines a giant piece of writing laid flat across a wide table. Red correction glows highlight errors spread across the page — a grammar mistake circled on the left, a missing full stop marked in the centre, a misspelled word crossed out, a run-on sentence underlined on the right. Correction notes fill the margins. Slightly dramatic, editorial, confident pre-advanced illustration, landscape format.
+
+==============================================================
+COMPLETION CHECKLIST
+==============================================================
+
+When done, tick each off and tell Claude "illustrations are done" —
+Claude will wire up all image fields in the data files automatically.
+
+PHONICS BEGINNER (10)
+  [ ] phonics-beginner-unit-1.webp     — The Alphabet
+  [ ] phonics-beginner-unit-2.webp     — Short Vowel 'a'
+  [ ] phonics-beginner-unit-3.webp     — Short Vowel 'e'
+  [ ] phonics-beginner-unit-4.webp     — Short Vowel 'i'
+  [ ] phonics-beginner-unit-5.webp     — Short Vowel 'o'
+  [ ] phonics-beginner-unit-6.webp     — Short Vowel 'u'
+  [ ] phonics-beginner-unit-7.webp     — Ending Consonants
+  [ ] phonics-beginner-unit-8.webp     — S-Blends
+  [ ] phonics-beginner-unit-9.webp     — Digraphs ch and sh
+  [ ] phonics-beginner-unit-10.webp    — Review: Short Vowels and Blends
+
+PHONICS INTERMEDIATE (10)
+  [ ] phonics-intermediate-unit-1.webp  — L-Blends
+  [ ] phonics-intermediate-unit-2.webp  — R-Blends
+  [ ] phonics-intermediate-unit-3.webp  — Digraphs th, wh, ph
+  [ ] phonics-intermediate-unit-4.webp  — Long Vowel A
+  [ ] phonics-intermediate-unit-5.webp  — Long Vowel E
+  [ ] phonics-intermediate-unit-6.webp  — Long Vowel I
+  [ ] phonics-intermediate-unit-7.webp  — Long Vowel O
+  [ ] phonics-intermediate-unit-8.webp  — Long Vowel U
+  [ ] phonics-intermediate-unit-9.webp  — R-Controlled Vowels
+  [ ] phonics-intermediate-unit-10.webp — Multi-Syllable Words
+
+PHONICS PRE-ADVANCED (10)
+  [ ] phonics-preadvanced-unit-1.webp   — Diphthongs ou and ow
+  [ ] phonics-preadvanced-unit-2.webp   — Diphthongs oi and oy
+  [ ] phonics-preadvanced-unit-3.webp   — Vowel Teams au, aw, oo
+  [ ] phonics-preadvanced-unit-4.webp   — Silent Letters
+  [ ] phonics-preadvanced-unit-5.webp   — Prefixes
+  [ ] phonics-preadvanced-unit-6.webp   — Suffixes -ing -ed -er -est
+  [ ] phonics-preadvanced-unit-7.webp   — Suffixes -tion -ment -ness
+  [ ] phonics-preadvanced-unit-8.webp   — Homophones and Homographs
+  [ ] phonics-preadvanced-unit-9.webp   — Etymology: Greek and Latin
+  [ ] phonics-preadvanced-unit-10.webp  — Fluency and Advanced Reading
+
+LANGUAGE SKILLS BEGINNER (10)
+  [ ] language-beginner-unit-1.webp     — Nouns
+  [ ] language-beginner-unit-2.webp     — Verbs
+  [ ] language-beginner-unit-3.webp     — Adjectives
+  [ ] language-beginner-unit-4.webp     — Simple Sentences
+  [ ] language-beginner-unit-5.webp     — Capital Letters and Full Stops
+  [ ] language-beginner-unit-6.webp     — Questions
+  [ ] language-beginner-unit-7.webp     — Plurals
+  [ ] language-beginner-unit-8.webp     — Pronouns
+  [ ] language-beginner-unit-9.webp     — Prepositions
+  [ ] language-beginner-unit-10.webp    — Sight Words and Review
+
+LANGUAGE SKILLS INTERMEDIATE (10)
+  [ ] language-intermediate-unit-1.webp  — Common and Proper Nouns
+  [ ] language-intermediate-unit-2.webp  — Present and Past Tense
+  [ ] language-intermediate-unit-3.webp  — Adjectives and Comparatives
+  [ ] language-intermediate-unit-4.webp  — Compound Sentences FANBOYS
+  [ ] language-intermediate-unit-5.webp  — Punctuation
+  [ ] language-intermediate-unit-6.webp  — Conjunctions
+  [ ] language-intermediate-unit-7.webp  — Homophones and Homonyms
+  [ ] language-intermediate-unit-8.webp  — Prefixes and Suffixes
+  [ ] language-intermediate-unit-9.webp  — Direct Speech
+  [ ] language-intermediate-unit-10.webp — Paragraph Writing
+
+LANGUAGE SKILLS PRE-ADVANCED (10)
+  [ ] language-preadvanced-unit-1.webp   — Active and Passive Voice
+  [ ] language-preadvanced-unit-2.webp   — Reported Speech
+  [ ] language-preadvanced-unit-3.webp   — Complex Sentences
+  [ ] language-preadvanced-unit-4.webp   — Figurative Language
+  [ ] language-preadvanced-unit-5.webp   — Idioms and Expressions
+  [ ] language-preadvanced-unit-6.webp   — Academic Vocabulary Tier 2
+  [ ] language-preadvanced-unit-7.webp   — Text Types and Features
+  [ ] language-preadvanced-unit-8.webp   — Essay Writing Structure
+  [ ] language-preadvanced-unit-9.webp   — Synonyms and Antonyms
+  [ ] language-preadvanced-unit-10.webp  — Editing and Proofreading
