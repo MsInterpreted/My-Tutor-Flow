@@ -30,15 +30,20 @@ function LeadCaptureModal({ assessment, onClose }) {
     if (!form.name.trim() || !form.email.trim()) return setError('Please enter your name and email.')
     setLoading(true)
     try {
+      const email = form.email.trim().toLowerCase()
+      const name = form.name.trim()
+      const childName = form.childName.trim() || null
       await addDoc(collection(db, 'leads'), {
-        name: form.name.trim(),
-        email: form.email.trim().toLowerCase(),
-        childName: form.childName.trim() || null,
+        name,
+        email,
+        childName,
         level: assessment.level,
         levelId: assessment.id,
         source: 'free_assessment',
         createdAt: serverTimestamp(),
       })
+      // Bridge to viewer so it skips its own entry form
+      sessionStorage.setItem('mtf_lead', JSON.stringify({ name, email, childName }))
       navigate(`/assess/${assessment.id}`)
     } catch {
       setError('Something went wrong. Please try again.')

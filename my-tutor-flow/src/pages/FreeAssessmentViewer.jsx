@@ -257,9 +257,12 @@ export default function FreeAssessmentViewer() {
   const { user } = useAuth()
 
   const assessment = FREE_ASSESSMENTS.find(a => a.id === level)
-  const [step, setStep] = useState(0) // 0=entry, 1/2/3=lessons, 4=results
-  const [guestName, setGuestName] = useState('')
-  const [guestEmail, setGuestEmail] = useState('')
+  // Check if lead data was pre-captured on the assessment landing page
+  const savedLead = (() => { try { return JSON.parse(sessionStorage.getItem('mtf_lead') || 'null') } catch { return null } })()
+
+  const [step, setStep] = useState(savedLead ? 1 : 0) // skip entry if email already captured
+  const [guestName, setGuestName] = useState(savedLead?.childName || savedLead?.name || '')
+  const [guestEmail, setGuestEmail] = useState(savedLead?.email || '')
   const [guestGrade, setGuestGrade] = useState('')
   const [guestOutcome, setGuestOutcome] = useState('')
   const [nameInput, setNameInput] = useState('')
@@ -295,11 +298,13 @@ export default function FreeAssessmentViewer() {
     const uid = user?.uid || `guest_${Date.now()}`
     const weakMarkers = [...new Set(results.filter(r => !r.correct).map(r => r.marker))]
     const strongMarkers = [...new Set(results.filter(r => r.correct).map(r => r.marker))]
+    const resolvedEmail = user?.email || email
+    const resolvedName = user?.displayName || name
     try {
       await setDoc(doc(db, 'assessments', `${uid}_${assessment.id}`), {
         uid,
-        displayName: user?.displayName || name,
-        email: user?.email || email,
+        displayName: resolvedName,
+        email: resolvedEmail,
         grade: grade || null,
         desiredOutcome: outcome || null,
         level: assessment.id,
@@ -311,6 +316,25 @@ export default function FreeAssessmentViewer() {
         isGuest: !user,
       }, { merge: true })
     } catch { /* fail silently */ }
+
+    // Fire results email if we have an address
+    if (resolvedEmail) {
+      try {
+        await fetch('/api/send-assessment-email', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            email: resolvedEmail,
+            name: resolvedName,
+            level: assessment.level,
+            score: { correct: results.filter(r => r.correct).length, total: results.length },
+            weakMarkers,
+            strongMarkers,
+          }),
+        })
+      } catch { /* fail silently — email is best-effort */ }
+      sessionStorage.removeItem('mtf_lead')
+    }
   }
 
   // Entry step (skip if logged in)
