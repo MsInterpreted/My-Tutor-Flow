@@ -23,8 +23,12 @@ export function AuthProvider({ children }) {
     const unsub = onAuthStateChanged(auth, async (firebaseUser) => {
       setUser(firebaseUser)
       if (firebaseUser) {
-        const snap = await getDoc(doc(db, 'users', firebaseUser.uid))
-        setProfile(snap.exists() ? snap.data() : null)
+        try {
+          const snap = await getDoc(doc(db, 'users', firebaseUser.uid))
+          setProfile(snap.exists() ? snap.data() : null)
+        } catch {
+          setProfile(null)
+        }
       } else {
         setProfile(null)
       }
@@ -97,9 +101,7 @@ export function AuthProvider({ children }) {
 
   function hasAccessToBook(bookId) {
     if (!profile) return false
-    const trialBookId = 'comprehension-beginner'
-    if (bookId === trialBookId) return true
-    if (profile.subscription === 'premium' || profile.subscription === 'institution') return true
+    if (profile.subscription === 'premium' || profile.subscription === 'institution' || profile.subscription === 'monthly' || profile.subscription === 'annual') return true
     if (profile.purchasedBooks?.includes(bookId)) return true
     return false
   }

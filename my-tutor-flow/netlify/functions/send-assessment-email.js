@@ -1,5 +1,8 @@
 const RESEND_API_KEY = process.env.RESEND_API_KEY
-const FROM = 'My Tutor Flow <hello@mytutorflow.com>'
+// Use verified domain once DNS is confirmed in Resend dashboard
+const FROM = process.env.RESEND_DOMAIN_VERIFIED === 'true'
+  ? 'My Tutor Flow <hello@mytutorflow.com>'
+  : 'My Tutor Flow <onboarding@resend.dev>'
 const APP_URL = 'https://mytutorflow.com'
 
 const MARKER_LABELS = {

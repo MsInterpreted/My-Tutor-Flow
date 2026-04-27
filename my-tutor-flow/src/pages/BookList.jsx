@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom'
 import { allBooks, seriesConfig, levelConfig } from '../data/index.js'
 import { useProgress } from '../contexts/StudentProgressContext.jsx'
 import { useAuth } from '../contexts/AuthContext.jsx'
-import { TRIAL_BOOK_ID } from '../config/pricing.js'
 import ProgressBar from '../components/interactive/ProgressBar.jsx'
 import ThemeToggle from '../components/ThemeToggle.jsx'
 
@@ -78,9 +77,6 @@ export default function BookList() {
                               <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" />
                             </svg>
                           </div>
-                        )}
-                        {book.id === TRIAL_BOOK_ID && (
-                          <div className="absolute top-2 left-2 bg-green-500 text-white text-xs font-bold px-2 py-0.5 rounded-full">FREE</div>
                         )}
                       </div>
                       {/* Info */}

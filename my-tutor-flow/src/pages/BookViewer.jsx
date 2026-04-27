@@ -10,7 +10,6 @@ import { useProgress } from '../contexts/StudentProgressContext.jsx'
 import ProgressBar from '../components/interactive/ProgressBar.jsx'
 import UpgradePrompt from '../components/UpgradePrompt.jsx'
 import { useAuth } from '../contexts/AuthContext.jsx'
-import { TRIAL_BOOK_ID, TRIAL_UNIT_LIMIT } from '../config/pricing.js'
 import ThemeToggle from '../components/ThemeToggle.jsx'
 
 export default function BookViewer() {
@@ -21,7 +20,6 @@ export default function BookViewer() {
   const { hasAccessToBook } = useAuth()
 
   const hasFullAccess = hasAccessToBook(bookId)
-  const isTrialBook = bookId === TRIAL_BOOK_ID
 
   useEffect(() => {
     if (!book) return
@@ -119,39 +117,23 @@ export default function BookViewer() {
         {book.series === 'comprehension' && <PEELExplainer />}
 
         {/* Units */}
-        {!hasFullAccess && !isTrialBook ? (
+        {!hasFullAccess ? (
           <UpgradePrompt bookTitle={book.title} />
         ) : (
           <>
-            {book.units?.map(unit => {
-              const isLocked = isTrialBook && !hasFullAccess && unit.id > TRIAL_UNIT_LIMIT
-              if (isLocked) return null
-              return (
-                <div key={unit.id} id={`unit-${unit.id}`} data-unit-id={unit.id}>
-                  {book.series === 'comprehension' && (
-                    <ComprehensionUnit unit={unit} color={book.color} bookId={book.id} />
-                  )}
-                  {book.series === 'phonics' && (
-                    <PhonicsUnit unit={unit} color={book.color} bookId={book.id} />
-                  )}
-                  {book.series === 'language' && (
-                    <LanguageUnit unit={unit} color={book.color} bookId={book.id} />
-                  )}
-                </div>
-              )
-            })}
-            {isTrialBook && !hasFullAccess && (
-              <div className="no-print mt-8">
-                <div className="bg-gradient-to-br from-violet-50 to-violet-100 border-2 border-violet-200 rounded-2xl p-8 text-center">
-                  <div className="text-3xl mb-3">🔒</div>
-                  <h3 className="font-display font-bold text-violet-800 text-lg mb-2">Units 3–{book.units?.length} are locked</h3>
-                  <p className="text-violet-600 text-sm mb-5">Upgrade to unlock the full book and all 9 books in the library.</p>
-                  <Link to="/pricing" className="inline-block bg-violet-700 text-white font-bold px-6 py-3 rounded-xl hover:bg-violet-800 transition-colors">
-                    Unlock All Books →
-                  </Link>
-                </div>
+            {book.units?.map(unit => (
+              <div key={unit.id} id={`unit-${unit.id}`} data-unit-id={unit.id}>
+                {book.series === 'comprehension' && (
+                  <ComprehensionUnit unit={unit} color={book.color} bookId={book.id} />
+                )}
+                {book.series === 'phonics' && (
+                  <PhonicsUnit unit={unit} color={book.color} bookId={book.id} />
+                )}
+                {book.series === 'language' && (
+                  <LanguageUnit unit={unit} color={book.color} bookId={book.id} />
+                )}
               </div>
-            )}
+            ))}
           </>
         )}
       </div>
