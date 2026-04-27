@@ -1,4 +1,7 @@
-import { Link } from 'react-router-dom'
+import { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore'
+import { db } from '../firebase.js'
 import { FREE_ASSESSMENTS, MARKERS } from '../data/freeAssessments.js'
 import { useAuth } from '../contexts/AuthContext.jsx'
 import ThemeToggle from '../components/ThemeToggle.jsx'
@@ -16,11 +19,122 @@ const HOW_IT_WORKS = [
   { step: '4', text: 'See the exact books that target each gap — unlock them with a subscription' },
 ]
 
+function LeadCaptureModal({ assessment, onClose }) {
+  const navigate = useNavigate()
+  const [form, setForm] = useState({ name: '', email: '', childName: '' })
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
+
+  async function handleSubmit(e) {
+    e.preventDefault()
+    if (!form.name.trim() || !form.email.trim()) return setError('Please enter your name and email.')
+    setLoading(true)
+    try {
+      await addDoc(collection(db, 'leads'), {
+        name: form.name.trim(),
+        email: form.email.trim().toLowerCase(),
+        childName: form.childName.trim() || null,
+        level: assessment.level,
+        levelId: assessment.id,
+        source: 'free_assessment',
+        createdAt: serverTimestamp(),
+      })
+      navigate(`/assess/${assessment.id}`)
+    } catch {
+      setError('Something went wrong. Please try again.')
+      setLoading(false)
+    }
+  }
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center px-4 bg-black/60 backdrop-blur-sm" onClick={e => e.target === e.currentTarget && onClose()}>
+      <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-2xl w-full max-w-md p-8 relative">
+        <button onClick={onClose} className="absolute top-4 right-4 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 text-xl leading-none">✕</button>
+
+        <div className="text-center mb-6">
+          <div className="w-14 h-14 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-4" style={{ backgroundColor: assessment.color + '22' }}>
+            {assessment.icon}
+          </div>
+          <h2 className="text-xl font-display font-black text-slate-800 dark:text-slate-100">Almost there!</h2>
+          <p className="text-slate-500 dark:text-slate-400 text-sm mt-1">
+            Enter your details to unlock the <strong>{assessment.level}</strong> assessment — free, no credit card needed.
+          </p>
+        </div>
+
+        {error && (
+          <div className="bg-red-50 border border-red-200 text-red-700 rounded-xl px-4 py-3 text-sm mb-4">{error}</div>
+        )}
+
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div>
+            <label className="block text-xs font-semibold text-slate-600 dark:text-slate-400 mb-1">Your name <span className="text-red-400">*</span></label>
+            <input
+              type="text"
+              value={form.name}
+              onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
+              required
+              placeholder="e.g. Sarah"
+              className="w-full border border-slate-200 dark:border-slate-600 rounded-xl px-4 py-3 text-sm bg-white dark:bg-slate-700 text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-violet-400"
+            />
+          </div>
+          <div>
+            <label className="block text-xs font-semibold text-slate-600 dark:text-slate-400 mb-1">Email address <span className="text-red-400">*</span></label>
+            <input
+              type="email"
+              value={form.email}
+              onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
+              required
+              placeholder="your@email.com"
+              className="w-full border border-slate-200 dark:border-slate-600 rounded-xl px-4 py-3 text-sm bg-white dark:bg-slate-700 text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-violet-400"
+            />
+          </div>
+          <div>
+            <label className="block text-xs font-semibold text-slate-600 dark:text-slate-400 mb-1">
+              Child's name <span className="text-slate-400 font-normal">(optional)</span>
+            </label>
+            <input
+              type="text"
+              value={form.childName}
+              onChange={e => setForm(f => ({ ...f, childName: e.target.value }))}
+              placeholder="e.g. Aiden"
+              className="w-full border border-slate-200 dark:border-slate-600 rounded-xl px-4 py-3 text-sm bg-white dark:bg-slate-700 text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-violet-400"
+            />
+          </div>
+
+          <button
+            type="submit"
+            disabled={loading}
+            className="w-full text-white font-bold py-3 rounded-xl transition-colors disabled:opacity-50 hover:opacity-90"
+            style={{ backgroundColor: assessment.color }}
+          >
+            {loading ? 'Starting…' : `Start ${assessment.level} Assessment →`}
+          </button>
+        </form>
+
+        <p className="text-center text-xs text-slate-400 dark:text-slate-500 mt-4">
+          We'll only send you helpful updates about My Tutor Flow. No spam, ever.
+        </p>
+      </div>
+    </div>
+  )
+}
+
 export default function FreeAssessmentPage() {
   const { user } = useAuth()
+  const navigate = useNavigate()
+  const [activeAssessment, setActiveAssessment] = useState(null)
+
+  function handleStartAssessment(assessment) {
+    if (user) {
+      navigate(`/assess/${assessment.id}`)
+    } else {
+      setActiveAssessment(assessment)
+    }
+  }
 
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-900">
+      {activeAssessment && <LeadCaptureModal assessment={activeAssessment} onClose={() => setActiveAssessment(null)} />}
       {/* Nav */}
       <nav className="bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 px-4 py-3 flex items-center gap-4 sticky top-0 z-10">
         <Link to="/" className="text-violet-700 font-bold text-lg font-display">My Tutor Flow</Link>
@@ -119,13 +233,13 @@ export default function FreeAssessmentPage() {
                       </div>
                     ))}
                   </div>
-                  <Link
-                    to={`/assess/${a.id}`}
-                    className="block text-center font-bold py-3 rounded-xl text-white transition-colors hover:opacity-90"
+                  <button
+                    onClick={() => handleStartAssessment(a)}
+                    className="w-full text-center font-bold py-3 rounded-xl text-white transition-colors hover:opacity-90"
                     style={{ backgroundColor: a.color }}
                   >
                     Start {a.level} →
-                  </Link>
+                  </button>
                 </div>
               </div>
             ))}
