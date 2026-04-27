@@ -275,6 +275,13 @@ export default function FreeAssessmentViewer() {
 
   useEffect(() => { window.scrollTo(0, 0) }, [step])
 
+  // Must be here (not inside a conditional) — Rules of Hooks
+  useEffect(() => {
+    if (step > totalSteps && allResults.length > 0) {
+      saveToFirestore(guestName, guestEmail, guestGrade, guestOutcome, allResults)
+    }
+  }, [step]) // eslint-disable-line react-hooks/exhaustive-deps
+
   if (!assessment) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -454,10 +461,6 @@ export default function FreeAssessmentViewer() {
 
   // Results
   if (step > totalSteps) {
-    // Save once when results screen mounts
-    useEffect(() => {
-      saveToFirestore(guestName, guestEmail, guestGrade, guestOutcome, allResults)
-    }, [])
     return (
       <div className="min-h-screen bg-slate-50 dark:bg-slate-900">
         <nav className="bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 px-4 py-3 flex items-center gap-3 sticky top-0 z-10">
