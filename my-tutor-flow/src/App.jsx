@@ -15,6 +15,7 @@ import TeacherDashboard from './pages/TeacherDashboard.jsx'
 import FreeAssessmentPage from './pages/FreeAssessmentPage.jsx'
 import FreeAssessmentViewer from './pages/FreeAssessmentViewer.jsx'
 import CertificatePage from './pages/CertificatePage.jsx'
+import ForgotPasswordPage from './pages/ForgotPasswordPage.jsx'
 
 function ProtectedRoute({ children }) {
   const { user } = useAuth()
@@ -37,6 +38,7 @@ function AppRoutes() {
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignupPage />} />
+          <Route path="/forgot-password" element={<ForgotPasswordPage />} />
           <Route path="/books" element={<ProtectedRoute><BookList /></ProtectedRoute>} />
           <Route path="/books/:bookId" element={<ProtectedRoute><BookViewer /></ProtectedRoute>} />
           <Route path="/dashboard" element={<ProtectedRoute><StudentDashboard /></ProtectedRoute>} />
